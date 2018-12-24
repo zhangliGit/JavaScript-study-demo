@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>球</title>
+  <style>
+    body{
+      width: 100%;
+      height: 100%;
+      background: #222
+    }
+  </style>
+</head>
+<body >
+</body>
+<script>
+  var number = 0;
+  function Ball(wh, bgCol, x, y) {
+    this.wh = wh;
+    this.bgCol = bgCol;
+    this.x = x;
+    this.y = y;
+    this.CreateBall = function() {
+      var div = document.createElement('div');
+      div.id = ++number;
+      div.style.height = this.wh + 'px';
+      div.style.width = this.wh + 'px';
+      div.style.background = this.bgCol;
+      div.style.borderRadius = '100%';
+      div.style.position = 'absolute';
+      div.style.left = x + 'px';
+      div.style.top = y + 'px';
+      document.documentElement.appendChild(div);
+    }
+    this.move = function(id) {
+      
+    }
+  }
+  var bgList = ['red', 'blue', 'yellow', 'green', '#444']
+  document.documentElement.addEventListener('click', function(event) {
+    var ball = new Ball(Math.floor(Math.random() + 50), bgList[Math.floor(Math.random() * 5)], event.pageX, event.pageY);
+    ball.CreateBall();
+  })
+</script>
+</html>

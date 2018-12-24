@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>函数</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0; 
+      font-size: 14px;
+      box-sizing: border-box
+    }
+    body {    
+      padding: 20px;
+    }
+    div {
+      line-height: 40px
+    }
+    h1 {
+      font-size: 20px
+    }
+  </style>
+</head>
+<body>
+  <h1>函数</h1>
+  <div>Funtion是所有函数的基类，定义的函数都会继承其原型上的属性</div>
+  <div>Function.__proto__ === function.prototype Function是自己继承自己，属于原型链最顶层了</div>
+  <div>apply 可以改变函数this的指针，用来继承, 会立即执行 传递的参数为数组  </div>
+  <div>call 可以改变函数this的指针，用来继承, 会立即执行，传递的参数为分开的字符串</div>
+  <div>bind， 可以改变函数this的指针，绑定后会返回一个新的函数，与call类似，但是会立即执行，</div>
+</body>
+<script>
+  function test(name, ages) {
+    console.log(arguments.length);
+  }
+  test('zhangli', '123')
+  console.dir(Function.prototype)
+  console.log(test.constructor === Function)
+  function Person(name, age) {
+    this.name = name;
+    this.age = age;
+  }
+  var obj =  {}
+  function Student(name, age, grade) {
+    Person.apply(obj, arguments);
+    this.grade = grade;
+  }
+  var student = new Student('zhangli', '23', '高一');
+  var obj1 = {}
+  function getA(name, sex) {
+    this.name = name;
+    this.sex = sex;
+  }
+  var getA1 = getA.bind(obj1, 'zhagli', 'nan')
+  getA1();
+  console.log(obj1)
+  
+</script>
+</html>

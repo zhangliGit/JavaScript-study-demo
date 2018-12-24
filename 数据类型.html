@@ -25,9 +25,17 @@
 </head>
 <body>
   <h1>数据类型</h1>
-  <div>5中基本数据类型: string, undefined, null, number, boolean</div>
-  <div>1中复杂数据类型：object</div>
+  <div>6中基本数据类型: string, undefined, null, number, boolean, symbol(ES6中新增一种类型)</div>
+  <div>2中复杂数据类型：object, function</div>
   <div>通过操作符typeof可以判断变量的数据类型</div>
+  <div>复杂数据类型object的实例都具有下列属性</div>
+  <div>constructor 保存着用于创建当前对象的函数</div>
+  <div>hasOwnProperty('name') 用于检测给定的属性是否在当前的对象实例中</div>
+  <div>isPrototypeOf(obj) 用于检测对象是否是传入对象obj的原型</div>
+  <div>propertyIsEnumerable('name') 用于检测给定的属性是否可以枚举，用for in循环</div>
+  <div>toLocalString() 返回对象的字符串表示</div>
+  <div>toString() 返回对象的字符串表示</div>
+  <div>valueOf() 返回对象的字符串，数值或布尔值表示，通常与toString()方法的返回值相同</div>
 </body>
 <script>
   /**
@@ -59,5 +67,51 @@
    */ 
   var e = true;
   console.log(e)
+
+  var obj = {name: 'zhangli'};
+  console.log(typeof obj);
+  console.log(obj.constructor === Object) // constructor属性返回创建当前对象的函数
+  console.log(obj.hasOwnProperty('name'))
+  console.log(Object.prototype.isPrototypeOf(obj)); // 判断Object.prototype是否是obj的原型
+  /**
+   * 创建构造函数和实例
+   * 构造函数的constructor属性在其原型(prototype)上， 创建的实例会直接继承
+   * 实例通过__proto__属性继承构造函数的原型prototype
+   * 构造函数原型上的constructor属性可以被重写
+   * 
+   */
+  function Person(name, height, sex) {
+    this.name = name;
+    this.height = height;
+    this.sex = sex;
+  }
+  Person.prototype = {
+    constructor: Person.prototype.constructor,
+    age: 22,
+    number: 1024
+  }
+  console.log(Person === Person.prototype.constructor)
+  let person = new Person('zhangli', '176', '男');
+  Object.defineProperty(person, 'isMarry', {
+    value: '是',
+    enumerable: false
+  })
+  console.log(person.toLocaleString())
+  console.log(person.hasOwnProperty('isMarry'))
+  /**
+   * propertyIsEnumerable 判断遍历出可以枚举的属性，是否可枚举在Object.defineProperty()中enumerablee设定
+   * for in 会遍历对象的所有属性，自身和原型上面的属性
+   * 如果只想遍历自身属性则通过hasOwnProperty判断, 这样就不会遍历出原型上面的属性
+   */
+  for(let key in person) {
+    console.log(key)
+  }
+  /**
+   * Object是所有对象的基类，所有派生出来的对象都会继承其原型
+   * Object中有很多类方法，实例的对象是直接继承不了的， 原型属性和方法时可以直接继承的
+   */
+   console.dir(Object.prototype === Object.__proto__)
+   console.dir(Object.__proto__ === Function.prototype)
+   console.log(Person.__proto__ === Function.prototype)
 </script>
 </html>

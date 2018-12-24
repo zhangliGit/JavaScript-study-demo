@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>基本包装类型</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0; 
+      font-size: 14px;
+      box-sizing: border-box
+    }
+    body {    
+      padding: 20px;
+    }
+    div {
+      line-height: 40px
+    }
+    h1 {
+      font-size: 20px
+    }
+  </style>
+</head>
+<body>
+  <h1>基本包装类型</h1>
+  <div>为了方便基本类型的操作，javascript提供了3个特殊的引用类型 Boolean, String, Number</div>
+  <div>在javascript中，每当读取创建一个基本类型时，后台就会创建一个对应的基本包装类型的对象，从而让我们能够调用一些方法来操作</div>
+</body>
+<script>
+  var str = new String('123abc');
+  var num = new Number(123)
+  var isA = new Boolean(true)
+  console.dir(window)
+  window.toolbar.visible = null
+</script>
+</html>

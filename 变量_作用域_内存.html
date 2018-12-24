@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>变量_作用域_内存</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0; 
+      font-size: 14px;
+      box-sizing: border-box
+    }
+    body {    
+      padding: 20px;
+    }
+    div {
+      line-height: 40px
+    }
+    h1 {
+      font-size: 20px
+    }
+  </style>
+</head>
+<body>
+  <h1>变量，作用域和内存</h1>
+  <div>数据类型分为基础类型和引用类型，基础类型是按值访问（值存储在栈内存中），引用类型是按引用访问（对象存储在堆内存中）</div>
+  <div>函数中参数的传递是按值传递的, 可以把函数的参数想象成局部变量</div>
+  <div>instanceof 用来检测引用类型数据的具体类型，用来检测基础类型时都会返回false</div>
+  <div>
+    javascript中的执行环境可以分为全局执行和函数执行环境
+  </div>
+</body>
+<script>
+  var obj = {
+    nane: 'zhangli'
+  }
+  function addTen(num) {
+    num += 10;
+    return num;
+  }
+  var count = 20;
+  var result = addTen(count);
+  console.log(count);
+  console.log(addTen instanceof Object)
+  for(var i = 0; i < 10; i++) {
+    console.log(i)
+  }
+  console.log(i)
+</script>
+</html>
