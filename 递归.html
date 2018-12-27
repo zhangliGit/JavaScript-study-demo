@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>递归</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0; 
+      font-size: 14px;
+      box-sizing: border-box
+    }
+    body {    
+      padding: 20px;+
+    }
+    div {
+      line-height: 40px
+    }
+    h1 {
+      font-size: 20px
+    }
+  </style>
+</head>
+<body>
+  <h1>递归</h1>
+  <div>递归就是在函数体内调用自身的情况下构成的, 递归函数中一定要有阈值的判断，及时跳出函数的调用，不然会陷入死循环，</div>
+  <div>递归的函数的写法需要先明白计算的递归计算逻辑</div>
+</body>
+<script>
+  var add = (function(){
+    'use strict'
+    return function total(num) {
+      if (num <=1 ) {
+        return 1
+      } else {
+        console.log(total(num-1))
+        return num * total(num-1)
+      }
+    }
+  })()
+  console.log('---')
+  console.log(add(5))
+  function fibonacci(count) {
+    var count = parseInt(count);
+    if (count < 0) {
+      return 0
+    }
+    function f(count) {
+      if (count <= 1) {
+        return 1
+      } else {
+        return arguments.callee(count -1) + arguments.callee(count -2)
+      }
+    }
+    return f(count)
+  }
+  console.log(fibonacci(5))
+  /**
+   * n! = n * (n - 2)
+   */
+  function getN(num) {
+    function f(num) {
+      if (num == 1) {
+        return 1
+      } else if (num == 2) {
+        return 5
+      } else {
+        return f(num-1) + f(num - 2)
+      }
+    }
+    return f(num)
+  }
+  console.log(getN(3))
+</script>
+</html>

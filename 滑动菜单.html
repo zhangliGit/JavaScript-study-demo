@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>滑动菜单</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-size: 14px
+    }
+    #scrollMenu {
+      width: 500px;
+      border: 2px #ccc solid;
+      height: 40px;
+      margin: 20px;
+      overflow: hidden;
+    }
+    ul li {
+      display: inline-block;
+      list-style: none;
+      height: 40px;
+      line-height: 40px;
+      text-align: center;
+    }
+    ul {
+    }
+  </style>
+</head>
+<body>
+  <div id="scrollMenu">
+    <ul>
+    </ul>
+  </div>
+</body>
+<script>
+  function ScrollMenu(obj) {
+    var scrollDom = document.getElementById(obj.id);
+    var scrollW = scrollDom.clientWidth;
+    var scrollLi = scrollW / (obj.column);
+    var scrollUl = scrollDom.children[0];
+    scrollUl.style.position = 'relative'
+    scrollUl.style.width = `${(obj.menuList.length) * scrollLi}px`
+    this.height = obj.height || document.getElementById(obj.id).clientHeight;
+    /**
+     * 创建底部边框
+     */ 
+    var botDom = document.createElement('div');
+    botDom.style.width = `${scrollLi}px`;
+    botDom.style.height = '2px';
+    botDom.style.background = 'red'
+    botDom.style.position = 'absolute'
+    botDom.style.bottom = '4px'
+    botDom.style.zIndex = '99'
+    scrollUl.appendChild(botDom)
+    obj.menuList.forEach((val, index) => {
+      var newLi = document.createElement('li');
+      newLi.id = index;
+      newLi.innerHTML = val;
+      newLi.style.width = `${scrollLi}px`;
+      scrollUl.appendChild(newLi)
+    })
+    /**
+     * 监听li
+     */
+    scrollUl.addEventListener('click', function(){
+      var _index = event.target.id;
+      console.log(_index)
+    })
+  }
+  window.onload = function() {
+    var menuList = ['新闻', '娱乐', '体育', '社会', '头条', '汽车', '房地产']
+    new ScrollMenu({
+      id: 'scrollMenu',
+      menuList,
+      column: 4,
+      currentIndex: function(index) {
+
+      }
+    })
+  }
+</script>
+</html>

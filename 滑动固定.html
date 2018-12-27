@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-size: 14px
+    }
+    #left {
+      width: 200px;
+      float: left;
+      min-height: 500px;
+    }
+    #left ul {
+      width: 200px;
+      background: #ccc;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 10;
+    }
+    #left ul li {
+      list-style: none;
+      height: 40px;
+      border-bottom: 1px #eee solid;
+      line-height: 40px;
+      padding-left: 20px;
+    }
+    #right {
+      width: 500px;
+      float: left;
+    }
+    .active {
+      background: red;
+    }
+    .fixed {
+      position: fixed;
+      top: 0;
+      left: 200px;
+      z-index: 99;
+    }
+  </style>
+</head>
+<body>
+  <div class="">
+    <div id="left">
+      <ul id="lefUL">
+        <li id="0" class="active">热销榜</li>
+        <li id="1" >单人套餐</li>
+        <li id="2">多人套餐</li>
+      </ul>
+    </div>
+    <div id="right">
+      <div>
+        <div style="height: 40px;width:100%;color:#fff;background: #000; line-height: 40px;">热销榜</div>
+        <div style="height:200px; background: red">
+        </div>
+      </div>
+      <div>
+        <div style="height: 40px;width:100%;color:#fff;background: #000; line-height: 40px;">单人套餐</div>
+        <div style="height:400px; background: blue">
+        </div>
+      </div>
+      <div>
+          <div style="height: 40px;width:100%;color:#fff;background: #000; line-height: 40px;">多人套餐</div>
+          <div style="height:700px; background:yellow">
+          </div>
+        </div>
+    </div>
+  </div>    
+</body>
+<script>
+  var rigList = [];
+  var lef = document.getElementById('lefUL').children;
+  var rig = document.getElementById('right').children;
+  for(var i = 0; i < rig.length; i++) {
+    rigList.push(rig[i].offsetTop)
+  }
+  window.onload = function() {
+    document.getElementById('lefUL').addEventListener('click', function(event){
+      var _index = parseInt(event.target.id);
+      console.log(_index);
+      rig[_index].scrollIntoView();
+      addAction[_index]
+    }, false)
+    window.onscroll = function() {
+      var scrollT = window.scrollY;
+      var _index = 0;
+      rigList.forEach(function(val, index) {
+        if (scrollT >= (val-40)) {
+          _index = index
+        }
+      })
+      addAction(_index)
+    }
+  }
+  function addAction(_index) {
+    rigList.forEach(function(val, index) {
+      lef[index].className = ''
+      rig[index].children[0].className = ''
+    })
+    lef[_index].className = 'active'
+    rig[_index].children[0].className = 'fixed'
+  }
+  var b
+  function b() {
+    }
+    
+    console.log(typeof b)
+</script>
+</html>

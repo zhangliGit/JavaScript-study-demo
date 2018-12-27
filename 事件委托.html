@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>事件委托</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0; 
+      font-size: 14px;
+      box-sizing: border-box
+    }
+    div {
+      line-height: 40px
+    }
+    h1 {
+      font-size: 20px
+    }
+    ul li {
+      list-style: none;
+      line-height: 50px;
+      background: red;
+      width:100%;
+      margin: 10px 0;
+      margin-left: -100px;
+      position: relative;
+    }
+    .fixed {
+      position: fixed;
+      top: 0;
+      z-index: 9;
+    }
+    .div {
+      position: absolute;
+      top:0;
+      right: 0;
+      height: 50px;
+      width: 100px;
+      background: blue
+    }
+  </style>
+</head>
+<body>
+  <h1>事件委托</h1>
+  <div>事件委托又称事件代理，把一类事件的操作代理给一个事件来进行，原理是利用了事件冒泡机制， 当点击子元素的时候，会向上触发父元素的同类事件</div>
+  <div>想要阻止事件冒泡可以用event.stopPropagation()</div>
+  <div>另外一个核心是利用了event对象, 浏览器操作界面的时候会返回event对象，里面包括了target对象，指向当前操作的元素，利用nodeName可以判断标签的类型</div>
+  <div>
+    <ul id="UL">
+      <li>1234
+        <div class="div"></div>
+      </li>
+      <li>4567</li>
+      <li>456</li>
+    </ul>
+  </div>
+  <div id="myDiv">
+    <div id="add">新增</div>
+    <div id="del">删除</div>
+    <div id="modify">修改</div>
+    <div id="update">更新</div>
+  </div>
+  <div onclick="test()" style="width: 300px; height:1000px; background: blue">
+    <div id="fixed" onclick="test1(event)" style="width: 200px; height: 200px; background: red; margin-left: 20px"></div>
+  </div>
+</body>
+<script>
+  window.onload = function() {
+    var ulDOM = document.getElementById('UL');
+    var startX, endX, moveX;
+    var handle = function(event) {
+      endX = event.pageX;
+      if (endX < startX) {
+        event.target.style.marginLeft = endX - startX + 'px';
+      }
+    }
+    ulDOM.onmousedown = function(event) {
+      startX = event.pageX;
+      event.target.addEventListener('mousemove', handle)
+    }
+    ulDOM.onmouseup = function(event) {
+      event.target.removeEventListener('mousemove', handle)
+    }
+    var myDiv = document.getElementById('myDiv');
+    myDiv.onclick = function(event) {
+      var ev = event || window.event;
+      var tar = ev.target || ev.srcElement;
+      var id = tar.id;
+      switch(id) {
+        case 'add': 
+        var newLi = document.createElement('li');
+        newLi.innerHTML = Math.floor(Math.random() * 100 + 50)
+        ulDOM.appendChild(newLi)
+        return;
+        case 'del':
+        console.log('del');
+        return;
+        case 'modify':
+        console.log('modify');
+        return;
+        case 'update':
+        console.log('update');
+        return;
+        default:
+        retrun;
+      }
+    }
+  }
+  var f = document.getElementById('fixed');
+  var ft = f.offsetTop;
+  window.onscroll = function(event) {
+    if (window.scrollY >= ft) {
+      f.className = 'fixed'
+    } else {
+      f.className = '';
+    }
+  }
+  function test(){
+    console.log('test')
+  }
+  function test1(event){
+    console.log(event.target.offsetLeft);
+      console.log(event.target.offsetTop);
+  }
+</script>
+</html>

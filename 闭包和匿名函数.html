@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>闭包和匿名函数</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0; 
+      font-size: 14px;
+      box-sizing: border-box
+    }
+    body {    
+      padding: 20px;
+    }
+    div {
+      line-height: 40px
+    }
+    h1 {
+      font-size: 20px
+    }
+  </style>
+</head>
+<body>
+  <h1>闭包和匿名函数</h1>
+  <div>在javascript中很容易将匿名函数和闭包搞混淆</div>
+  <div>闭包： 实质是一个函数，是有权访问另一个函数作用域中变量的函数，创建闭包的最常见方式，就是在一个函数中创建另一个函数</div>
+  <div>要彻底搞明白其中的细节，必须从理解函数被调用的时候发生了什么入手</div>
+  <div>当某个函数被调用时，会创建一个执行环境和相应的作用域链，然后使用arguments和相应的参数的值来初始化函数的活动对象</div>
+  <div>函数在执行过程中，需要读取和写入值，就需要在作用域链中进行查找变量</div>
+  <div>闭包与普通函数不同的是，普通函数执行完毕之后其活动对象（局部变量）就会被销毁，从而释放内存</div>
+  <div>而闭包的函数，由于内部的函数包含了外部函数的作用域，所有当函数执行后，对应的活动对象不会被销毁，容易造成占用过多内存</div>
+</body>
+<script>
+  function test() {
+    var arr = [];
+    for(let i = 0; i < 10; i++) {
+      arr[i] = function() {
+        return i
+      }
+    }
+    return arr;
+  }
+  var a = test();
+  console.log(a[0]());
+</script>
+</html>

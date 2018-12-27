@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>事件捕获</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0; 
+      font-size: 14px;
+      box-sizing: border-box
+    }
+    div {
+      line-height: 40px
+    }
+    h1 {
+      font-size: 20px
+    }
+    ul li {
+      list-style: none;
+      line-height: 50px;
+      background: red;
+      width:100%;
+      margin: 10px 0;
+      margin-left: -100px;
+      position: relative;
+    }
+    .fixed {
+      position: fixed;
+      top: 0;
+      z-index: 9;
+    }
+    .div {
+      position: absolute;
+      top:0;
+      right: 0;
+      height: 50px;
+      width: 100px;
+      background: blue
+    }
+  </style>
+</head>
+<body>
+  <h1>事件捕获</h1>
+  <div>事件捕获与事件冒泡切好相反，事件捕获是指不太具体的节点应该更早的接受到事件，而最具体的节点最后接收到事件</div>
+  <div>
+    <ul id="UL">
+      <li>1234
+        <div class="div"></div>
+      </li>
+      <li>4567</li>
+      <li>456</li>
+    </ul>
+  </div>
+  <div id="myDiv">
+    <div id="add">新增</div>
+    <div id="del">删除</div>
+    <div id="modify">修改</div>
+    <div id="update">更新</div>
+  </div>
+  <div id = "test" style="width: 300px; height:1000px; background: blue">
+    <div id="test1" style="width: 200px; height: 200px; background: red; margin-left: 20px">
+    </div>
+  </div>
+</body>
+<script>
+  window.onload = function() {
+    window.oncontextmenu = function() {
+      alert(2);
+      return false
+    }
+  }
+  document.documentElement.addEventListener('click', function(){
+   console.log('window') 
+  }, true)
+  document.getElementById('test').addEventListener('click', function(){
+    console.log('test')
+  }, true)
+  document.getElementById('test1').addEventListener('click', function(){
+    console.log('test1')
+  }, true)
+  var User = {
+    count: 1,
+    getCount: function() {
+      return this.count;
+    }
+  };
+  console.log(User.getCount()); // 1
+  var func = User.getCount;
+     var a = 100;  
+     function test(){  
+    	console.log(a);  // 100
+   	  a = 10; 
+    	console.log(a);  //10
+     }  
+      test();
+      console.log(a); //10
+      function person(name, age) {
+        var o = new Object();
+        o.name = name;
+        o.age = age
+        return o;
+      }
+      var b = person('zhangli', 22);
+      console.log(b);
+</script>
+</html>

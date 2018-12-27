@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>面向对象程序设计</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0; 
+      font-size: 14px;
+      box-sizing: border-box
+    }
+    body {    
+      padding: 20px;
+    }
+    div {
+      line-height: 40px
+    }
+    h1 {
+      font-size: 20px
+    }
+  </style>
+</head>
+<body>
+  <h1>面向对象程序设计</h1>
+  <div>创建对象模式</div>
+  <div>工厂模式</div>
+  <div>构造函数模式</div>
+  <div>原型模式</div>
+  <div>组合使用构造函数和原型模式</div>
+  <div>动态原型模式</div>
+  <div>寄生构造函数模式</div>
+</body>
+<script>
+  var obj = {
+    height: 20
+  }
+  Object.defineProperties(obj, {
+    _age: {
+      value: 30,
+      writable: true
+    },
+    year: {
+      value: 2018
+    },
+    age: {
+      get: function() {
+        return this._age + 1
+      },
+      set: function(newVal) {
+        console.log(newVal)
+        this._age = newVal
+      }
+    }
+  })
+  obj.year = 2000;
+  /**
+   * 工厂模式创建对象
+   */
+  function createObj(name, sex, age, grade) {
+    var o = new Object();
+    o.name = name;
+    o.sex = sex;
+    o.age = age;
+    o.grade = grade;
+    o.showName = function() {
+      return this.name;
+    }
+    return o;
+  }
+  var obj1 = createObj('zhangli', 'nan', 30, '大专');
+  var obj2 = createObj('chentian', 'nv', 28, '大专');
+  console.log(obj1)
+  console.log(obj2)
+  /**
+   * 自定义构造函数创建对象, 创建的自定义执行时分为4个步骤
+   *1. 创建一个新对象
+   *2. 将构造函数的作用域赋给新对象（因此this就指向了这个新对象）
+   *3. 执行构造函数里面的方法，给对象添加属性和方法
+   *4. 返回新对象
+   */
+  function CreateObj(name, sex, age, grade) {
+    this.name = name;
+    this.sex = sex;
+    this.age = age;
+    this.grade = grade;
+    this.showName = function() {
+      return this.name;
+    }
+  }
+  var obj3 = new CreateObj('zhangli', 'nan', 30, '大专');
+  var obj4 = new CreateObj('chentian', 'nv', 28, '大专');
+  console.log(obj3 instanceof CreateObj)
+  console.log(CreateObj instanceof Function)
+  console.log(typeof obj3)
+  /**
+   * 原型模式，我们创建的每个函数都有一个prototype（原型）属性，这个属性是一个指针，指向一个原型对象，这个对象的用途是包含可以由特定类型的所有实例共享的属性和方法
+   * 由于prototype中的属性和方法可以被创建的实例对象共享，所以可以用来定义对象的一些共有的属性和方法,但是定义的属性和方法没有动态性
+   */
+   function Person() {
+   }
+   Person.prototype = {
+     constructor: Person,
+     age: 20,
+     sex: 'nan',
+     name: 'zhangli',
+     showName: function() {
+       return this.name;
+     }
+   }
+   var obj5 = new Person()
+   var obj6 = new Person();
+   console.log('name' in obj5);
+   console.log(obj5.hasOwnProperty('name'));
+  /**
+   * 构造函数 和 原型模式 组合模式
+   * 这种模式结合了构造函数和原型模式的有点，摒弃了各自的缺点，所以是开发中常用的一种模式
+   */
+   function Person1(name, age, sex) {
+      this.sex = sex;
+      this.age = age;
+      this.name = name;
+   }
+   Person1.prototype = {
+     constructor: Person1,
+     grede: '大专',
+     showName: function() {
+       return this.name
+     }
+   }
+   var obj7 = new Person1('zhangli', 'nan', 30);
+   var obj8 = new Person1('chentian', 'nv', 28);
+   Object.defineProperties(obj7, {
+     sex: {
+       value: 'zhangli',
+       enumerable: false
+     }
+   })
+   for(let key in obj7) {
+     console.log(key);
+   }
+   console.log(Object.keys(obj7))
+   console.log(Object.getOwnPropertyNames(obj7));
+   console.log(Object.getOwnPropertyNames(obj7.__proto__))
+   /**
+    * 动态原型模式
+    * 此模式是在构造函数中直接给原型添加属性和方法
+    */
+  function Person2(name, age, sex) {
+    this.sex = sex;
+    this.age = age;
+    this.name = name;
+    if (typeof this.showName !== 'function') {
+      Person2.prototype.showName = function() {
+        return this.name
+      }
+    }
+  }
+  var obj9 = new Person2('zhangli', 'nan', 30);
+  var obj10 = new Person2('chentian', 'nv', 28);
+  console.log(obj9)
+  console.log(obj10)
+  /**
+   * 寄生构造函数模式 与前面讲的工程模式，构造函数模式很像，是两者的一个结合体
+   * 返回的对象与构造函数和构造函数的原型属性没有任何的关联
+   * 此模式 更像是重写构造函数执行的过程
+   */
+  function Person3(name, sex, age) {
+    var o = new Object();
+    o.name = name;
+    o.sex = sex;
+    o.age = age;
+    return o
+  }
+  var obj11 = new Person3('zhangli', 'nan', 30)
+  console.log(obj11);
+  /**
+   * 稳妥构造函数模式
+   * 此模式与寄生构造函数模式有点类型，其特点是不会使用this和new， 其构造的对象和构造函数以及构造函数的原型没有任何关联
+   */
+</script>
+</html>
