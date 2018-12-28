@@ -29,6 +29,7 @@
       text-align: center;
     }
     ul {
+      margin-left: -20px;
     }
   </style>
 </head>
@@ -44,6 +45,8 @@
     var scrollW = scrollDom.clientWidth;
     var scrollLi = scrollW / (obj.column);
     var scrollUl = scrollDom.children[0];
+    scrollUl.style.marginLeft = "0px";
+    scrollUl.style.transition = "all .2s linear"
     scrollUl.style.position = 'relative'
     scrollUl.style.width = `${(obj.menuList.length) * scrollLi}px`
     this.height = obj.height || document.getElementById(obj.id).clientHeight;
@@ -57,7 +60,12 @@
     botDom.style.position = 'absolute'
     botDom.style.bottom = '4px'
     botDom.style.zIndex = '99'
+    botDom.style.left = 0;
+    botDom.style.transition = "all .3s ease";
     scrollUl.appendChild(botDom)
+    /**
+     * 遍历菜单
+     */
     obj.menuList.forEach((val, index) => {
       var newLi = document.createElement('li');
       newLi.id = index;
@@ -68,9 +76,46 @@
     /**
      * 监听li
      */
-    scrollUl.addEventListener('click', function(){
+    var startX, moveX;
+    var scrollL = scrollLi * (obj.menuList.length) - scrollW;
+    console.log(scrollUl.clientLeft)
+    var move = function(event) {
+      moveX = event.pageX;
+      console.log(moveX - startX)
+      var scrollW = parseInt(scrollUl.style.marginLeft);
+      console.log("当前居左" + scrollW)
+      console.log('移动位移' + (moveX - startX))
+      scrollUl.style.marginLeft = `${scrollW + moveX - startX}px`
+      if (parseInt(scrollUl.style.marginLeft) >=0) {
+        scrollUl.style.marginLeft = 0
+      } else if (parseInt(scrollUl.style.marginLeft) <= -scrollL) {
+        scrollUl.style.marginLeft = `-${scrollL}px`
+      }
+    }
+
+    scrollUl.addEventListener('mousedown', function(event){
+      startX = event.pageX;
+      scrollUl.addEventListener('mousemove', move)
+    })
+    scrollUl.addEventListener('mouseout', function(event){
+      scrollUl.removeEventListener('mousemove', move)
+    })
+    document.documentElement.addEventListener('mouseup', function(){
+      scrollUl.removeEventListener('mousemove', move)
+    })
+    scrollUl.addEventListener('click', function(event){
       var _index = event.target.id;
-      console.log(_index)
+      if (event.target.nodeName.toLowerCase() != 'li') return
+      /**
+       * 点击一个li时底部边框会位移
+       */ 
+      botDom.style.left = `${_index * scrollLi}px`; 
+      if (_index >= (obj.column - 1)) {
+        if (_index == (obj.menuList.length - 1)) return;
+        scrollUl.style.marginLeft = `-${scrollLi * (_index - 2)}px`
+      } else {
+      //  scrollUl.style.marginLeft = `0px`
+      }
     })
   }
   window.onload = function() {
