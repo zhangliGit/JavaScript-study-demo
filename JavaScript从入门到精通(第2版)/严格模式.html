@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>严格模式</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+    body {
+      font-size: 14px;
+      padding: 40px;
+    }
+    ul li {
+      line-height: 20px
+    }
+  </style>
+</head>
+<body>
+  <ul>
+      <li>
+        严格模式 在es5(在 ECMA version 5)中引入，它增加了增强的错误检查（语法）和安全，使用 'use strict' 申明为严格模式，严格模式有作用范围，在脚本头部使用，则是全局的，在函数体内使用则是局部的
+      </li>
+      <li>
+        严格模式下 变量名必须用var申明
+      </li>
+      <li>
+        严格模式下 对象或函数内的变量不能重复
+      </li>
+  </ul>
+  
+</body>
+<script>
+  'use strict'
+  var obj = {
+    name: 'zhangli',
+    name: 'chentitan'
+  }
+  console.log(obj)
+  function test() {
+    'use strict'
+    var b = 123;
+    var b = 1123;
+  }
+  test()
+  if (a == b) { // a 和 b 未定义
+    console.log(2)
+  }
+</script>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>javascript</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+    body {
+      font-size: 16px;
+      padding: 30px;
+    }
+  </style>
+</head>
+<body>
+    <ul>
+        <li>javascript中使用常用的7中数据类型</li>
+        <li>Number, String, Boolean, Null, Undefined, Object, Symbol</li>
+        <li>isNaN 常用来判断是否为数字, 返回为true时， 则不是数字</li>
+        <li>变量的作用域 是指可以访问到它的值的位置，函数的参数实际上是作为一个变量，在函数内部定义</li>
+        <li>通常情况下，js执行的是隐式的类型转换，但是在很多情况下，我们也可以显示的转换数据类型</li>
+        <li>String()  Number()  Boolean()</li>
+      </ul>
+</body>
+<script>
+  console.log(isNaN('123abc'))
+  var str = 'abcdefg'
+  var str1 = 'ABcdsjk'
+  console.log(isNaN('AVC'))
+  console.log(str.substring(0, 3)) // 字符串截取 从0开始到3结束，不包括3
+  console.log(str.substr(2, 3)) // 字符串截取, 从2开始，往后的3个数
+  console.log(str.toUpperCase()) // 字符串转大写
+  console.log(str1.toLowerCase()) // 字符串小写
+  console.log(Boolean(0))
+  var a = 123;
+  console.log(typeof String(a))
+  console.log(typeof Boolean(a))
+  console.log(typeof Number(str))
+  var b = '1231';
+  console.log(typeof Number(b))
+</script>
+</html>
