@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+          margin: 0;
+          padding: 0; 
+          font-size: 14px;
+          box-sizing: border-box
+        }
+        div {
+          line-height: 40px
+        }
+        h1 {
+          font-size: 20px
+        }
+        .div {
+          margin: 20px;
+          overflow: hidden;
+          width: 500px;
+          height: 400px;
+          background: red
+        }
+        .div1 {
+          width: 200px;
+          height: 200px;
+          background: blue;
+          margin: 30px;
+        }
+    </style>
+</head>
+<body>
+  <div>
+    event对象中的几个属性值
+  </div>
+  <div>
+    pageX pageY表示鼠标点击时在页面的坐标x，y
+  </div>
+  <div>
+    offsetX, offsetY表示鼠标点击时在当前元素中的坐标
+  </div>
+  <div>
+    layerX, layerY 表示鼠标点击时在起父元素中的坐标
+  </div>
+  <div id="div" class="div">
+    <div id="div1" class="div1"></div>
+  </div>
+</body>
+<script>
+  document.getElementById('div1').addEventListener('click', function(event){
+    console.log(event)
+  })
+</script>
+</html>
