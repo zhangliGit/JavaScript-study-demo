@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>数组</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+    body {
+      font-size: 14px;
+      padding: 20px;
+    }
+    ul li {
+      line-height: 30px;
+    }
+  </style>
+</head>
+<body>
+  <ul>
+    <li></li>
+  </ul>
+</body>
+<script>
+  var arr = [1, 2, 3, 4, 5, 6, 7]
+  console.log(arr.slice(2, 6)) // 从索引2开始 到索引6结束 不包括6
+  arr.push(9)
+  arr.unshift(2)
+  for(var val of arr) {
+    console.log(val);
+  }
+  console.log(arr.join(''))
+  var url = 'http://www.baidu.com/haha.html'
+  console.log(encodeURI(url))
+  console.log(encodeURIComponent(url))
+  var obj1 = "{'a':1, 'b':2}";
+  console.log(eval("("+ obj1 +")").a)
+  var obj = {a: 1, b: 2}
+  console.log(typeof obj1)
+</script>
+
+</html>
