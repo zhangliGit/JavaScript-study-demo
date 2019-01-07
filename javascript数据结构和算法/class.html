@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>javascript</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+    body {
+      font-size: 14px;
+      padding: 20px;
+    }
+    ul li {
+      line-height: 30px;
+    }
+  </style>
+</head>
+<body>
+  <ul>
+    <li></li>
+  </ul>
+</body>
+<script>
+  function Book(col,  size) {
+    this.col = col;
+    this.size = size;
+  }
+  Book.prototype.getSize = function() {
+    return this.size
+  }
+  console.dir(Book);
+  var book = new Book('red',  '10*10');
+  console.log(book);
+  class  Book1  {
+    constructor (col,  size)  {
+      this.col = col;
+      this.size  = size;
+    }
+    getSize() {
+      return this.size;
+    }
+  }
+  var book1 = new Book1('yellow', '20*20');
+  console.log(book1)
+  /**
+   * 父类 
+   */
+  class Parent {
+    constructor (name, age, sex) {
+      this.name = name;
+      this.age = age;
+      this.sex = sex;
+    }
+    getName () {
+      return this.name;
+    }
+  }
+  class Children extends Parent  {
+    constructor (name, age, sex, grade) {
+      super(name, age, sex);
+      this.grade = grade;
+    }
+    getGrade ()  {
+      return this.grade
+    }
+  }
+  var children = new Children('zhangli', '30', 'nan',  'work');
+  console.log(children)
+  /**
+   * 
+   */ 
+</script>
+</html>

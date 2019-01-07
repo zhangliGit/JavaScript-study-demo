@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>stack</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+    body {
+      font-size: 14px;
+      padding: 20px;
+    }
+    ul li {
+      line-height: 30px;
+    }
+  </style>
+</head>
+<body>
+  <ul>
+    <li></li>
+  </ul>
+</body>
+<script>
+  class Stack {
+    constructor() {
+      this.items = []
+      this.push = function(element){
+        this.items.push(element)
+      }
+      this.pop = function() {
+        this.items.pop()
+      }
+      this.peek = function() {
+        return this.items[items.length-1];
+      }
+      this.isEmpty = function() {
+        return this.items.length == 0 
+      }
+      this.clear = function() {
+        this.items.length = 0;
+      }
+      this.size = function() {
+        return this.items.length
+      }
+      this.print = function() {
+        return this.items.toString()
+      }
+    }
+  }
+  var stack = new Stack();
+  stack.push(3);
+  stack.push(4)
+  console.log(stack.print())
+</script>
+</html>
