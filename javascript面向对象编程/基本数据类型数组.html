@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>javascript</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+    body {
+      font-size: 14px;
+      padding: 20px;
+    }
+    ul li {
+      line-height: 30px;
+    }
+  </style>
+</head>
+<body>
+  <ul>
+    <li></li>
+  </ul>
+</body>
+<script>
+  console.log('bSAD'.toLowerCase())
+  console.log('adads'.toUpperCase())
+  console.log(Math.floor('123.12'))
+  console.log(Math.ceil(2.3))
+  function isFloat(val) {
+    return typeof val === 'number' && val.toString().indexOf('.') > -1
+  }
+  var sex =  Symbol('sex');
+  var obj1 = {
+    name: 'zhangli',
+    age: '29',
+    [Symbol('sex')]: 'nan'
+  }
+  var a = Symbol.for('name');
+  var b = Symbol.for('name');
+  console.log(Symbol.keyFor(a))
+
+  var s = Object.getOwnPropertySymbols(obj1)[0]
+  console.log(obj1[s])
+  for(var key in obj1) {
+    console.log(obj1[key]);
+  }
+  console.dir(obj1);
+</script>
+</html>
