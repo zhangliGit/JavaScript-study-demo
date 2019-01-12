@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>javascript</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+    body {
+      font-size: 14px;
+      padding: 20px;
+    }
+    ul li {
+      line-height: 30px;
+    }
+  </style>
+</head>
+<body>
+  <ul>
+    <li>javascript中一切皆对象</li>
+    <li>number, string, null, undefined, boolean为基础数据类型</li>
+    <li>object, array, function为复杂数据类型（引用数据类型）</li>
+  </ul>
+</body>
+<script>
+  var str = '123';
+  console.dir(str.__proto__)
+  var num = 123;
+  console.dir(num.__proto__);
+  var arr = [
+    {
+      name: 'zhangli',
+      age: '30',
+      face: {
+        a: 1
+      }
+    },
+    {
+      name: 'chentian',
+      age: '27',
+      face: {
+        b: 1
+      }
+    }
+  ]
+  var arr1 = JSON.parse(JSON.stringify(arr))
+  arr[0].face.a = 22;
+  console.log(arr);
+  console.log(arr1);
+  var cor_js = {
+    sortBy: function(arr, key) {
+      return arr.sort((a, b) => {
+        return a[key] - b[key]
+      })
+    }
+  }
+ // console.log(cor_js.sortBy(arr, 'age'));
+</script>
+</html>

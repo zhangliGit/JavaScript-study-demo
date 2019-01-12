@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>javascript</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+    body {
+      font-size: 14px;
+      padding: 20px;
+    }
+    ul li {
+      line-height: 30px;
+    }
+  </style>
+</head>
+<body>
+  <ul>
+    <li></li>
+  </ul>
+</body>
+<script>
+  /**
+   * 填充数组 fill, 会 覆盖 已有的值，如果想新增到某个位置 则使用splice
+   */ 
+  var  a = [1,2,3,4,5,2]
+  console.log(a.includes(3, 3))
+  /**
+   * find传入一个回调函数，返回一个表达式，找出第一个符合条件的值，findIndex则返回对应的索引
+   */ 
+  var  b = a.find(val => {
+    return val > 4
+  })
+  console.log(b);
+  /**
+   * 复制数组元素到某个位置 一共 3个参数  第一个表示复制到某个位置的索引， 第二个和第单个表示复制数据的开始和结束索引 不包括结束，结束不填为数组末尾 
+   */ 
+  // a.copyWithin(1,3)
+  /**
+   * splice 用来添加和删除数组元素 
+   */
+  a.splice(1, 0, 1.1)
+  console.log(a);
+  var arr = [1, 2, 3, 4]
+  var arr1 = [
+    {name: 'zhangli'},
+    1,2
+  ]
+  var arr2 = arr1.map(val => {
+    return val
+  })
+  arr2[0].name = 'chentian'
+  console.log(arr.reduce((p, c, i, a) => p+c));
+  for ( let index of arr.entries())  {
+    console.log(index)
+  }
+  var arr1 = [1, 2, 3, 4]
+  arr1.splice(0, 1, 1.1, 1.2)
+  /**
+   * javascript只支持一维数组，不支持多维矩阵数组，但是可以通过数组嵌套来实现类型的功能
+   */ 
+  var arr2 = [
+    [
+      [1,2,3,4],
+      [5,6,7,8],
+      [9,10,11,12]
+    ],
+    [
+      [11,22,33,44],
+      [55,66,77,88],
+      [99,10,11,12]
+    ]
+  ]
+  for (var i = 0; i < arr2.length; i++) {
+    for (var j = 0; j  < arr2[i].length; j++) {
+      for (var z = 0; z < arr2[i][j].length; z++) {
+      }
+    }
+  }
+  const row = 6;
+  for (var i = 0; i < row; i++) {
+    if ( i < row / 2) {
+      for (var j = 0; j < i; j++) {
+        document.write("*"); 
+      } 
+    } else {
+      for (var j = row; i < j; j--) {
+        document.write("*"); 
+      } 
+    }
+    document.write("<br />");
+  }
+</script>
+</html>

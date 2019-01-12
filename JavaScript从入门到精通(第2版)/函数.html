@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>javascript</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+    body {
+      font-size: 14px;
+      padding: 20px;
+    }
+    ul li {
+      line-height: 30px;
+    }
+  </style>
+</head>
+<body>
+  <ul>
+    <li></li>
+  </ul>
+</body>
+<script>
+  // 命名函数
+  function test()  {
+    for (let i = 0; i < arguments.length;  i++) {
+      console.log(i)
+    }
+  }
+  test(1, 2, 3)
+  // 函数表达式
+  var test1 = function() {
+    console.log(2);
+  }
+  function a() {
+    var my  = '123';
+    function b() {
+      console.log(my)
+      return my;
+    }
+    return b();
+  }
+  var c = a();
+  console.log(c)
+  /**
+   * 对象属性 
+   */
+  var obj = {
+    name: 'zhangli',
+    sex: 'nan'
+  }
+  for ( key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      console.log('hh')
+    }
+  }
+  if ('name' in  obj)  {
+    console.log(true)
+  }
+</script>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>dom编程</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+    body {
+      font-size: 14px;
+      padding: 20px;
+    }
+    ul li {
+      line-height: 30px;
+    }
+  </style>
+</head>
+<body>
+  <ul>
+    <li>javascript对dom的操作是很好性能的</li>
+    <h1>访问和修改dom元素</h1>
+    <li>document.querySelectorAll</li>
+    <h1>重绘与重排也会大量消耗性能</h1>
+    <li>一下这些情况会出现重排</li>
+    <li>添加或删除可见的DOM元素</li>
+    <li>元素位置改变</li>
+    <li>元素尺寸变化</li>
+    <li>内容改变</li>
+    <li>页面渲染器初始化</li>
+    <li>浏览器尺寸变化</li>
+  </ul>
+  <div id="div"></div>
+</body>
+<script>
+  const li = document.querySelectorAll('ul li');
+  console.log(li)
+  document.getElementById('div').style.cssText = "background: red; width: 100px; height: 100px"
+</script>
+</html>

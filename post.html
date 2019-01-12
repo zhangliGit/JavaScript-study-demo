@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+<script>
+  function zAjax(type,url,params,callback,tag){
+      var isGet = type=="GET"||type=="get"?true:false;
+      if(isGet){
+          var url = url;
+          if (params && params != {}) {
+            var newP = [];
+            for (var key in params) {
+              newP.push({
+                keys: key,
+                values: params[key]
+              });
+            }
+            for (var i = 0; i < newP.length; i++) {
+              if (i == 0) {
+                url += "?" + newP[i].keys + "=" + newP[i].values
+              } else {
+                url += "&" + newP[i].keys + "=" + newP[i].values
+              }
+            }
+        }
+      }
+      $.ajax({
+        type:type,
+        timeout:10000,
+        data: isGet?"":params,
+        url:url,
+        success:function(data){
+        },
+        error:function(){
+        }
+      })
+    }
+  function requestAjax(params,callBack) {
+        var xmlHttp;
+        if (window.ActiveXObject) {
+          xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+        } else if (window.XMLHttpRequest) {
+          xmlHttp = new XMLHttpRequest();
+        }
+        var method = params.method ? params.method.toUpperCase() : 'GET';
+        var requestDone = false;
+        if (method == "POST") {
+          var postData = params.data;
+          postData = (function (obj) { // 转成post需要的字符串.
+            var str = "";
+            for (var prop in obj) {
+              str += prop + "=" + obj[prop] + "&"
+            }
+            return str;
+          })(postData);
+          xmlHttp.open("POST", params.url);
+          xmlHttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+          if (params.headers && params.headers != {}) {
+            for (var key in params.headers) {
+              xmlHttp.setRequestHeader(key, params.headers[key]);
+            }
+          }
+          xmlHttp.send(postData);
+        }
+        xmlHttp.onreadystatechange = function () {
+          //响应成功,并且没有超时
+          if (xmlHttp.readyState == 4) {
+            if (xmlHttp.status == 200 || xmlHttp.status == 304) {
+            }
+            if (xmlHttp.status == 404 || xmlHttp.status == 403 || xmlHttp.status == 500 || xmlHttp.status == 401) {
+          }
+        }
+      }
+    }
+</script>
+</html>
