@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>javascript</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+    body {
+      font-size: 14px;
+      padding: 20px;
+    }
+    ul li {
+      line-height: 30px;
+    }
+  </style>
+  <script defer>      
+    console.log(1);
+  </script>
+  <!-- <script>
+    let script = document.createElement('script');
+    script.src = 'load.js';
+    script.type = 'text/javascript';
+    document.getElementsByTagName('head')[0].appendChild(script);
+  </script> -->
+  <script>
+    console.log(6)
+    let ajax = new XMLHttpRequest();
+    ajax.open('get', 'load.js')
+    ajax.onreadystatechange = function() {
+      console.log(8)
+      if (ajax.readyState == 4) {
+        if (ajax.status >= 200 && ajax.status < 300 || ajax.status == 304) {
+          console.log(5)
+          let script = document.createElement('script');
+          script.type = 'text/javascript';
+          script.text = ajax.responseText;
+          document.getElementsByTagName('head')[0].appendChild(script);
+        }
+      }
+    }
+  </script>
+  <script>
+    console.log(4)
+  </script>
+</head>
+<body>
+  <ul>
+    <h1>JavaScript性能优化</h1>
+    <li>css文件时并行下载，与script脚步的下载不同</li>
+    <li>为了提高页面渲染加载性能，建议把JavaScript的标签放到页面后面，不要放在head里面</li>
+    <li>尽量的减少JavaScript的请求个数，一个100kb的脚步下载，比4个25kb的脚步所用的时间要短，因为不可避免http请求会消耗性能和时间</li>
+    <h1>无阻赛脚步</h1>
+    <li>在script标签中使用defer属性，延迟加载，脚步会在window.onload前加载执行</li>
+    <li>通过动态创建JavaScript的script标签加载脚步</li>
+    <li>通过xmlHttpRequest对象异步请求文件，然后动态创建script标签插入到界面</li>
+
+  </ul>
+</body>
+<script>
+  window.onload = function() {
+    console.log(3);
+  }
+  function test() {
+    var age = 'zhangli';
+    return age
+  }
+  console.dir(test)
+  var str = '{a: 1}';
+  console.log(eval("("+str+")").a)
+</script>
+</html>

@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>严格模式</title>
+  <script>
+  </script>
   <style>
     * {
       margin: 0;
@@ -23,7 +25,7 @@
 <body>
   <ul>
       <li>
-        严格模式 在es5(在 ECMA version 5)中引入，它增加了增强的错误检查（语法）和安全，使用 'use strict' 申明为严格模式，严格模式有作用范围，在脚本头部使用，则是全局的，在函数体内使用则是局部的
+       严格模式 在es5(在 ECMA version 5)中引入，它增加了增强的错误检查（语法）和安全，使用 'use strict' 申明为严格模式，严格模式有作用范围，在脚本头部使用，则是全局的，在函数体内使用则是局部的
       </li>
       <li>
         严格模式下 变量名必须用var申明
@@ -36,19 +38,6 @@
 </body>
 <script>
   'use strict'
-  var obj = {
-    name: 'zhangli',
-    name: 'chentitan'
-  }
-  console.log(obj)
-  function test() {
-    'use strict'
-    var b = 123;
-    var b = 1123;
-  }
-  test()
-  if (a == b) { // a 和 b 未定义
-    console.log(2)
-  }
+  var a = 123;
 </script>
 </html>
