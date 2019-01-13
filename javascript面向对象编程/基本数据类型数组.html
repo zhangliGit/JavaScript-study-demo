@@ -49,5 +49,35 @@
     console.log(obj1[key]);
   }
   console.dir(obj1);
+  var someVal = 1
+  if(typeof someVal === 'undefined') {
+    console.log(2);
+  }
+  let i = 0;
+  while(++i < 10) {
+    console.log(i)
+  }
+  let obj2 = {
+    name: 'zhangli',
+    sex: 'nan'
+  }
+  delete obj2['name'];
+  console.log(obj2)
+  let arr1 = [1,2,3,4];
+  delete arr1[2];
+  console.log(arr1[2]);
+  var aa;
+  console.log(typeof aa)
+  var s = '1s';
+  console.log(s++)
+  console.log(!!'false')
+  console.log(!!undefined)
+  console.log(typeof -Infinity)
+  console.log(false === '')
+  console.log(typeof '2E+2')
+  var bb = 3e+3
+  console.log(bb++)
+  var v = 100 || 10;
+  console.log(v);
 </script>
 </html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>javascript</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+    body {
+      font-size: 14px;
+      padding: 20px;
+    }
+    ul li {
+      line-height: 30px;
+    }
+  </style>
+</head>
+<body>
+  <ul>
+    <li></li>
+  </ul>
+</body>
+<script>
+    function test() {
+        return arguments;
+    }
+    var a = '11.2323';
+    var b = 'http://www.baicu.com? a=你好&b=2';
+    console.log(encodeURIComponent(b));
+    console.log(escape('哈哈'))
+    function test() {
+        var a = 213;
+        return function() {
+            return a
+        }
+    }
+    var b = test();
+    console.log(b())
+    function f() {
+        var a = []
+        var i;
+        for (var i=0; i < 3; i++) {
+            a[i] = (function(i) {
+                return function() {
+                    return i
+                }
+            })(i)
+        }
+        return a
+    }
+    var aa =  f();
+    console.log(aa[0]());
+    console.log(test instanceof Function)
+</script>
+
+</html>
