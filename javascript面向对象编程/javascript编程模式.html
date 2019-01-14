@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>javascript</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+    body {
+      font-size: 14px;
+      padding: 20px;
+    }
+    ul li {
+      line-height: 30px;
+    }
+  </style>
+</head>
+<body>
+  <div style="width: 200px; height: 100px; background: #ccc">
+    <span style="font-weight: bold">haha:</span><span>我是今天头发比的就凭你的骄傲了就到了附件爱丽丝得减肥克鲁赛德解放路上经典款</span>
+  </div>
+</body>
+<script>
+  // 编程模式
+  /**
+   * @des 1.行为隔离
+   */
+  var observer = {
+    addSubscriber: function(callback) {
+      this.subscribers[this.subscribers.length] = callback;
+    },
+    removeSubscriber: function(callback){
+      for(var i = 0; i < this.subscribers.length; i++) {
+        if (this.subscribers[i] === callback)  {
+          delete this.subscribers[i];
+        }
+      }
+    },
+    publish: function(what) {
+      for(var i = 0; i < this.subscribers.length; i++) {
+        if(typeof this.subscribers[i] === 'function') {
+          this.subscribers[i](what)
+        }
+      }
+    },
+    make: function(o) {
+      for (var i in this) {
+        o[i] = this[i];
+        o.subscribers = [];
+      }
+    }
+  }
+  var blogger = {
+    writeBlogPost: function(){
+      var content = 'today is' + new Date();
+      this.publish(content);
+    }
+  }
+  var la_times = {
+    newIssue: function() {
+      var paper = 'has a earth';
+      this.publish(paper)
+    }
+  }
+  observer.make(blogger);
+  console.dir(blogger)
+  var jack = {
+    read: function(what) {
+      console.log('i just read that' + what);
+    }
+  }
+  blogger.addSubscriber(jack.read)
+  blogger.writeBlogPost('212')
+</script>
+</html>

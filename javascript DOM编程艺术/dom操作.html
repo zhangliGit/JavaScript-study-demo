@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>javascript</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+    body {
+      font-size: 14px;
+      padding: 20px;
+    }
+    ul li {
+      line-height: 30px;
+    }
+  </style>
+</head>
+<body>
+  <div class="d1" id="div1" style="width: 200px; height: 200px; background: red; overflow: hidden;">
+    <div class="d1" id="div2" title="" style="width: 100px; height: 100px;background:#fff;margin: 10px;">
+        123
+    </div>
+  </div>
+</body>
+<script>
+  var d2 = document.getElementById('div2');
+  console.dir(d2.childNodes[0].nodeValue)
+</script>
+</html>

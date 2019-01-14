@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>javascript</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+    body {
+      font-size: 14px;
+      padding: 20px;
+    }
+    ul li {
+      line-height: 30px;
+    }
+  </style>
+</head>
+<body>
+    <div id="div1" style="width: 100px; height: 100px; background: red; overflow: hidden;">
+      <div id="div2" style="width: 50px; height: 50px; background: blue; margin: 20px;"></div>
+    </div>
+    <a href="www.baidu.com">跳转</a>
+</body>
+<script>
+  // 事件有 事件冒泡和事件捕捉，默认的事件机制是冒泡
+  const d1 = document.getElementById('div1');
+  const d2 = document.getElementById('div2');
+  d1.onclick = function() {
+    console.log(1)
+  }
+  d2.onclick = function(ev) {
+    var ev = ev || event;
+    console.log(2);
+    // stopPropagation 用来阻止事件冒泡
+    ev.stopPropagation();
+  }
+  document.getElementsByTagName('a')[0].addEventListener('click', function(e){
+    e.preventDefault();
+  }, false)
+</script>
+</html>

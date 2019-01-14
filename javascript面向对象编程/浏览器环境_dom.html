@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>javascript</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+    body {
+      font-size: 14px;
+      padding: 20px;
+    }
+    ul li {
+      line-height: 30px;
+    }
+  </style>
+</head>
+<body>
+  <ul>
+    <li></li>
+  </ul>
+  <div id="box">
+      <div name="div" id="box1">1</div>
+      <div id="box2" style="width: 200px; height: 200px; background: red" class="c1 c2">
+        <div id="box21">123</div>
+      </div>
+      <div id="box3" class="c1">
+        12
+      </div>
+  </div>
+  <div id="dialog" style="position: absolute; left: 30px; top: 40px; background:#000; z-index: 99; width: 100px; height: 100px;">
+
+  </div>
+  <div id="dialog1" style="position: absolute; left: 130px; top: 140px; background:#999; z-index: 99; width: 100px; height: 100px;">
+
+    </div>
+</body>
+<script>
+  ;(function(){
+    var d = document.createElement('div');
+    var d21 = document.getElementById('box21')
+    d.innerHTML = 'new'
+    d21.parentNode.replaceChild(d, d21)
+  })()
+  // firstChild ie6.7.8写法， firstElementChild 非ie的写法
+  // 判断元素是否有子元素可以用childElementCount以及children的长度等于0判断
+  // childNodes 会返回空元素
+  // getEelmentsByName
+  // cloneNode(false) 浅拷贝拷贝dom元素 true为深拷贝
+  // insertBefore
+  const d = document.getElementById('box2');
+  console.dir(d);
+  console.dir(d.children)
+  console.log(d.previousElementSibling)
+  console.log(d.nextElementSibling)
+  console.log(d.classList[0])
+  let nD = document.createElement('div')
+  nD.id="box12";
+  nD.innerHTML = '12';
+  d.nextElementSibling.parentNode.insertBefore(nD, d.nextElementSibling);
+  const b = document.getElementById('box3');
+  console.log(document.getElementsByName('div'))
+  console.log(b.cloneNode(true).nodeType)
+  ;(function(){
+    document.onmousedown = function(ev) {
+      var curr = ev.target;
+      var newD = curr.cloneNode(true);
+      newD.style.opacity = '0.5'
+      document.documentElement.appendChild(newD);
+      var ev = ev || window.event;
+      let sx = ev.clientX;
+      let sy = ev.clientY;
+      let l = newD.offsetLeft;
+      let t = newD.offsetTop;
+      if(d.setCaptrue) {
+        d.setCaptrue()
+      }
+      // 使用document监听 而不使用dom元素
+      document.onmousemove = function(ev) {
+        var ev = ev || event;
+        newD.style.left = `${l + ev.clientX - sx}px`
+        newD.style.top = `${t + ev.clientY - sy}px`
+      }
+      document.onmouseup = function(ev) {
+        newD.style.opacity = 1;
+        curr.parentNode.removeChild(curr);
+        document.onmousemove = null;
+        document.onmouseup = null;
+        if(d.releaseCaptrue) {
+          d.releaseCaptrue()
+        }
+      }
+      return false;
+    }
+  })()
+  mYfunction('dialog1')
+  function mYfunction(id){
+    var oDiv = document.getElementById(id);
+    oDiv.onmousedown = function (ev) {
+        var ev = ev || event;
+        var disX = ev.clientX;
+        var disY = ev.clientY;
+        var l = oDiv.offsetLeft;
+        var t = oDiv.offsetTop;
+        if(d.setCapture) {
+          d.setCapture()
+        }
+        document.onmousemove = function (ev) {
+            //这里为什么使用document，是因为快速拖拽的话会鼠标丢失，
+            var ev = ev || event;
+            oDiv.style.left = ev.clientX - disX+l + "px";
+            oDiv.style.top = ev.clientY - disY+t+ "px";
+        }
+        document.onmouseup = function (ev) {
+            document.onmousemove = document.onmouseup = null;
+            //为何不用oDiv.onmouseup是因为被挡住之后会无视掉遮挡的元素
+        }
+        return false;
+    }
+}
+</script>
+</html>

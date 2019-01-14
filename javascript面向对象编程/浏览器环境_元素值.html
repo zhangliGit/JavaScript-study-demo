@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>javascript</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+    body {
+      font-size: 14px;
+      width:  100%;
+      height: 100%;
+    }
+    ul li {
+      line-height: 30px;
+      margin-left: 10px;
+    }
+    ul li:first-child {
+      margin: 0px;
+    }
+  </style>
+</head>
+<body>
+  <div id="p" style="width: 200px; height: 200px; background:#000; margin: 20px; overflow: hidden;">
+      <div id="c" name="test" style="width:  80px; height: 80px; background: #fff; margin: 20px;padding: 20px;">
+        12
+      </div>
+    </div>
+  <div id="div1" style="width:  200px; height: 200px; background: #000000; overflow:scroll; overflow-x: hidden;">
+    <div id="div2" style="color:#fff; width: 300px; border: 5px #666 solid">
+      我是div元素里面的内容哈哈哈哈哈哈哈哈哈哈哈哈哈哈我是div元素里面的内容哈哈哈哈哈哈哈哈哈哈哈哈哈哈我是div元素里面的内容哈哈哈哈哈哈哈哈哈哈哈哈哈哈我是div元素里面的内容哈哈哈哈我是div元素里面的内容哈哈哈哈哈哈哈哈哈哈哈哈哈哈我是div元素里面的内容哈哈哈哈哈哈哈哈哈哈哈哈哈哈我是div元素里面的内容哈哈哈哈哈哈哈哈哈哈哈哈哈哈我是div元素里面的内容哈哈哈哈哈哈哈哈哈哈哈哈哈哈我是div元素里面的内容哈哈哈哈哈哈哈哈哈哈哈哈哈哈我是div元素里面的内容哈哈哈哈哈哈哈哈哈哈哈哈哈哈我是div元素里面的内容哈哈哈哈哈哈哈哈哈哈哈哈哈哈我是div元素里面的内容哈哈哈哈哈哈哈哈哈哈哈哈哈哈我是div元素里面的内容哈哈哈哈哈哈哈哈哈哈哈哈哈哈我是div元素里面的内容哈哈哈哈哈哈哈哈哈哈哈哈哈哈我是div元素里面的内容哈哈哈哈哈哈哈哈哈哈哈哈哈哈我是div元素里面的内容哈哈哈哈哈哈哈哈哈哈哈哈哈哈我是div元素里面的内容哈哈哈哈哈哈哈哈哈哈哈哈哈哈我是div元素里面的内容哈哈哈哈哈哈哈哈哈哈哈哈哈哈我是div元素里面的内容哈哈哈哈哈哈哈哈哈哈哈哈哈哈我是div元素里面的内容哈哈哈哈哈哈哈哈哈哈哈哈哈哈我是div元素里面的内容哈哈哈哈哈哈哈哈哈哈哈哈哈哈我是div元素里面的内容哈哈哈哈哈哈哈哈哈哈哈哈哈哈我是div元素里面的内容哈哈哈哈哈哈哈哈哈哈哈哈哈哈我是div元素里面的内容哈哈哈哈哈哈哈哈哈哈哈哈哈哈我是div元素里面的内容哈哈哈哈哈哈哈哈哈哈哈哈哈哈我是div元素里面的内容哈哈哈哈哈哈哈哈哈哈哈哈哈哈我是div元素里面的内容哈哈哈哈哈哈哈哈哈哈哈哈哈哈我是div元素里面的内容哈哈哈哈哈哈哈哈哈哈哈哈哈哈我是div元素里面的内容哈哈哈哈哈哈哈哈哈哈哈哈哈哈我是div元素里面的内容哈哈哈哈哈哈哈哈哈哈哈哈哈哈我是div元素里面的内容哈哈哈哈哈哈哈哈哈哈哈哈哈哈我是div元素里面的内容哈哈哈哈哈哈哈哈哈哈哈哈哈哈我是div元素里面的内容哈哈哈哈哈哈哈哈哈哈哈哈哈哈我是div元素里面的内容哈哈哈哈哈哈哈哈哈哈哈哈哈哈我是div元素里面的内容哈哈哈哈哈哈哈哈哈哈哈哈哈哈我是div元素里面的内容哈哈哈哈哈哈哈哈哈哈哈哈哈哈我是div元素里面的内容哈哈哈哈哈哈哈哈哈哈哈哈哈哈我是div元素里面的内容哈哈哈哈哈哈哈哈哈哈哈哈哈哈我是div元素里面的内容哈哈哈哈哈哈哈哈哈哈哈哈哈哈我是div元素里面的内容哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈
+    </div>
+  </div>
+  <ul  id="scroll1" style="width: 500px;  height: 100px; background: #333; white-space: nowrap; overflow: hidden; font-size: 0px">
+    <li style="width: 140px; height: 100px; display: inline-block; background: red"></li>
+    <li style="width: 60px; height: 100px; display: inline-block; background: red"></li>
+    <li style="width: 80px; height: 100px; display: inline-block; background: red"></li>
+    <li style="width: 40px; height: 100px; display: inline-block; background: red"></li>
+    <li style="width: 150px; height: 100px; display: inline-block; background: red"></li>
+    <li style="width: 40px; height: 100px; display: inline-block; background: red"></li>
+    <li style="width: 60px; height: 100px; display: inline-block; background: red"></li>
+    <li style="width: 40px; height: 100px; display: inline-block; background: red"></li>
+  </ul>
+  <div style="width: 500px; height: 200px; background: #666; display: none">
+    <div style="height: 200px; width: 100px; background: #333; display: inline-block"></div>
+    <div style="height: 200px; width: 100px; background: #333; display: inline-block"></div>
+    <div style="height: 200px; width: 100px; background: #333; display: inline-block"></div>
+    <div style="height: 200px; width: 100px; background: #333; display: inline-block"></div>
+    <div style="height: 200px; width: 100px; background: #333; display: inline-block"></div>
+  </div>
+</body>
+<script>
+  // offsetHeight 是元素的高度  padding+border+height
+  // clientHeight 是元素的可视高度 padding+height(不包含border值)
+  // scrolllHeight 是元素的滚动区域的高度(这个高度为元素所有内容的高度)
+  // scrollTop 是div原生滚动条滚动的高度 == scrollHeight- offsetHeight
+  // offsetLeft 是元素相对于网页左侧的距离
+  //offsetTop 是元素相对于网页顶部的距离
+  // clinetLeft 获取元素左边框 的宽度
+  // clientTop 获取元素上边框的高度
+  // event对象
+  // event.target 当前点击的对象
+  // event.pageX || event.clientX 鼠标点击的x轴坐标 基于网页左上角
+  // event.pageY || event.clientY鼠标点击的Y轴坐标 基于网页左上角
+  // event.offsetX 鼠标点击的X轴坐标 基于当前元素
+  // event.offsetY 鼠标点击的Y轴坐标 基于当前元素
+  // event.layerX 鼠标点击的X轴坐标 基于父元素
+  // event.layerY 鼠标点击的Y轴坐标 基于父元素
+  const dp = document.getElementById('p');
+  const dc = document.getElementById('c');
+  console.dir(dc.style.marginLeft)
+  console.log(dp.offsetLeft)
+  console.log(dp.offsetTop)
+  console.log(dc.offsetLeft)
+  console.log(dc.offsetTop)
+  console.log(dc.clientTop)
+  console.log(dc.clientLeft)
+  const d1 = document.getElementById('div1');
+  const d2 = document.getElementById('div2');
+  console.dir(d1.scrollHeight)
+  d1.onscroll = function() {
+    console.log(d1.scrollTop)
+    if(d1.scrollTop + d1.offsetHeight >= d1.scrollHeight) {
+      console.log('到底饿了')
+    } else if(d1.scrollTop <= 0) {
+      console.log('到顶乐乐');
+    }
+  }
+  ;(function(){
+    let s1 = document.getElementById('scroll1');
+    console.log(s1.scrollLeft);
+    console.log(s1.offsetWidth)
+    console.log(s1.scrollWidth);
+    var tag = true; // 开始滚动
+    let time = setInterval(() => {
+      if(tag) {
+        if (s1.scrollLeft < s1.scrollWidth - s1.offsetWidth) { // 滚到头了
+          s1.scrollLeft++;
+        } else {
+          tag = false;
+        }
+      } else {
+        if (s1.scrollLeft > 0) {
+          s1.scrollLeft--;
+        } else {
+          tag = true;
+        }
+      }
+    },50)
+  })()
+  console.log(document.documentElement.nodeName)
+  console.log(dc.innerHTML.nodeType)
+  document.getElementById('c').addEventListener('click', fn, false);
+  function fn(ev) {
+    let e = event || window.event;
+    console.dir(e)
+  }
+</script>
+</html>
