@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>javascript</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+    body {
+      font-size: 14px;
+      padding: 20px;
+    }
+    ul li {
+      list-style: none;
+      line-height: 30px;
+    }
+    .box{
+      width: 100px;
+      height: 100px;
+      background: #000;
+      transition: all 3s ease;
+    }
+    .box1 {
+      transform-origin: 0 0;
+    }
+    .box:hover{
+      transform: translate(120px, 40px);
+    }
+    .move {
+      animation: moveTo 3s linear;
+      width: 100px;
+      height: 100px;
+      background: red;
+      padding: 20px;
+      border: 5px #000000 solid
+    }
+    @keyframes moveTo {
+      0% {
+        width: 100px;
+      }
+      50% {
+        width: 400px;
+      }
+      100% {
+        width: 100px
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+
+  </div>
+  <div class="box box1">
+  </div>
+  <div class="move"></div>
+</body>
+</html>

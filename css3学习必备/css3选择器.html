@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>javascript</title>
+  <link href="./iconfont.css"  rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+    body {
+      font-size: 14px;
+      padding: 20px;
+    }
+    ul li {
+      line-height: 30px;
+      list-style: none;
+      margin: 10px;
+    }
+    .list-ul {
+      padding: 10px;
+      background: #ccc;
+    }
+    ul li[class] {
+    }
+    /*匹配class属性值为li1的元素*/
+    ul li[class="li1"] {
+      background: red;
+    }
+    /*匹配name属性等于li2的元素*/
+    ul li[name="li2"] {
+      background: blue;
+    }
+    /*匹配name属性包含li5的元素*/
+    ul li[name~="li5"]{
+      background:yellow;
+    }
+    /*匹配n开头 连字符- 连接的属性值 包括n*/
+    ul li[name|="n"] {
+      background: blue
+    }
+    /*匹配第一个子元素*/
+    ul li:first-child{
+      background: blue;
+    }
+    /*匹配最后一个子元素*/
+    ul li:last-child{
+      background: #000
+    }
+    .header{
+      width: 200px;
+      height: 30px;
+      background: #666;
+      position: relative;
+    }
+    /*伪类，在元素前面插入一个内容*/
+    .header:before{
+      top: -10px;
+      left: -10px;
+      content: "\e728";
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      z-index: 999;
+      font-size:25px;
+      background: red;
+    }
+    /*在元素(元素填充的内容)后插入一个元素*/
+    .header:after{
+      content: '';
+      width: 30px;
+      height: 30px;
+      bottom: 0px;
+      right: 0px;
+      position: absolute;
+      z-index: 99;
+      background: blue
+    }
+    /*匹配box的子元素div 不包括孙子元素*/
+    .box > div  {
+      margin-left: 20px;
+    }
+    /*匹配box1相邻的后一个子元素*/
+    .box1 + div {
+      background: red;
+    }
+    /*匹配box1后面的所有子元素*/
+    .box1 ~ div {
+      background: red
+    }
+   /*匹配属性name已en开头的元素*/
+   .box2[name^="en"] {
+     background: dodgerblue
+   }
+   /*匹配属性name已en结尾的元素*/
+   .box2[name$="en"] {
+     background: forestgreen
+   }
+   /*匹配属性name包含cd的元素*/
+   .box2[name*="cd"] {
+     background: blue
+   }
+   /*匹配box3的第几个子元素*/
+   .box3 div:nth-child(1) {
+     background: blue
+   }
+   /*匹配box3的子元素 带表达式的*/
+   .box3 div:nth-child(even){
+    background: red 
+   }
+   /*匹配box3的从后往前的第几个子元素，与nth-child相反*/
+   .box3 div:nth-last-child(1) {
+     background: yellow
+   }
+   /*父元素中尽包含一个子元素*/
+   .box3 p:only-child  {
+     background: #000
+   }
+   /*选择匹配e的元素且不包子节点*/
+   .box4 {
+   }
+   .box4 p:first-of-type {
+     background: red;
+     width: 200px
+   }
+  </style>
+</head>
+<body>
+  <div class="coicon">
+    <div class="header ">66</div>
+    <div class="list-ul">
+      <ul>
+        <li>我是开头</li>
+        <li class="li1" name="li1">第一行</li>
+        <li>1111</li>
+        <li>2222</li>
+        <li class="li5" name="li5">第五行</li>
+        <li class="li6" name="n-l">第六行</li>
+        <li class="li7" name="n-li">第七行</li>
+        <li class="li8" name="">第八行</li>
+        <li class="li8" name="">第九行</li>
+      </ul>
+      <div class="box">
+        <div>
+          <span>我是新元素</span>
+          <div>我是子的</div>
+        </div>
+        <div class="box1">我是新元素1</div>
+        <div class="box2" name="enn">我是新元素2</div>
+        <div class="box2" name="nen">我是新元素3</div>
+        <div class="box2" name="abcde">我是新元素3</div>
+      </div>
+      <div class="box3">
+        <p>456</p>
+      </div>
+      <div class="box4">
+        <div>23</div>
+        <p>10000</p>
+        <p>88989</p>
+        <p>10000</p>
+        <p>88989</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

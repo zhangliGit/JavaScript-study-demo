@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>javascript</title>
+  <link rel="stylesheet" href="./flex.css" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+    body {
+      font-size: 14px;
+      padding: 20px;
+    }
+    ul li {
+      list-style: none;
+      line-height: 30px;
+    }
+    .text-li {
+      height: 30px;
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", STHeiti, "Microsoft Yahei", Tahoma, Simsun, sans-serif;
+      font-style: normal;
+      font-weight: bold;
+      vertical-align: bottom;
+      text-align: justify;
+    }
+    .divt{
+    }
+    .divc{
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      text-shadow:-10px 1px 1px #000;
+    }
+    .box1{
+      width: 100px;
+      height: 50px;
+      border-radius: 50% 40%
+    }
+    .sjx {
+      margin: 10px;
+      width: 0px; 
+      height: 0px;
+      border-left: 40px solid #fff;
+      border-top: 40px solid #000;
+      border-right: 40px solid #000;
+      border-bottom: 40px solid #fff;
+    }
+  </style>
+</head>
+<body>
+  <ul>
+    <li class="text-li co-flex" style="width: 400px;">
+      <div class="divt">
+        12
+      </div>
+      <div class="co-f1 divc" style="">
+          我是一个兵来自老百姓我是一个兵来自老百姓我是一个兵来自老百姓我是一个兵来自老百姓
+      </div>
+    </li>
+    <li class="text-li">
+      <div class="divt co-flex co-jsb">姓名</div>
+    </li>
+  </ul>
+  <div style="font-size:0; vertical-align:middle;">
+    <div style="width: 100px; height: 100px; background: black; display: inline-block;vertical-align:middle"></div>
+    <div style="width: 100px; height: 100px; background: blue;display: inline-block;vertical-align:middle">12</div>
+  </div>
+  <div style="background: #000; margin: 20px;"  class="box1">
+  </div>
+  <div class="sjx"> </div>
+</body>
+</html>
