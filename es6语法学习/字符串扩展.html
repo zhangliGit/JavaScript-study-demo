@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>javascript</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+    body {
+      font-size: 14px;
+      padding: 20px;
+    }
+    ul li {
+      line-height: 30px;
+    }
+  </style>
+</head>
+<body>
+  <ul>
+    <li></li>
+  </ul>
+</body>
+<script>
+  let str = '1234';
+  console.log(str.codePointAt(3));
+  console.log(str.indexOf('2'))
+  // 字符是否在字符串的首部
+  console.log(str.startsWith('2'))
+  // 字符是否在字符串尾部
+  console.dir(str.endsWith('4'));
+  var s = '3,8,11'
+  // of在参数转化为数组
+  console.log(Array.of(1,4,5,6))
+  console.log(Object.is({a:2}))
+  var h = 'height'
+  var o = {
+    name: '123',
+    sex: '30',
+    [h]:'123'
+  }
+  console.log(o[h])
+  var a = Symbol('123');
+  var b = Symbol('123');
+  console.log(a == b)
+  var person = {
+    name: 'zhangli',
+    age: '20'
+  }
+  var proxy = new Proxy(person, {
+    get: function(target, property){
+      console.log(target, property);
+      return target[property]
+    },
+    set: function(target, property, val) {
+      target[property] = val;
+    }
+  })
+  proxy.h = 123;
+  var obj = {
+    name: 'zhangli'
+  }
+  Object.observe(obj, function(changes){
+    console.dir(changes);
+  })
+</script>
+</html>

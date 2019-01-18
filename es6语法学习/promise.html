@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>javascript</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+    body {
+      font-size: 14px;
+      padding: 20px;
+    }
+    .div {
+      line-height: 30px;
+      width:100px;
+      background: red;
+      height: 10px;
+      background-image: url(data:image/png;base64,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);
+    }
+  </style>
+</head>
+<body>
+  <ul>
+    <li></li>
+  </ul>
+</body>
+<script>
+  function getData(t) {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve(t);
+      }, t)
+    })
+  }
+  var p1 = getData(1000);
+  var p2 = getData(2000);
+  Promise.all([p2, p1]).then(data => {
+    console.log(data);
+  })
+  Promise.race([p2, p1]).then(data => {
+    console.log(data);
+  })
+</script>
+</html>

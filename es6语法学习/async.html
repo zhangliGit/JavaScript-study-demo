@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>javascript</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+    body {
+      font-size: 14px;
+      padding: 20px;
+    }
+    ul li {
+      line-height: 30px;
+    }
+  </style>
+</head>
+<body>
+  <ul>
+    <li></li>
+  </ul>
+</body>
+<script>
+  function $ajax(t) {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve(t);
+      }, t)
+    })
+  }
+  async function getData(t) {
+    let data = await $ajax(t);
+    console.log(data);
+    console.log(4);
+  }
+  console.log(getData(2000));
+</script>
+</html>

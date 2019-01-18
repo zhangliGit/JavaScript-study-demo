@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>javascript</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+    body {
+      font-size: 14px;
+      padding: 20px;
+    }
+    ul li {
+      line-height: 30px;
+    }
+  </style>
+</head>
+<body>
+  <ul>
+    <li></li>
+  </ul>
+</body>
+<script>
+  let {
+    aa,
+    bb,
+    ee=123,
+    ...cc
+  } = {bb:2, cc:4,aa: 1, dd: 4,ee:23}
+  console.log(aa,bb,cc,ee)
+  let a = 1;
+  let b = 2;
+  // 变量交换值 
+  [a, b] = [b,a]
+  console.log(a,b)
+  function test(){
+    return [1,2,3]
+  }
+  function add({a,b,c}) {
+    return a+b+c
+  };
+  console.log(add({a:1,b:2,c:3}))
+  let [r,t,y] = test()
+  console.log(r,t,y)
+</script>
+</html>

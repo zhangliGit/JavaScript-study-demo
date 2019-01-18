@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>javascript</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+    body {
+      font-size: 14px;
+      padding: 20px;
+    }
+    ul li {
+      line-height: 30px;
+    }
+  </style>
+</head>
+<body>
+  <ul>
+    <li></li>
+  </ul>
+</body>
+<script>
+  //Set接受一个数组作为参数
+  let arr = new Set([]);
+  arr.add(1);
+  console.log(Array.from(arr)[0]);
+  console.log(arr);
+  let arr1 = [
+   1,2,3,2,3,1,445,6
+  ]
+  let arr2 = Array.from(new Set(arr1));
+  console.log(arr2);
+  var arr3 = [
+    {
+      id: 1,
+      name: '张立',
+      age: '12',
+    },
+    {
+      id: 1,
+      name: '张立',
+      age: '1244',
+    },
+    {
+      id: 2,
+      name: '张立',
+      age: '13',
+    },
+    {
+      id: 2,
+      name: '张立',
+      age: '133',
+    },
+    {
+      id: 3,
+      name: '张立',
+      age: '13',
+    }
+  ]
+  function quchong(arr, key = '') {
+    let newA = [];
+    arr.forEach((item, index, arr) => {
+      if(key == '') {
+        if (JSON.stringify(newA).indexOf(JSON.stringify(item)) == -1) {
+          newA.push(item);
+        }
+      } else{
+          var tag = newA.some((item1, index) => {
+            return item1[key] == item[key]
+          })
+          if (!tag) newA.push(item);
+      }
+    })
+    return newA;
+  }
+  console.log(quchong(arr3, 'id'))
+</script>
+</html>

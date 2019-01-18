@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>javascript</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+    body {
+      font-size: 14px;
+      padding: 20px;
+    }
+    ul li {
+      line-height: 30px;
+    }
+  </style>
+</head>
+<body>
+  <ul>
+    <li></li>
+  </ul>
+</body>
+<script>
+  class Parent {
+    constructor(name, sex, age){
+      this.name = name;
+      this.sex = sex;
+      this.age = age;
+      this.showName = function() {
+        return '123'
+      }
+    }
+    showName () {
+      return this.name;
+    }
+  }
+  Parent.prototype.showAge = function() {
+    return this.age;
+  }
+  var p = new Parent('zhangli', 'nan', '30');
+  console.dir(p);
+  console.dir(p.showAge());
+  console.log(p.showName())
+  class Child extends Parent {
+    constructor(name, sex, age, height){
+      super(name, sex, age); // 等同于super.constructor(name, sex, age);
+      this.height = height;
+    }
+  }
+  var c = new Child('zhangziyue', 'nv', '1', '76');
+  console.log(c)
+</script>
+</html>
