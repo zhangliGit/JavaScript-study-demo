@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>javascript</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+    body {
+      font-size: 14px;
+      padding: 20px;
+    }
+    ul li {
+      line-height: 30px;
+    }
+  </style>
+</head>
+<body>
+  <ul>
+    <li></li>
+  </ul>
+</body>
+<script>
+    let str = "abc123def456 gh";
+    let regex = /1[358]\d{9}/;
+    console.log(regex.test('18702707106'))
+    console.log(str.replace(/(?!123)/g, 'bb'));
+    let str1 = '12345678';
+    console.log(str1.replace(/(?=(\d{3})+$)/g, ','));
+    console.log(str1.replace(/^\d{1}/, 'p'))
+    var regex1 = /^[0-9a-zA-Z]{6, 12}$/;
+    console.log(regex1.test('acde12345A'))
+    console.log(/^\w+$/.test('12'))
+    var reg = new RegExp(/^[0-9A-Za-z]\w*$/);
+    console.log(reg.test('132323v'));
+    console.log(/.*[0-9].*[A-Z].*[a-z].*_/.test('12ADAjk_'))
+
+</script>
+</html>
