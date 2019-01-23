@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>javascript</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+    body {
+      font-size: 14px;
+      padding: 20px;
+    }
+    ul li {
+      line-height: 30px;
+    }
+  </style>
+</head>
+<body>
+  <ul>
+    <li></li>
+  </ul>
+</body>
+<script>
+    var regex = /he{2,3}llo/;
+    /**
+     * test()进行字符串匹配，判断是否存在
+     */
+    console.log(regex.test('heeelloworld'));
+    /**
+     * 横向匹配
+     * match 字符串匹配，返回匹配的字符串，为数组形式
+     */
+     var regex1 = /ab{2,5}c/g;
+     var str = 'abbc abbbc abbbbc abbbbbc';
+     console.log(str.match(regex1));
+    /**
+     * 纵向匹配
+     */
+     var regex2 = /a[123]b/g;
+     var str1 = "a1b a2b a3b a4b";
+     console.log(str1.match(regex2));
+     /**
+      * 字符组
+      * 虽然叫字符组，实际指的是字符组中的一个字符
+      * [abc] 表示匹配的字符可是a，b，c之一
+      * 如果匹配的字符比较多的话 可以使用范围表示法
+      */
+    let regex3 = /a[123456abcdefgABCDE]c/;
+    let regex4 = /a[1-6a-gA-E]c/; // 此为简写， -为特殊连接符，如果需要匹配a，-，z中任意一种的话，- 需要转义,
+    let regex5 = /a[1-6-azA-E]c/; // 转义有三种写法 [-az] [az-] [a\-z]
+    console.log(regex5.test('a5c'));
+    let str2 = 'abbccde abcde';
+    console.log(/ab{1,3}c{1,3}de/.test(str2))
+    /**
+     * 排除字符组
+     * 某位字符可以是任何字符，但就是不能为a,b,c
+     */
+    let str3 = 'a1245ce';
+    console.log(/a[0-9a-z]{1,4}ce/.test(str3));
+    console.log(/a?/.test('abbbbbdc'));
+    console.log(/\d{2,5}/g.test(12345678));
+    console.log('1234567'.match(/\d{2,5}?/g));
+    /**
+     * (p1|p2|p3) 管道符 表示任选其一
+     * 此匹配模式为惰性模式，当前面匹配成功后 后面就不匹配了
+     */
+     console.log('hello'.match(/(hell|o)/g))
+     console.log(/#\w{6}|\w{3}/g.test('#fff'))
+     console.log(/\d{4}-[01][1-9]-\d{2}/.test('8787-12-31'))
+     console.log(/([0][0-9]|[1][0-2])/.test('12'))
+     console.log(/(0[0-9]|[12][0-9]|3[0-1])/.test('32'))
+     console.log(/^[0-9][^]+[A-Z]$/.test('12121C'))
+</script>
+</html>
