@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>javascript</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+    body {
+      font-size: 14px;
+      padding: 20px;
+    }
+    ul li {
+      line-height: 30px;
+    }
+  </style>
+</head>
+<body>
+  <ul>
+    <li></li>
+  </ul>
+</body>
+<script>
+  var regex = /[0-9]+/g
+  var str = 'cb12cde456fgh789';
+  console.log(str.replace(/(^|[a-z$])/g, 'mm'));
+  console.log(str.match(/^(\d{2,})/g));
+  console.log(str.replace(/\d{2,3}/g, 'pp'));
+</script>
+</html>
