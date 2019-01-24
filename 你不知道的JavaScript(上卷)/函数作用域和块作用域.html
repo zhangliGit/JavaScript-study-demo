@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>javascript</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+    body {
+      font-size: 14px;
+      padding: 20px;
+    }
+    ul li {
+      line-height: 30px;
+    }
+  </style>
+</head>
+<body>
+  <ul>
+    <li></li>
+  </ul>
+</body>
+<script>
+  function aa() {
+    var a = 1;
+    var b = 2;
+    function bb() {
+      return {
+        clear: function() {
+          a = null;
+          b = null;
+          return a+b;
+        },
+        total: a + b,
+      }
+    }
+    return bb();
+  }
+  {
+    var a = 2;
+  }
+  console.log(a)
+  console.log(foo)
+  var foo = function() {
+    console.log(2)
+  }
+  for(let i = 0; i<=5; i++) {
+    setTimeout(() => {
+      console.log(i);
+    }, i*1000)
+  }
+  function module() {
+    var f  = 12;
+    return {
+      getF: function() {
+        return f
+      },
+      setF: function() {
+        f++;
+      }
+    }
+  }
+  var m = module()
+  m.setF()
+  m.setF()
+  console.log(m.getF())
+</script>
+</html>
