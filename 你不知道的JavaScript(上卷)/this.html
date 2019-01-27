@@ -38,13 +38,24 @@
   }
   console.log(showName.call(me));
   console.log(speak.call(me));
+  var a = 123;
   function foo() {
-   var a = 2;
-   this.bar() 
+    var a = 456;
+    function bar() {
+      return window.a
+    }
+    return bar();
   }
-  function bar() {
-    console.log('bar');
+  console.log(foo())
+  var obj1 = {
+    name: 'zhangli'
   }
-  foo();
+  var obj2 ={
+    age: '23',
+    ...obj1
+  }
+  console.log(obj2.name)
+  console.dir(Object)
+  console.dir(Object.prototype)
 </script>
 </html>
