@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>javascript</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+    body {
+      font-size: 14px;
+      padding: 20px;
+    }
+    ul li {
+      line-height: 30px;
+      float: left;
+      margin: 0 10px;
+    }
+  </style>
+</head>
+<body>
+  <ul>
+    <li onclick="tabChange('sports')">体育</li>
+    <li onclick="tabChange('enjoy')">娱乐</li>
+    <li onclick="tabChange('news')">新闻</li>
+  </ul>
+  <div style="clear: both;"></div>
+  <div>NBA火箭队今天赢球啦</div>
+  <div>谁又出轨啦</div>
+  <div>今天又有雨</div>
+  <div onclick="window.history.forward()">返回</div>
+</body>
+<script>
+  function tabChange(path) {
+    window.location.hash = `#${path}?id=123`
+  }
+  window.onhashchange = function(event) {
+    console.log(window.history)
+    console.log(event)
+  }
+</script>
+</html>

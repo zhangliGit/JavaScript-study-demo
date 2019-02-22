@@ -26,10 +26,19 @@
 </head>
 <body>
   <ul>
-    <li></li>
+    <li onclick="getD()">获取数据</li>
   </ul>
 </body>
 <script>
+  function getD() {
+    new Promise((resolve, reject) => {
+      reject('error')
+    }).then((data) => {
+      console.log(data)
+    }).catch(data => {
+      console.log(data)
+    })
+  }
   function getData(t) {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
@@ -44,6 +53,27 @@
   })
   Promise.race([p2, p1]).then(data => {
     console.log(data);
+  })
+  // 封装的数据请求方法
+  function $ajax(t) {
+    return new Promise((resolve, reject) => {
+      // 此处用setTimeout替代ajax异步请求
+      setTimeout(() => {
+        if (t > 2000) {
+          resolve(t)  
+        } else {
+          reject('传递的时间太短')
+        }
+      }, t)
+    })
+  }
+  const t1 = $ajax(4000)
+  const t2 = $ajax(3500)
+  const t3 = $ajax(3000)
+  Promise.all([t1, t2, t3]).then(data => {
+    console.log(data) // [4000, 3500, 3000]
+  }, error => {
+    console.log(error)
   })
 </script>
 </html>
