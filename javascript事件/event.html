@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>javascript</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+    body {
+      font-size: 14px;
+      padding: 20px;
+    }
+    ul li {
+      line-height: 30px;
+    }
+  </style>
+</head>
+<body>
+  <ul>
+    <li class="liList">点击事件</li>
+    <li onclick="handleClick(event,this)">点击事件</li>
+  </ul>
+</body>
+<script>
+  document.querySelector('.liList').addEventListener('click', (e) => {
+    console.log(e)
+  }, false)
+  function handleClick(event,e) {
+    console.log(event, e)
+  }
+</script>
+</html>

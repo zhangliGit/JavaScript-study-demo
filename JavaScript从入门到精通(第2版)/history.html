@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>javascript</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+    body {
+      font-size: 14px;
+      padding: 20px;
+    }
+    ul li {
+      line-height: 30px;
+      float: left;
+      margin: 0 10px;
+    }
+  </style>
+</head>
+<body>
+  <ul>
+    <li onclick="tabChange('sports','red')">体育</li>
+    <li onclick="tabChange('enjoy','blue')">娱乐</li>
+    <li onclick="tabChange('news', 'yellow')">新闻</li>
+  </ul>
+  <div style="clear: both;"></div>
+  <div>NBA火箭队今天赢球啦</div>
+  <div>谁又出轨啦</div>
+  <div>今天又有雨</div>
+  <div onclick="window.history.back()">返回</div>
+</body>
+<script>
+  function tabChange(path, col) {
+    // replace不会新增路由的历史记录，而是替换当前的历史记录
+    if (path == 'news') {
+      window.history.replaceState({color: col}, 'histroy1', `${path}.html`)
+    } else {
+      window.history.pushState({color: col}, 'histroy1', `${path}.html`)
+    }
+    
+    console.log(window.history)
+    document.body.style.color = col
+  }
+  // 当操作浏览器的时候才会监听到
+  window.onpopstate = function(event) {
+    console.log(event)
+    document.body.style.color = event.state.color
+  }
+</script>
+</html>
