@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>javascript</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+    body {
+      font-size: 14px;
+      padding: 20px;
+    }
+    ul li {
+      line-height: 30px;
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+      <div class="div1">111</div>
+      <div class="div2">222</div>
+      <div class="div3">333</div>
+      <div class="div2">444</div>
+  </div>
+</body>
+<script>
+    window.onload = function() {
+        console.log(document.querySelector('.div2'))
+    }
+</script>
+</html>
