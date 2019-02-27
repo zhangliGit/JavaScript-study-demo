@@ -26,21 +26,41 @@
   </ul>
 </body>
 <script>
-  var a = '223'
-  function test(a,b) {
-    return this.name + a + b;
+  var name = 'hello'
+  function foo(a,b) {
+    return a+b
   }
-  let obj = {
-    age: 'zhangli-',
-    getName: () => {
-      return this.age;
+  function foo1(a,b){
+    return a-b
+  }
+  var obj = {
+    name: 'hi',
+    foo: foo
+  }
+  var obj1 = {
+    name: 'bye'
+  }
+  foo(); // hello
+  console.log(foo.call(foo1, 2,3));
+  function Person(name, age, sex) {
+    this.name = name;
+    this.age = age;
+    this.sex = sex;
+    this.getName = function() {
+      return this.name
     }
   }
-  function test1() {
-    setTimeout(() => {
-      console.log(this.a)
-    }, 2000)
+  var person = new Person('tony', '30', '男')
+  console.log(person.name) // tony
+  console.log(person.getName()) // tony
+  var say = 'hi'
+  function test() {
+    console.log(this.say)
   }
-  test1.call();
+  var obj3 = {
+    say: 'hello',
+    test: test
+  }
+  obj3.test() // hello
 </script>
 </html>

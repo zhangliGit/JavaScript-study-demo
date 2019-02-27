@@ -22,13 +22,19 @@
         display: block
     }
     .banner {
-        padding-top: 67.76%;
+       /* padding-top 百分比为图片高度/宽度*/
+        padding-top: 67.76%; 
         background: url('./img/s.png') no-repeat center;
         background-size: cover
     }
   </style>
 </head>
 <body>
+  <!--
+    cover 等比例缩放图片（会占满整个区域），如果图片比例与显示区域比例区别很大，则会出现图片被裁减情况（类似于被隐藏，看不到完整的图片），
+    contain 等比例缩放图片（可能不会占满整个区域，但是会显示出完整图片），如果图片比例与显示区域比例区别很大，则会出现留空的情况
+    100% 100% 不是等比的缩放图片，会占满真个区域，如果图片比例与显示区域比例区别很大，则图片会显得失真
+  -->
     <div class="banner"></div>
     <img src="./img/2.jpg" style="width:100%; height: auto;display:block" alt="">
 </body>
