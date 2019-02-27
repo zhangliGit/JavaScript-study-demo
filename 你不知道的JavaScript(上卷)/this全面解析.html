@@ -26,6 +26,7 @@
   </ul>
 </body>
 <script>
+<<<<<<< HEAD
   function baz() {
     // 当前调用栈是：baz
     // 因此，当前调用位置是全局作用域
@@ -45,5 +46,43 @@
     console.log('foo')
   }
   baz(); // baz调用的位置
+=======
+  var name = 'hello'
+  function foo(a,b) {
+    return a+b
+  }
+  function foo1(a,b){
+    return a-b
+  }
+  var obj = {
+    name: 'hi',
+    foo: foo
+  }
+  var obj1 = {
+    name: 'bye'
+  }
+  foo(); // hello
+  console.log(foo.call(foo1, 2,3));
+  function Person(name, age, sex) {
+    this.name = name;
+    this.age = age;
+    this.sex = sex;
+    this.getName = function() {
+      return this.name
+    }
+  }
+  var person = new Person('tony', '30', '男')
+  console.log(person.name) // tony
+  console.log(person.getName()) // tony
+  var say = 'hi'
+  function test() {
+    console.log(this.say)
+  }
+  var obj3 = {
+    say: 'hello',
+    test: test
+  }
+  obj3.test() // hello
+>>>>>>> 2afff11c1c8450bd9c6203c6421370dcde1e1442
 </script>
 </html>

@@ -29,15 +29,27 @@
   (function(){
     console.log(1234);
   })()
-  function test() {
-    var test = 123;
-    return {
-      show: function() {
-        return test;
-      }
+  var num = 100;
+  function fn1() {
+    var num = 0;
+    return function fn2() {
+      num++;
+      return num
     }
   }
-  var a = test();
-  console.log(a.show());
+  var f = fn1();
+  console.log(f()) // 1
+  console.log(f()) // 2
+  console.log(f()) // 3
+  console.log(num) // 100
+  var arr = [];
+  (function(){
+    var num = 1;
+  })()
+  for(var i = 0; i < 10; i++) {
+    arr[i] = i
+  }
+  console.log(arr[1])
+  console.log(arr[8])
 </script>
 </html>
