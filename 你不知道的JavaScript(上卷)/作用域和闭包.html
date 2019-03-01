@@ -26,7 +26,24 @@
   </ul>
 </body>
 <script>
-  var a = 1;
-  console.log(a())
+  var obj = {
+    a: '123'
+  }
+   function test() {
+     var title = "hello";
+     function test1() {
+       var title1 = 'world'
+       console.log(title1)
+       function test2() {
+         var title2 = 'haha'
+         console.log(title2)
+         debugger;
+       }
+       test2()
+     }
+     test1.call(obj)
+     console.log(title)
+   }
+   test()
 </script>
 </html>
