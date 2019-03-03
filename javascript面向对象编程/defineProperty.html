@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>javascript</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+    body {
+      font-size: 14px;
+      padding: 20px;
+    }
+    ul li {
+      line-height: 30px;
+    }
+  </style>
+</head>
+<body>
+  <ul>
+    <li></li>
+  </ul>
+</body>
+<script>
+    var obj = {
+        a: 1,
+        b: 2,
+        c: 3
+    }
+    var val = obj.a
+    Object.defineProperty(obj, 'a', {
+        enumerable: true, 
+        configurable: true, 
+        get: function() {
+            console.log('您访问了属性a')
+            return val
+        },
+        set: function(newVal) {
+            console.log(`您设置了属性a为${newVal}`)
+            val = newVal
+        }
+    })
+    console.log(obj.a)
+    obj.a = 4
+</script>
+</html>

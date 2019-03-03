@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>javascript</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+    body {
+      font-size: 14px;
+      padding: 20px;
+    }
+    ul li {
+      line-height: 30px;
+    }
+  </style>
+</head>
+<body>
+  <ul>
+    <li></li>
+  </ul>
+</body>
+<script>
+    var obj = {
+        name: 'zhangli',
+        des: {
+            sex: '男',
+            age: 31
+        }
+    }
+    // 监听对象属性
+    function observe(data) {
+        if (!data || typeof data !== 'object') {
+            return
+        }
+        Object.keys(data).forEach(key => {
+            defineReactive(data, key, data[key])
+        })
+        console.log(data)
+        console.log(Object.keys(data))
+    }
+    observe(obj)
+    function defineReactive(data, key, val) {
+        // 如果属性的值为对象，则继续遍历其属性进行监听
+        observe(val);
+        Object.defineProperty(data, key, {
+            get: function() {
+                console.log(`您访问了${key}`)
+                return val
+            },
+            set: function(newVal) {
+                console.log(`您设置了${key}的值为${newVal}`)
+                val = newVal
+            }
+        })
+        observe(val)
+    }
+</script>
+</html>
