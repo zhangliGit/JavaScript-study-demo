@@ -26,24 +26,25 @@
   </ul>
 </body>
 <script>
-  var obj = {
-    a: '123'
-  }
-   function test() {
-     var title = "hello";
-     function test1() {
-       var title1 = 'world'
-       console.log(title1)
-       function test2() {
-         var title2 = 'haha'
-         console.log(title2)
-         debugger;
-       }
-       test2()
-     }
-     test1.call(obj)
-     console.log(title)
-   }
-   test()
+    var obj = {
+        a: 1,
+        b: 2,
+        c: 3
+    }
+    var val = obj.a
+    Object.defineProperty(obj, 'a', {
+        enumerable: true, 
+        configurable: true, 
+        get: function() {
+            console.log('您访问了属性a')
+            return val
+        },
+        set: function(newVal) {
+            console.log(`您设置了属性a为${newVal}`)
+            val = newVal
+        }
+    })
+    console.log(obj.a)
+    obj.a = 4
 </script>
 </html>

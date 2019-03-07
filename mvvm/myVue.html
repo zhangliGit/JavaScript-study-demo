@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <h2>{{title}}</h2>
+        <input v-model="name">
+        <h1>{{name}}</h1>
+        <button v-on:click="clickMe">click me!</button>
+        <p>aaaa{{xxx}}zzzz</p>
+    </div>
+    <!-- <h1 id="name">{{name}}</h1> -->
+</body>
+
+</html>
+<script>
+    /**** 
+     * Observer
+     * 
+     * */
+    //初始化数据监听器
+    function observe(data) {
+        //验证传入的参数格式
+        if (!data || typeof data !== 'object') {
+            return;
+        }
+        // var dep = new Dep(); //创建订阅器Dep
+        // console.log(dep)
+        //遍历所有属性
+        Object.keys(data).forEach(function (key) {
+            defineReactive(data, key, data[key])//所有数据，单个键，单个值
+            console.log(data)
+            console.log(key)
+            console.log(data[key])
+        })
+        console.log(Object.keys(data))
+    }
+
+    //监听所有属性
+    function defineReactive(data, key, val) {
+        observe(val); // 递归遍历所有子属性
+        var dep = new Dep();//创建订阅器Dep
+        Object.defineProperty(data, key, {
+            enumerable: true, // 可枚举
+            configurable: false, // 可配置
+            get: function () {//返回它本身
+                console.log(Dep)
+                console.log(Dep.target)
+                if (Dep.target) { // 判断是否需要添加订阅者
+                    dep.addSub(Dep.target); // 在这里添加一个订阅者
+                }
+                return val;
+            },
+            set: function (newVal) {//返回更新值
+                val = newVal;
+                console.log('属性' + key + '已经被监听了，现在值为：“' + newVal.toString() + '”');
+                console.log(dep)
+                dep.notify(); // 如果数据变化，通知所有订阅者
+            }
+        })
+    }
+    console.log(Dep)
+    Dep.target = null;
+
+    //订阅器容器
+    function Dep() {
+        this.subs = [];
+    }
+
+    //订阅器原型方法
+    Dep.prototype = {
+        //添加进订阅器容器
+        addSub: function (sub) {
+            this.subs.push(sub);
+        },
+        //通知所有订阅者
+        notify: function () {
+            this.subs.forEach(function (sub) {
+                console.log(sub)
+                sub.update();
+            });
+        }
+    };
+    /**** 
+     * Watcher
+     * 
+     * */
+    //初始化Watcher订阅者
+    function Watcher(vm, exp, cb) {//实例本身， 模板键值，模板值重新赋值方法
+        console.log(vm)
+        console.log(exp)
+        console.log(cb)
+        this.cb = cb;
+        this.vm = vm;
+        this.exp = exp;
+        this.value = this.get();  // 将自己添加到订阅器的操作
+    }
+
+    Watcher.prototype = {
+        update: function () {
+            this.run();
+        },
+        run: function () {
+            var value = this.vm.data[this.exp];
+            var oldVal = this.value;
+            if (value !== oldVal) {
+                this.value = value;
+                this.cb.call(this.vm, value, oldVal);//实例的赋值方法call到订阅者
+            }
+        },
+        //让实例设置的属性强制映射到结构树上
+        get: function () {
+            console.log(Dep.target)
+            console.log(Dep)
+            Dep.target = this;  // 缓存自己
+            var value = this.vm.data[this.exp]  // 强制执行监听器里的get函数
+            Dep.target = null;  // 释放自己
+            return value;
+        }
+    };
+    /**** 
+     * Compile
+     * 
+     * */
+    function Compile(el, vm) {//dom节点，实例对象
+        this.vm = vm;
+        this.el = document.querySelector(el);
+        this.fragment = null;
+        this.init();
+    }
+    Compile.prototype = {
+        // 初始化
+        init: function () {
+            if (this.el) {
+                this.fragment = this.nodeToFragment(this.el);
+                this.compileElement(this.fragment);
+                this.el.appendChild(this.fragment);//挂载点载入模板碎片
+            } else {
+                console.log('Dom元素不存在');
+            }
+        },
+        //创建一个fragment片段，用于解析的dom节点
+        nodeToFragment: function (el) {
+            var fragment = document.createDocumentFragment();//创建fragment-DOM模板碎片
+            var child = el.firstChild;
+            while (child) {
+                // 将Dom元素移入fragment中
+                fragment.appendChild(child);
+                child = el.firstChild
+            }
+            return fragment;
+        },
+        //获取起始节点下所有节点并且递归遍历所有符合{{}}的指令
+        compileElement: function (el) {
+            var childNodes = el.childNodes;
+            var self = this;
+            //数组分割的方法作用于起始节点下所有节点并遍历每个节点执行对应方法
+            [].slice.call(childNodes).forEach(function (node) {
+                var reg = /\{\{(.*)\}\}/;//{{}}指令的正则
+                var text = node.textContent;//节点的内容
+
+                //v-model指令和事件指令的解析编译
+                if (self.isElementNode(node)) {
+                    self.compile(node);
+                } else if (self.isTextNode(node) && reg.test(text)) {  // 判断是否是符合这种形式{{}}的指令
+                    self.compileText(node, reg.exec(text)[1]);
+                }
+
+                if (node.childNodes && node.childNodes.length) {
+                    self.compileElement(node);  // 继续递归遍历子节点
+                }
+            });
+        },
+        // 执行v-model指令和事件指令的解析编译
+        compile: function (node) {
+            var nodeAttrs = node.attributes;//获取该元素上的长度
+            var self = this;
+            //遍历该元素上的所有属性
+            Array.prototype.forEach.call(nodeAttrs, function (attr) {
+                var attrName = attr.name;
+                if (self.isDirective(attrName)) {
+                    var exp = attr.value;//指定model的value值
+                    var dir = attrName.substring(2);
+                    if (self.isEventDirective(dir)) {  // 事件指令
+                        self.compileEvent(node, self.vm, exp, dir);
+                    } else {  // v-model 指令
+                        self.compileModel(node, self.vm, exp, dir);
+                    }
+                    node.removeAttribute(attrName);
+                }
+            });
+        },
+        //执行{{}}的节点的值
+        compileText: function (node, exp) {//每个符合{{}}的节点，{{}}里面的内容值
+            var self = this;
+            var initText = this.vm[exp];
+            this.updateText(node, initText);  // 将初始化的数据初始化到视图中
+            new Watcher(this.vm, exp, function (value) { // 生成订阅器并绑定更新函数
+                self.updateText(node, value);
+            });
+        },
+        //执行事件的节点的值
+        compileEvent: function (node, vm, exp, dir) {
+            var eventType = dir.split(':')[1];
+            var cb = vm.methods && vm.methods[exp];
+
+            if (eventType && cb) {
+                node.addEventListener(eventType, cb.bind(vm), false);
+            }
+        },
+        //执行模块的节点的值
+        compileModel: function (node, vm, exp, dir) {
+            var self = this;
+            var val = this.vm[exp];
+            this.modelUpdater(node, val);
+            new Watcher(this.vm, exp, function (value) {
+                self.modelUpdater(node, value);
+            });
+
+            node.addEventListener('input', function (e) {
+                var newValue = e.target.value;
+                if (val === newValue) {
+                    return;
+                }
+                self.vm[exp] = newValue;
+                val = newValue;
+            });
+        },
+        //更新文本
+        updateText: function (node, value) {
+            node.textContent = typeof value == 'undefined' ? '' : value;
+        },
+        //更新模块
+        modelUpdater: function (node, value, oldValue) {
+            node.value = typeof value == 'undefined' ? '' : value;
+        },
+        // 判断是是不是v-指令
+        isDirective: function (attr) {
+            return attr.indexOf('v-') == 0;
+        },
+        // 判断是是不是on:事件指令
+        isEventDirective: function (dir) {
+            return dir.indexOf('on:') === 0;
+        },
+        // 判断元素节点 元素类型等于1
+        isElementNode: function (node) {
+            return node.nodeType == 1;
+        },
+        // 判断文本节点
+        isTextNode: function (node) {
+            return node.nodeType == 3;
+        }
+    }
+    /**** 
+     * Observer和Watcher
+     * 
+     * */
+    function SelfVue(options) {// 整个实例对象   //data, el, exp 所有数据，选中元素，模板键值
+        var self = this;
+        this.vm = this;
+        this.data = options.data;
+        this.methods = options.methods;
+        //赋值时，属性的绑定做一层封装
+        Object.keys(this.data).forEach(function (key) {
+            self.proxyKeys(key);  // 绑定代理属性
+        });
+        //劫持并监听所有属性
+        observe(this.data);
+        //解析器解析挂载点的指令
+        new Compile(options.el, this.vm)//挂载点，实例对象
+        options.mounted.call(this); // 所有事情处理好后执行mounted函数
+
+        // el.innerHTML = this.data[exp];  // 初始化模板数据的值 // 内容为设置的键值
+        // console.log(el.innerHTML)
+        // console.log(this)
+        // new Watcher(this, exp, function (value) {//selfvue本身，模板键值，模板值为监听的新值
+        //     el.innerHTML = value;
+        // });
+        return this;
+    }
+    //让selfVue的属性代理为访问selfVue.data的属性
+    SelfVue.prototype = {
+        proxyKeys: function (key) {
+            var self = this;
+            Object.defineProperty(this, key, {
+                enumerable: false,
+                configurable: true,
+                get: function() {
+                    return self.data[key];
+                },
+                set: function(newVal) {
+                    self.data[key] = newVal;
+                }
+            });
+        }
+    }
+    /**** 
+     * 实例
+     * 
+     * */
+    var selfVue = new SelfVue({
+        el: '#app',
+        data: {
+            title: 'hello world',
+            name: 'null',
+            xxx: 'cjh'
+        },
+        methods: {
+            clickMe: function () {
+                this.title = 'hello world';
+            }
+        },
+        mounted: function () {
+            window.setTimeout(() => {
+                this.title = '你好';
+            }, 2000);
+        }
+    });
+
+    // window.setTimeout(function () {
+    //     selfVue.title = '你好';
+    // }, 2000);
+    // window.setTimeout(function () {
+    //     selfVue.name = 'canfoo';
+    // }, 2500);
+
+    // //实例
+    // var ele = document.querySelector('#name');
+    // var selfVue = new SelfVue({
+    //     name: 'hello world'
+    // }, ele, 'name');
+    // console.log(ele)
+    // console.log('name')
+
+    // window.setTimeout(function () {
+    //     console.log('name值改变了');
+    //     selfVue.name = 'canfoo';
+    // }, 2000);
+
+
+    // //实例
+    // var library = {
+    //     book1: {
+    //         name: ''
+    //     },
+    //     book2: ''
+    // };
+    // observe(library);
+    // library.book1.name = 'vue权威指南'; // 属性name已经被监听了，现在值为：“vue权威指南”
+    // library.book2 = '没有此书籍';  // 属性book2已经被监听了，现在值为：“没有此书籍”
+    // console.log(library)
+</script>

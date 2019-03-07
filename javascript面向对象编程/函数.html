@@ -56,6 +56,25 @@
     var aa =  f();
     console.log(aa[0]());
     console.log(test instanceof Function)
+    function haha() {
+        return {
+            get: function() {
+                console.log('get')
+            },
+            post: function() {
+                console.log('post')
+            }
+        }
+    }
+    haha.get = function() {
+        console.log('get1')
+    }
+    haha.post1 = function() {
+        console.log('post')
+    }
+    console.log(typeof haha)
+    console.log(typeof haha)
+    haha.get()
 </script>
 
 </html>

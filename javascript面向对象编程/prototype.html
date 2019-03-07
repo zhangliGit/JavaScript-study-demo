@@ -26,24 +26,16 @@
   </ul>
 </body>
 <script>
-  var obj = {
-    a: '123'
-  }
-   function test() {
-     var title = "hello";
-     function test1() {
-       var title1 = 'world'
-       console.log(title1)
-       function test2() {
-         var title2 = 'haha'
-         console.log(title2)
-         debugger;
-       }
-       test2()
-     }
-     test1.call(obj)
-     console.log(title)
-   }
-   test()
+    let obj = {
+        name: 'hello world' 
+    }
+    function Fn(){}
+    Fn.prototype.title = 'hellow'
+    Fn.prototype.getName = function() {
+        return this.title
+    }
+    var fn = new Fn()
+    console.dir(fn)
+    console.log(fn.__proto__) // hello world
 </script>
 </html>

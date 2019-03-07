@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>javascript</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+    body {
+      font-size: 14px;
+      padding: 20px;
+    }
+    ul li {
+      line-height: 30px;
+    }
+  </style>
+</head>
+<body>
+    <button id="count">点我</button>
+    <div id="show"></div>
+    <div id="move">取消订阅</div>
+</body>
+<script>
+    var Event = (function(){
+        var clientList = {},
+        listen,
+        trigger,
+        remove;
+        listen = function( key, fn ){
+            // 如果没有订阅则设置为空数组
+            if ( !clientList[ key ] ){
+                clientList[ key ] = [];
+            }
+            // 把订阅加到数组
+            clientList[ key ].push(fn);
+            console.log(clientList)
+        };
+        trigger = function(){
+            var key = Array.prototype.shift.call(arguments),
+            fns = clientList[ key ];
+            console.log(key, fns)
+            if ( !fns || fns.length === 0 ){
+                return false;
+            }
+            // 遍历订阅事件发送通知
+            for (let i = 0; i < fns.length; i++) {
+                fns[i](arguments[0])
+            }
+        };
+        remove = function( key, fn ){
+            var fns = clientList[ key ];
+            if ( !fns ){
+                return false;
+            }
+            if ( !fn ){
+                fns && ( fns.length = 0 );
+            }else{
+                for ( var l = fns.length - 1; l >=0; l-- ){
+                    var _fn = fns[ l ];
+                    if ( _fn.toString() === fn.toString() ){
+                        fns.splice( l, 1 );
+                    }
+                }
+            }
+        };
+        return {
+            listen: listen,
+            trigger: trigger,
+            remove: remove
+        }
+    })();
+    var a = (function(){
+        var count = 0;
+        var button = document.getElementById( 'count' );
+        button.onclick = function(){
+            Event.trigger( 'add', count++ );
+        }
+    })();
+    var b = (function(){
+        var div = document.getElementById( 'show' );
+        Event.listen( 'add', function( count ){
+            console.log(count)
+            div.innerHTML = count;
+        });
+        Event.listen( 'add', function( count ){
+            console.log(count)
+            div.innerHTML = count;
+        });
+    })();
+    document.querySelector('#move').addEventListener('click', function(){
+        Event.remove('add', function( count ){
+            console.log(count)
+            div.innerHTML = count;
+        });
+    }, false)
+</script>
+</html>

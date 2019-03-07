@@ -23,6 +23,7 @@
 <body>
   <div id="app">
     <div>{{name}}</div>
+    <div>{{age}}</div>
   </div>
 </body>
 <script>
@@ -73,9 +74,11 @@
       Object.defineProperty(data, key, {
         configurable: true,
         get: function() {
+          console.log('您访问了'+key)
           return val
         },
         set: function(newVal) {
+          console.log('您设置了'+key)
           if (newVal == val) {
             return
           }
@@ -93,10 +96,12 @@
   var wm = new Wue({
     el: '#app',
     data: {
-      name: 'zhangli'
+      name: 'zhangli',
+      age: '29'
     }
   })
-
+  wm.name = 123
+console.dir(wm)
 // 创建Compile构造函数
 function Compile(el, vm) {
     // 将el挂载到实例上方便调用
