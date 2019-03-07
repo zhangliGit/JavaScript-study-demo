@@ -25,4 +25,108 @@
     <li></li>
   </ul>
 </body>
+<script>
+  function Person(name, sex) {
+    this.name = name;
+    this.sex = sex;
+    this.getName = function() {
+      return this.name;
+    }
+  }
+  Person.prototype.age = 30;
+  // 通过原型链继承Person
+  Child.prototype = new Person('tony', '男');
+  function Child() {
+  }
+  let child = new Child()
+  // child继承了父类的构造函数属性和原型对象
+  console.dir(child)
+
+  // 借用构造函数继承
+  function Child1(name, sex) {
+    Person.call(this, name, sex)
+  }
+  let child1 = new Child1('tony', '男')
+  // child1只继承了父类构造函数的属性
+  console.log(child1)
+
+  // 组合继承 （原型链+借用构造函数继承）
+  function Child2(name, sex) {
+    Person.call(this, name, sex)
+  }
+  Child2.prototype = new Person()
+  let child2 = new Child2('tony', '男')
+  console.dir(child2)
+
+ //原型式继承
+ function createO(o) {
+   function F() {}
+   F.prototype = o
+   return new F()
+ }
+ var obj = {
+   name: 'tony',
+   sex: '男'
+ }
+ let child3 = createO(obj)
+ child3.age = 30
+ console.log(child3)
+
+ // 寄生式继承
+ function createO(o) {
+   function F() {}
+   F.prototype = o
+   return new F()
+ }
+ function createAnother(o) {
+   let newO = createO(o)
+   newO.getName = function() {
+     return this.name
+   }
+   return newO
+ }
+ let child4 = createAnother(obj)
+ console.log(child4)
+
+  // 寄生组合继承
+  function inheritPt(subType,superType){
+      var prototype = Object.create(superType.prototype) 
+      prototype.constructor = subType;
+      subType.prototype = prototype   
+  }
+  function SuperType(name){
+      this.name=name
+  }
+  SuperType.prototype.sayName=function(){
+    return this.name
+  }
+  function SubType(name,age){
+      SuperType.call(this,name)
+      this.age=age
+  }
+  inheritPt(SubType, SuperType);
+  var sub = new SubType('hello', 30)
+  console.dir(sub)
+
+ 
+  class Person5 {
+    constructor(name,age) {
+      this.name = name
+      this.age = age
+    }
+    getName () {
+      return this.name
+    }
+  }
+  class Child5 extends Person5 {
+    constructor(name, age) {
+      super(name, age)
+    }
+    getAge () {
+      return this.age
+    }
+  }
+  let child5 = new Child5('marry', 30)
+  console.dir(child5)
+</script>
 </html>

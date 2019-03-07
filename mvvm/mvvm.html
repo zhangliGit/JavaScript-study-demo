@@ -132,8 +132,10 @@ function Compile(el, vm) {
     }
     
     replace(fragment);  // 替换内容
-    
     vm.$el.appendChild(fragment);   // 再将文档碎片放入el中
 }
+setTimeout(() => {
+  wm.name = 'haha'
+},2000)
 </script>
 </html>

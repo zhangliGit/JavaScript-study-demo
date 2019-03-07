@@ -21,6 +21,24 @@
   </style>
 </head>
 <body>
-  
+  <div>
+  </div>
 </body>
+<script>
+  let newUlEle = document.createElement('ul')
+  document.body.appendChild(newUlEle)
+  // 创建文档碎片
+  let fragD = document.createDocumentFragment()
+  const st = new Date().getTime()
+  for (let i = 0; i < 50000; i++) {
+    let li = document.createElement('li')
+    li.textContent = `我是第${i}条数据`
+    // 把元素对象先插入到文档碎片
+    fragD.appendChild(li)
+  }
+  // 在ul中插入文档碎片
+  newUlEle.appendChild(fragD)
+  const et = new Date().getTime()
+  console.log(`消耗时间: `, et1 - st2)
+</script>
 </html>

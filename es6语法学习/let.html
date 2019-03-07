@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>javascript</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+    body {
+      font-size: 14px;
+      padding: 20px;
+    }
+    ul li {
+      line-height: 30px;
+    }
+  </style>
+</head>
+<body>
+  <ul>
+    <li></li>
+  </ul>
+</body>
+<script>
+let person = {
+    name: 'hello'
+}
+let proxy = new Proxy(person, {
+    get: function(target, property) {
+        console.log(`您获取了${property}`)
+        return target[property]
+    },
+    set: function(target, property, val) {
+        console.log(`您设置了${property}的值为${val}`)
+        target[property] = val;
+    }
+})
+proxy.name = 'hello world'
+console.log(proxy.name)
+let [a,b,...c] = [1,2,3,4] 
+console.log(a,b,c)
+let arr = new Set([]);
+  arr.add(1);
+  console.log(typeof arr)
+</script>
+</html>

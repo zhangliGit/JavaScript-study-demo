@@ -49,11 +49,6 @@
   var foo = function() {
     console.log(2)
   }
-  for(let i = 0; i<=5; i++) {
-    setTimeout(() => {
-      console.log(i);
-    }, i*1000)
-  }
   function module() {
     var f  = 12;
     return {
@@ -69,5 +64,15 @@
   m.setF()
   m.setF()
   console.log(m.getF())
+  var str = 'hello world'
+  function fn() {
+    var str1 = 'hello'
+    function fn1() {
+      var str2 = 'world'
+      console.log(str)
+    }
+    fn1()
+  }
+  fn() // hello world
 </script>
 </html>

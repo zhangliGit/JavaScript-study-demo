@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>javascript</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+    body {
+      font-size: 14px;
+      padding: 20px;
+    }
+    ul li {
+      line-height: 30px;
+    }
+  </style>
+</head>
+<body>
+  <ul>
+    <li>12</li>
+  </ul>
+</body>
+<script>
+  var obj = {
+    title: 99,
+    name: {
+      age: 1,
+      sex: 2
+    }
+  }
+  var obj1 = obj
+  console.log(obj === obj1)
+  var obj2 = {
+    ...obj
+  }
+  obj2.name.age = 222
+  obj2.title = 'hello'
+  console.log(obj, obj2)
+  var arr = [1,2,{a:3}]
+  var arr1 = arr;
+  console.log(arr1 === arr)
+  var arr2 = [...arr]
+  console.log(arr1 === arr2)
+  var str = 'hello'
+  console.log([...'hello'])
+  function haha(a, ...arr) {
+    console.log(arr)
+  }
+  haha(1,2,3)
+  // 把数组转化为有序的字符串
+  var arr3 = [1,3,4]
+  function abc(a,c,b) {
+    console.log(a,b,c)
+  }
+  abc(...arr3)
+</script>
+</html>
