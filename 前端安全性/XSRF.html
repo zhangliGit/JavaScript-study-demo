@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>javascript</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+    body {
+      font-size: 14px;
+      padding: 20px;
+    }
+    ul li {
+      line-height: 30px;
+    }
+  </style>
+</head>
+<body>
+    <div id="dom">123</div>
+  <ul>
+    <li>
+        <img src="http://yapi.demo.qunar.com/api/group/list">
+    </li>
+  </ul>
+</body>
+<script>
+    // var XHR = new XMLHttpRequest() 
+    // XHR.open('get', 'http://yapi.demo.qunar.com/api/group/list', true)
+    // XHR.send(null)
+    // XHR.onreadystatechange = function() {
+    //     if (XHR.readyState === 4) {
+    //         if (XHR.status === 200) {
+    //             console.log(XHR.responseText)
+    //         }
+    //     }
+    // }
+    fetch('http://yapi.demo.qunar.com/mock/56163/health/userInfo',{
+        method: 'GET',
+        mode: 'cors',
+    }).then(res => {
+        return res.json();
+    }).then(json => {
+        console.log('获取的结果', json.data);
+        return json;
+    }).catch(err => {
+        console.log('请求错误', err);
+    })
+    
+</script>
+</html>
