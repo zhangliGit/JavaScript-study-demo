@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>javascript</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+    body {
+      font-size: 14px;
+      padding: 20px;
+    }
+    ul li {
+      line-height: 30px;
+    }
+  </style>
+</head>
+<body>
+  <div id="app" onClick="pub()">发布消息</div>
+</body>
+<script>
+let pubsub = (() => {
+    let subList = {}
+    function subscribe(id, fn) {
+      if (!subList[id]) {
+        subList[id] = []
+      }
+      subList[id].push(fn)
+    }
+    function publish(id, ...args) {
+      if (!subList[id]) return
+      for (let key in subList) {
+        if (key === id) {
+          subList[id].forEach((fn, index) => {
+            fn(...args)
+          })
+        }
+      }
+    }
+    return {
+      subscribe,
+      publish
+    }
+})();
+pubsub.subscribe('text', function(a,b){
+  console.log(1)
+  console.log(a, b)
+})
+pubsub.subscribe('text', function(id){
+  console.log(2)
+  console.log(id)
+})
+pubsub.subscribe('submit', function(id){
+  console.log(2)
+  console.log(id)
+})
+function pub() {
+  pubsub.publish('text', 10,13)
+  pubsub.publish('submit', 10,13)
+}
+
+</script>
+</html>
