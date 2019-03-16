@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>javascript</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+    body {
+      font-size: 14px;
+      padding: 20px;
+    }
+    ul li {
+      line-height: 30px;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <div v-if="tag1">第一</div>
+    <div v-show="tag1">第二</div>
+    <div @click="change">改变</div>
+  </div>
+</body>
+<script src="https://cdn.bootcss.com/vue/2.6.8/vue.js"></script>
+<script>
+    var vm = new Vue({
+        el: "#app",
+        beforeCreate () {
+            console.log(1)
+        },
+        created () {
+            console.log(2)
+        },
+        beforeMount () {
+            console.log(3)
+        },
+        mounted () {
+            console.log(4)
+        },
+        beforeUpdate () {
+            console.log(5)
+        },
+        updated () {
+            console.log(6)
+        },
+        beforeDestroy () {
+
+        },
+        destroyed () {
+            console.log(7)
+        },
+        data: {
+            tag1: false
+        },
+        methods: {
+            change () {
+                this.tag1 = true
+            }
+        }
+    })
+
+</script>
+</html>
