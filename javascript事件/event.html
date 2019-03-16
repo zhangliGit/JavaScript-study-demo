@@ -24,6 +24,7 @@
   <ul>
     <li class="liList">点击事件</li>
     <li onclick="handleClick(event,this)">点击事件</li>
+    <li onclick="getDate1()">jsonp</li>
   </ul>
 </body>
 <script>
@@ -32,6 +33,27 @@
   }, false)
   function handleClick(event,e) {
     console.log(event, e)
+  }
+  function getJson(data) {
+    console.log(data);
+  }
+  function getDate() {
+    let sc = document.createElement('script');
+    sc.type="text/javascript";
+    sc.src = "http://xiaoyueyue.com.cn:8089/getData?callback=getJson";
+    document.getElementsByTagName("head")[0].appendChild(sc);
+  }
+  function getDate1() {
+    var XMLHttp = new XMLHttpRequest();
+    XMLHttp.open('get', 'http://xiaoyueyue.com.cn:8089/getData?callback=getJson');
+    XMLHttp.send(null);
+    XMLHttp.onreadystatechange = function() {
+      if (XMLHttp.readyState === 4) {
+        if (XMLHttp.status === 200) {
+          console.log(XMLHttp.responseText)
+        }
+      }
+    }
   }
 </script>
 </html>
