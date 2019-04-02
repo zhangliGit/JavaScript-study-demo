@@ -21,130 +21,30 @@
   </style>
 </head>
 <body>
-  <div id="app">
-    <div>{{this.name}}</div>
-    <div>{{this.age}}</div>
-    <div @click="changeD">改变值</div>
-  </div>
+  <ul>
+    <li></li>
+  </ul>
 </body>
-<script src="https://cdn.bootcss.com/vue/2.6.8/vue.js"></script>
 <script>
-  let vm = new Vue({
-    el: "#app",
-    data: {
-      name: 'zhangli',
-      age: 30,
-      other: {
-        height: 176,
-        light: 73
-      }
-    },
-    created() {
-      console.log(this)
-    },
-    methods: {
-      changeD () {
-        this.name = 'chentian'
-        console.log(this)
-      }
-    },
-    mounted() {
-      console.log(this)
-    },
-  })
-  function Observer(obj) {
-    if(!obj || typeof obj !== 'object') {
-      return
+    var obj = {
+        a: 1,
+        b: 2,
+        c: 3
     }
-    Object.keys(obj).forEach(key => {
-      definePro(obj, key, obj[key])
-    })
-    return obj
-  }
-  function definePro(obj, key, val) {
-    Observer(val)
-    // 收集所有的依赖
-    var deps = [];
-    Object.defineProperty(obj, key, {
-      enumerable: true,
-      configurable: true,
-      get: function() {
-        console.log(`你调用了${key}属性`)
-        // 全局依赖收集里面有没有target 并且依赖器里面不存在对应的依赖
-        if (Dep.target && deps.indexOf(Dep.target) === -1) {
-          deps.push(Dep.target)
+    var val = obj.a
+    Object.defineProperty(obj, 'a', {
+        enumerable: true, 
+        configurable: true, 
+        get: function() {
+            console.log('您访问了属性a')
+            return val
+        },
+        set: function(newVal) {
+            console.log(`您设置了属性a为${newVal}`)
+            val = newVal
         }
-        console.log(`你调用了${key}属性`)
-        console.log(deps)
-        return val
-      },
-      set: function(newVal) {
-        console.log(`您设置了${key}属性`)
-        val = newVal
-        console.log(deps);
-        deps.forEach(dep => {
-          dep()
-        })
-      }
     })
-  }
-  var hero = Observer({
-    health: 2000,
-    IQ: 150
-  })
-  // 当计算属性的值被更新时调用
-  function onComputedUpdate(val) {
-    console.log(`我的类型是${val}`)
-  }
-  // 观察者
-  // obj 被观察的对象
-  // key 被观察对象的key
-  // cb 回调函数，返回计算属性的值
-  function watcher(obj, key, cb) {
-    // 定义一个被动触发函数，当这个‘被观测对象’的依赖更新时调用
-    const onDepUpdated = () => {
-      const val = cb()
-      onComputedUpdate(val)
-    }
-    Object.defineProperty(obj, key, {
-      get: function() {
-        Dep.target = onDepUpdated
-        // 执行cb过程中会用到Dep.target
-        // 当cb()执行完了就重置Dep.target为null
-        const val = cb()
-        Dep.target = null
-        return val
-      },
-      set: function() {
-        console.log('计算属性无法被赋值')
-      }
-    })
-  }
-  // 收集依赖
-  // const Dep = {
-  //   target: null
-  // }
-  class Dep {
-    constructor () {
-      this.deps = []
-    }
-    depend () {
-      if (Dep.target && this.deps.indexOf(Dep.target) === -1) {
-        this.deps.push(Dep.target)
-      }
-    }
-    notify () {
-      this.deps.forEach(dep => {
-        dep()
-      })
-    }
-  }
-  Dep.target = null
-  watcher(hero, 'type', () => {
-    return hero.health > 4000 ? '坦克' : "脆皮"
-  })
-  console.log(`英雄的初始类型：${hero.type}`)
-  hero.IQ = 200
-  hero.health = 8000
+    console.log(obj.a)
+    obj.a = 4
 </script>
 </html>

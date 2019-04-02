@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>javascript</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-size: 14px;
+    }
+    ul li {
+      line-height: 30px;
+    }
+    #app {
+      width:400px;
+      border: 100px #ccc solid;
+      padding: 10px;
+    }
+    .box {
+        background-color: #FF8C00;
+        width: 300px;
+        height: 300px;
+        position: relative;
+    }
+    .content {
+        background-color: #F00;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%)
+    }
+
+  </style>
+</head>
+<body>
+  <div id="app">
+      <div class="box">
+          <div class="content">
+            212hkjdhkfjsdkfjk 
+          </div>
+      </div>
+  </div>
+</body>
+<script src="https://cdn.bootcss.com/vue/2.6.8/vue.js"></script>
+<script>
+  console.log(typeof Worker)
+  var w = new Worker('./work.js')
+  w.onmessage = function(event) {
+   // document.querySelector("#app").innerHTML = event.data
+  }
+  console.log(document.querySelector("#app").offsetWidth)
+</script>
+</html>

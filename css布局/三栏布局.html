@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>javascript</title>
+  <!--[if IE]>
+    console.log('ie')
+  <![endif]-->
+  <script>
+    console.log(4)
+  </script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+    body {
+      font-size: 14px;
+    }
+    ul li {
+      line-height: 30px;
+    }
+    .box_lef {
+        width: 100px;
+        height: 100px;
+        background: red;
+        float:left
+    }
+    .box_rit {
+        width: 100px;
+        height: 100px;
+        background: blue;
+        float:right;
+    }
+    .box_cen {
+        margin: 0 100px;
+        width: auto;
+        height: 200px;
+        background: green
+    }
+    .box_lef1 {
+        position: absolute;
+        left: 0;
+        width: 100px;
+        height: 100px;
+        background: red
+    }
+    .box_rit1 {
+        width: 100px;
+        height: 100px;
+        background: blue;
+        position: absolute;
+        right: 0;
+        top: 0
+    }
+    .box_cen1 {
+        margin: 0 100px;
+        height: 200px;
+        background: green;
+    }
+    .box_lef2 {
+        float: left;
+        width: 100px;
+        height: 100px;
+        background: red
+    }
+    .box_cen2 {
+        float: left;
+        height: 200px;
+        background: green;
+        width: calc(100% - 200px)
+    }
+    .box_rit2 {
+        float: left;
+        width: 100px;
+        height: 100px;
+        background: green
+    }
+
+  </style>
+</head>
+<body>
+    <div style="display:flex;">
+        <div style="width: 100px; height: 100px; background: red"></div>
+        <div style="flex: 1; height: 200px; width: 200px; background: green"></div>
+        <div style="width: 100px; height: 100px; background: blue"></div>
+    </div>
+    <div>
+        <div class="box_lef"></div>
+        <div class="box_rit"></div>
+        <div class="box_cen"></div>
+    </div>
+    <div class="" style="position: relative">
+        <div class="box_lef1"></div>
+        <div class="box_cen1"></div>
+        <div class="box_rit1"></div>
+    </div>
+    <div>
+        <div class="box_lef2"></div>
+        <div class="box_cen2"></div>
+        <div class="box_rit2"></div>
+    </div>
+</body>
+<script src="https://cdn.bootcss.com/vue/2.6.8/vue.js"></script>
+</html>

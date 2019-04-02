@@ -67,7 +67,6 @@
     })
     var obj3 = {name: 1}
     var obj4 = {name: 1}
-    console.log(JSON.stringify(obj3) === JSON.stringify(obj4))
     // cors 跨域资源共享
     function setHide(str){
         let len = str.length;
@@ -79,9 +78,17 @@
         }
         return nStr + str.substr(len -4)
     }
-    console.log(setHide('abcd'))
     var n = 1;
     var m = n++;
-    console.log(m, n)
+    var str = 'hello'
+    str.test = 'test'
+    function test() {
+
+    }
+    var a = [1,1,2,3]
+    var b = {}
+    var c = function() {}
+    console.log(2 > '99')
+    console.log([].valueOf())
 </script>
 </html>

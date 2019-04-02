@@ -26,27 +26,6 @@
   </ul>
 </body>
 <script>
-<<<<<<< HEAD
-  function baz() {
-    // 当前调用栈是：baz
-    // 因此，当前调用位置是全局作用域
-    console.log('baz');
-    bar(); // bar调用的位置
-  }
-  function bar() {
-    // 当前调用栈是：baz -> bar
-    // 因此，当前调用的位置在baz中
-    console.log('bar')
-    foo()
-  }
-  function foo() {
-    debugger;
-    // 当前调用栈是：baz -> bar -> foo
-    // 因此，当前调用栈在bar中
-    console.log('foo')
-  }
-  baz(); // baz调用的位置
-=======
   var name = 'hello'
   function foo(a,b) {
     return a+b
@@ -83,6 +62,5 @@
     test: test
   }
   obj3.test() // hello
->>>>>>> 2afff11c1c8450bd9c6203c6421370dcde1e1442
 </script>
 </html>
