@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>javascript</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+    body {
+      font-size: 14px;
+      padding: 20px;
+    }
+    ul li {
+      line-height: 30px;
+    }
+  </style>
+</head>
+<body>
+  <ul>
+    <li></li>
+  </ul>
+</body>
+<script src="https://cdn.bootcss.com/vue/2.6.8/vue.js"></script>
+<script>
+  console.log(1);
+  setTimeout(function(){
+    console.log(3)
+  }, 0)
+  setTimeout(function(){
+    console.log(2)
+  }, 0)
+  new Promise((resolve, reject) => {
+    resolve()
+  }).then(() => {
+    console.log(4)
+  })
+  console.log(5)
+  //1,5,4,2,3
+
+
+  setTimeout(function(){
+    console.log('定时器开始啦')
+  });
+    
+  new Promise(function(resolve){
+      console.log('马上执行for循环啦');
+      for(var i = 0; i < 10000; i++){
+          i == 99 && resolve();
+      }
+  }).then(function(){
+      console.log('执行then函数啦')
+  })
+  
+  console.log('代码执行结束')
+  // 马上执行for循环啦
+  // 代码执行结束
+  // 执行then函数啦
+  // 定时器开始啦
+</script>
+</html>

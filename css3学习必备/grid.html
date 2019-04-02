@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>javascript</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+    body {
+      font-size: 14px;
+    }
+    .container {
+      display: grid;
+      grid-template-columns: 200px 1fr 1fr 100px;
+      grid-template-rows: 200px 500px 500px
+    }
+    .container div {
+      width: 100px;
+      height: 100px;
+      background: red
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div>1</div>
+    <div>2</div>
+    <div>3</div>
+    <div>4</div>
+    <div>5</div>
+    <div>6</div>
+    <div>7</div>
+    <div>8</div>
+  </div>
+</body>
+<script src="https://cdn.bootcss.com/vue/2.6.8/vue.js"></script>
+<script>
+  function total(n) {
+    if(n == 1) {
+      return 1
+    }
+    if (n == 2) {
+      return
+    }
+    return total(n - 1) + total(n - 2)
+  }
+  console.log(total(5))
+</script>
+</html>
