@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>javascript</title>
-  <link rel="stylesheet" href="my.css" >
   <style>
     * {
       margin: 0;
@@ -22,26 +21,21 @@
   </style>
 </head>
 <body>
-  <input type="text" id="text"  value="" />
-  <div id="app"></div>
+  <ul>
+    <li></li>
+  </ul>
 </body>
+<script src="https://cdn.bootcss.com/vue/2.6.8/vue.js"></script>
 <script>
-  var obj = {
-    txt: ''
-  }
-  var val = obj.txt
-  Object.defineProperty(obj, 'txt', {
-    get: function() {
-      return val
-    },
-    set: function(newV) {
-      val = newV
-      document.querySelector("#app").innerHTML = newV
+  function total(i) {
+    if (i < 0) {
+      return 0
     }
-  })
-  document.querySelector("#text").addEventListener('keyup', function(e) {
-    obj.txt = e.target.value 
-  })
-  console.log(obj.txt)
+    return i + total(i-1)
+  }
+  console.log(total(6))
+  var arr = [1,2,3,4,5,1,2,3,4,5];
+  var newArr = [];
+  console.log(newArr)
 </script>
 </html>

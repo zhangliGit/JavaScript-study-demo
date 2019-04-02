@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>javascript</title>
-  <link rel="stylesheet" href="my.css" >
   <style>
     * {
       margin: 0;
@@ -22,26 +21,21 @@
   </style>
 </head>
 <body>
-  <input type="text" id="text"  value="" />
-  <div id="app"></div>
+  <ul>
+    <li></li>
+  </ul>
 </body>
+<script src="https://cdn.bootcss.com/vue/2.6.8/vue.js"></script>
 <script>
-  var obj = {
-    txt: ''
+  function add(a,b,c,d,e,f) {
+    return a+b+c+d+e+f
   }
-  var val = obj.txt
-  Object.defineProperty(obj, 'txt', {
-    get: function() {
-      return val
-    },
-    set: function(newV) {
-      val = newV
-      document.querySelector("#app").innerHTML = newV
+  function wrapFun(fn,a,b,c) {
+    return function(d,e,f) {
+      return add(a,b,c,d,e,f)
     }
-  })
-  document.querySelector("#text").addEventListener('keyup', function(e) {
-    obj.txt = e.target.value 
-  })
-  console.log(obj.txt)
+  }
+  var p = wrapFun(add, 1,2,3)
+  console.log(p(4,5,6))  
 </script>
 </html>

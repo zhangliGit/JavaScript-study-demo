@@ -32,7 +32,7 @@
       transform: translate(120px, 40px);
     }
     .move {
-      animation: moveTo 3s linear;
+      animation: moveTo 1s linear 4 2s;
       width: 100px;
       height: 100px;
       background: red;
@@ -50,14 +50,79 @@
         width: 100px
       }
     }
+    .trans {
+      width: 100px;
+      height: 100px;
+      background: red;
+      transform: rotate(45deg)
+    }
+    .trans1 {
+      width: 100px;
+      height: 100px;
+      background:blue;
+      transition: all 2s ease;
+    }
+    .trans1:hover {
+      transform: translate(200px, 0)
+    }
+    .par > p:only-of-type {
+      background:red
+    }
+    div input:checked + div {
+      background: red
+    }
+    div[name*="zl"]:empty {
+      background: red
+    }
+    .fl_div {
+      width:300px;
+      background: red;
+      float: left;
+    }
+    .cle {
+      overflow: auto;
+    }
+    .sjx {
+    width: 0;
+    height: 0;
+    border: 20px red solid;
+    border-color: transparent red transparent transparent    
+}
   </style>
 </head>
 <body>
-  <div class="box">
-
+  <div class="sjx"></div>
+  <div style="width: 400px;  height: 400px; background: red; display: table;">
+    <div style="background: #fff; display: table-cell; vertical-align: middle;text-align: center;">23</div>
+  </div>
+  <div class="cle">
+      <div class="fl_div">123212</div>
+  </div>
+  <div>456</div>
+  <div name="zl">1212</div>
+  <div name="zl">2</div>
+  <div name="zl">
+    <div>123</div>
+  </div>
+  <div style=" position: relative;">
+    <input type="checkbox" style="position: absolute; left: 4px; top: 4px">
+    <div style="padding: 0 20px">123</div>
+  </div>
+  <div>
+      <input type="checkbox">22
+  </div>
+  <div class="par">
+    <p>111</p>
+    <div>4444</div>
   </div>
   <div class="box box1">
   </div>
   <div class="move"></div>
+  <div class="trans"></div>
+  <div class="trans1"></div>
+  <input type="text" id="inp" />
 </body>
+<script>
+</script>
+
 </html>

@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>javascript</title>
-  <link rel="stylesheet" href="my.css" >
   <style>
     * {
       margin: 0;
@@ -22,26 +21,29 @@
   </style>
 </head>
 <body>
-  <input type="text" id="text"  value="" />
-  <div id="app"></div>
+  <ul>
+    <li></li>
+  </ul>
 </body>
+<script src="https://cdn.bootcss.com/vue/2.6.8/vue.js"></script>
 <script>
-  var obj = {
-    txt: ''
+  function $ajax(num) {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        if (num > 4) {
+          resolve('ok')
+        } else {
+          console.log(3)
+        }
+      }, 2000)
+    }).catch(err => {
+      console.log(323)
+    })
   }
-  var val = obj.txt
-  Object.defineProperty(obj, 'txt', {
-    get: function() {
-      return val
-    },
-    set: function(newV) {
-      val = newV
-      document.querySelector("#app").innerHTML = newV
-    }
-  })
-  document.querySelector("#text").addEventListener('keyup', function(e) {
-    obj.txt = e.target.value 
-  })
-  console.log(obj.txt)
+  async function getData() {
+      let res = await $ajax(1)
+      console.log(2)
+  }
+  getData()
 </script>
 </html>

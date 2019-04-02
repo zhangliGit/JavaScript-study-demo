@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>javascript</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+    body {
+      font-size: 14px;
+      padding: 20px;
+    }
+    ul li {
+      line-height: 30px;
+    }
+  </style>
+</head>
+<body>
+  <ul>
+    <li></li>
+  </ul>
+</body>
+<script src="https://cdn.bootcss.com/vue/2.6.8/vue.js"></script>
+<script>
+  var arr = [1,2,2,3,4,12]
+  var newArr = [];
+  // 基本遍历法
+  arr.forEach(item => {
+    if (newArr.indexOf(item) === -1) {
+      newArr.push(item)
+    }
+  })
+  console.log(newArr)
+  // set方法
+  var arN = new Set(arr);
+  console.log(Array.from(arN))
+  
+  function Car(name, col) {
+    this.name = name;
+    this.col = col
+    this.getName = function() {
+      return name
+    }
+    return 100
+  }
+  Car.prototype = {
+    construct: Car.prototype.constructor,
+    run: function() {
+      return "100km/h"
+    }
+  }
+  let car = new Car('xy', 'white');
+  let nCar = Object.create(car);
+  nCar.name = 'bc'
+  console.log(car)
+  console.log(nCar)
+
+  var obj = {
+    list: {
+      title: 'hello',
+      content: 'hello world',
+      name: [1,2,3]
+    }
+  }
+  var obj1 = JSON.parse(JSON.stringify(obj))
+  obj1.list.title = 'hi'
+  console.log(obj1, obj)
+  function deepCopy(p, c) {
+    // 新创建一个对象，如果有就是对象，没有就为空
+　　var c = c || {};
+    // 遍历原始对象
+　　for (var i in p) {
+        console.log(i)
+        // 如果值为对象，则继续遍历
+  　　　　if (typeof p[i] === 'object') {
+          // 
+　　　　　　c[i] = (p[i].constructor === Array) ? [] : {};
+　　　　　　deepCopy(p[i], c[i]);
+　　　　} else {
+            console.log(i)
+　　　　　　　c[i] = p[i];
+　　　　}
+　　}
+　　return c;
+  }
+  console.log(deepCopy(obj))
+  var obj3 = Object.create(null);
+  obj3.name = 'zhangli'
+  console.dir(obj3)
+  var bar = {
+    name: 'zhangli',
+    age: {
+      a: 30
+    }
+  }
+  var zar = Object.assign({}, 1,2,3);
+  bar.age.a = 31
+  console.log(zar);
+</script>
+</html>
