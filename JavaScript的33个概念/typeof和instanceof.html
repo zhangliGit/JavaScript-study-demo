@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>javascript</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+    body {
+      font-size: 14px;
+      padding: 20px;
+    }
+    ul li {
+      line-height: 30px;
+    }
+  </style>
+</head>
+<body>
+  <ul>
+    <li></li>
+  </ul>
+</body>
+<script src="https://cdn.bootcss.com/vue/2.6.8/vue.js"></script>
+<script>
+    console.log(1 === '1')
+    var a = 123
+    var aa = 123
+    console.log(Object.is(a,aa))
+    var b = {
+        a: 123
+    }
+    var bb = {
+        a: 123
+    }
+    var c = [1,2,3]
+    function d() {
+
+    }
+    console.log(typeof a)
+    console.log(typeof b)
+    console.log(typeof c)
+    console.log(typeof d)
+    console.log(Object.is(b,bb))
+    console.log(Object.prototype.toString.call(1) === "[object Number]")
+    console.log(Object.prototype.toString.call([1]) === "[object Array]")
+</script>
+</html>

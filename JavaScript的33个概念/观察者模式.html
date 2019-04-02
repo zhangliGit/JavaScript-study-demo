@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>javascript</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+    body {
+      font-size: 14px;
+      padding: 20px;
+    }
+    ul li {
+      line-height: 30px;
+    }
+  </style>
+</head>
+<body>
+  <ul>
+    <li></li>
+  </ul>
+</body>
+<script src="https://cdn.bootcss.com/vue/2.6.8/vue.js"></script>
+<script>
+    // 观察者列表
+    function ObserverList() {
+        this.observerList = []
+    }
+    // 新增观察者
+    ObserverList.prototype.add = function(obj) {
+        return this.observerList.push(obj)
+    }
+    // 获取观察者数量
+    ObserverList.prototype.count = function() {
+        return this.observerList.length
+    }
+    ObserverList.prototype.get = function(index) {
+        if (index > -1 && index < this.observerList.length) {
+            return this.observerList[index]
+        }
+    }
+    // 获取观察者的索引位置
+    ObserverList.prototype.indexOf = function(obj, startIndex) {
+        var i = startIndex;
+        while(i < this.observerList.length) {
+            if(this.observerList[i] === obj) {
+                return i
+            }
+            i++
+        }
+        return -1
+    }
+    // 移除观察者
+    ObserverList.prototype.remove = function(index) {
+        this.observerList.push(index, 1)   
+    }
+    
+    // 目标
+    function Subject() {
+        this.observers = new ObserverList()
+    }
+    Subject.prototype.addObserver = function(observer) {
+        this.observers.add(observer)
+    }
+    Subject.prototype.removeObserver = function(observer) {
+        this.observers.remove(this.observers.indexOf(observer, 0))
+    }
+    Subject.prototype.notify = function(context) {
+        var observerCount = this.observers.count()
+        console.log(observerCount)
+        for (var i = 0; i < observerCount; i++) {
+            console.log(this.observers.get(i))
+        }
+    }
+    var sub = new Subject()
+    var obs = new Observer()
+    console.log(sub)
+    sub.addObserver('123')
+    sub.addObserver('567')
+    sub.notify('12345')
+    // 观察者
+    function Observer() {
+        this.update = function(val) {
+            console.log(val)
+        }
+    }
+</script>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>javascript</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+    body {
+      font-size: 14px;
+      padding: 20px;
+    }
+    ul li {
+      line-height: 30px;
+    }
+  </style>
+</head>
+<body>
+  <ul>
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+  </ul>
+</body>
+<script src="https://cdn.bootcss.com/vue/2.6.8/vue.js"></script>
+<script>
+    document.querySelector("ul").addEventListener('click', function(e){
+        console.log(e.target.innerText)
+    }, false)
+    var obj = {
+        name: 'zhangli',
+        pro: {
+            sex: 'nan',
+            age: 30
+        }
+    }
+    //var obj2 = JSON.parse(JSON.stringify(obj))
+    function cloneDeep(obj) {
+        if (typeof obj != 'object') return;
+        let newObj = obj instanceof Object ? {} : [];
+        for(let key in obj) {
+            newObj[key] = typeof obj[key] === 'object' ? cloneDeep(obj[key]) : obj[key] 
+        }
+        return newObj
+    }
+    var obj2 = cloneDeep(obj);
+    obj.name = 'chentain'
+    console.log(obj, obj2)
+    function foo() {
+        var say = 'hello world';
+        return function(name) {
+            return `${say}${name}`
+        }
+    }
+    var bar = foo();
+    function fun(a,b,callback) {
+        var num = a+b;
+        callback(num)
+    }
+    fun(4,5,function(res){
+        console.log(res)
+    })
+    var obj3 = {name: 1}
+    var obj4 = {name: 1}
+    console.log(JSON.stringify(obj3) === JSON.stringify(obj4))
+    // cors 跨域资源共享
+    function setHide(str){
+        let len = str.length;
+        if(len <= 4) return str;
+        let i = 0, nStr = '';
+        while(i < len - 4) {
+            i++;
+            nStr += '#'
+        }
+        return nStr + str.substr(len -4)
+    }
+    console.log(setHide('abcd'))
+    var n = 1;
+    var m = n++;
+    console.log(m, n)
+</script>
+</html>
