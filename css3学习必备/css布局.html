@@ -19,7 +19,7 @@
     }
     .bfc {
       overflow: hidden;
-      font-size:
+      font-size: 0px;
     }
     .box1 {
       width: 200px;
@@ -46,5 +46,20 @@
 </body>
 <script src="https://cdn.bootcss.com/vue/2.6.8/vue.js"></script>
 <script>
+  var obj = {
+    foo: 'bar',
+    show: function() {
+      var self = this;
+      console.log(this.foo);
+      console.log(self.foo);
+      (function(){
+        console.log(this.foo);
+        console.log(self.foo);
+      })()
+    }
+  }
+  obj.show()
+  window.localStorage.setItem('loginTag', 'zhangli')
+  window.sessionStorage.setItem('quitTag', 'haha')
 </script>
 </html>
