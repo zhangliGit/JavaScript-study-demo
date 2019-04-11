@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>javascript</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+    body {
+      font-size: 14px;
+      padding: 20px;
+    }
+    ul li {
+      line-height: 30px;
+    }
+  </style>
+</head>
+<body>
+    <input type="text" value="" />
+    <input type="text" value="" />
+</body>
+<script src="https://cdn.bootcss.com/vue/2.6.8/vue.js"></script>
+<script>
+    var inpList = document.querySelectorAll('input');
+    /**
+     * @des 定义防抖函数
+     * @params handler：防抖操作 time：延迟时间
+     */
+    let timer = null
+    function fangdou(handler, time) {
+      return function() {
+        clearTimeout(timer)
+        timer = setTimeout(() => {
+          handler.call(this)
+        }, time)
+      }
+    }
+    function $ajax() {
+      console.log(this.value)
+    }
+    
+    inpList.forEach(inp => {
+      inp.oninput = fangdou($ajax, 500)
+    })
+</script>
+</html>

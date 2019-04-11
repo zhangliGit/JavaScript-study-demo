@@ -19,7 +19,6 @@
     }
     .bfc {
       overflow: hidden;
-      font-size:
     }
     .box1 {
       width: 200px;
@@ -36,15 +35,46 @@
     div#test span { color: green }
     span { color: red }
     div span { color: blue }
+    .bg{
+      background: red
+    }
   </style>
 </head>
 <body>
-      <div style="width: 200px; height: 200px;  background: red;">
-        <div style="width: 100px; height: 100px; background: green; position: relative;top:10px;left: 10px"></div>
-      </div>
-      <div style="width: 200px; height: 200px; background: blue;display: inline-block"></div>
+  <div class="bfc">
+    <div style="width: 100px; height: 100px; background: red; margin-bottom:20px"></div>
+    <div class="bfc">
+      <div style="width: 100px; height: 100px; background: blue; margin-top: 20px;"></div>
+    </div>
+  </div>
+  <div style="height: auto; background: red; overflow: hidden">
+    <div style="float: left">kfjdsjfsjfl</div>
+  </div>
+  <div style="background: green; width: 300px;">
+    <div style="width: 100px; height: 100px; background: blue; float:left"></div>
+    <div class="bfc">
+        <div>我是元素哈哈哈我是元素哈哈哈我是元素哈哈哈我是元素哈哈哈我是元素哈哈哈我是元素哈哈哈我是元素哈哈哈我是元素哈哈哈我是元素哈哈哈我是元素哈哈哈我是元素哈哈哈我是元素哈哈哈我是元素哈哈哈我是元素哈哈哈</div>
+    </div>
+  </div>
+  <ul id="ulD">
+    <li>
+      <div>111</div>
+      <div>11111</div>
+    </li>
+    <li>
+        <div>111</div>
+        <div>22222</div>
+    </li>
+  </ul>
 </body>
+
 <script src="https://cdn.bootcss.com/vue/2.6.8/vue.js"></script>
 <script>
+  var liD = document.querySelector("#ulD").children
+  for(var i = 0; i<liD.length; i++) {
+    liD[i].children[1].onclick = function(){
+      this.className = this.getAttribute('class') === '' ? 'bg' : ''
+    }
+  }
 </script>
 </html>

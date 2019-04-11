@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>javascript</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+    body {
+      font-size: 14px;
+      padding: 20px;
+    }
+    ul li {
+      line-height: 30px;
+    }
+  </style>
+</head>
+<body>
+  <ul>
+    <li></li>
+  </ul>
+</body>
+<script src="https://cdn.bootcss.com/vue/2.6.8/vue.js"></script>
+<script>
+    function Parent(name, sex) {
+        var method1 = function() {
+            return this.name
+        }
+        this.name = name
+        this.sex = sex
+        this.getName = function() {
+            return '实例方法'
+        }
+        this.getFun = function() {
+            return method1.call(this)
+        }
+    }
+    Parent.prototype.method3 = function() {
+        return '原型方法'
+    }
+    Parent.method2 = function() {
+        return '静态方法，类方法'
+    }
+    var parent = new Parent('zhang', 'nan')
+    console.log(parent)
+    for(let key in parent) {
+        console.log(key)
+    }
+    console.log(Parent.method2())
+    console.log(parent.method3())
+    console.log(parent.getName())
+    console.log(parent.getFun())
+    function Child(name, sex) {
+        Parent.call(this, name, sex)
+    }
+    var child = new Child('yueyue', 'nv')
+    console.log(child.getFun())
+
+
+
+
+    class Father {
+        // 静态方法
+        static getType () {
+            return 'type'
+        }
+        // 实例属性
+        constructor(name, sex) {
+            console.log('======')
+            this.name = name
+            this.sex = sex
+        }
+        // 此方法在类的内部定义，会被指向类的原型prototype上，实例化类后，此方法不能被枚举到，而es5可以枚举
+        getName () {
+            return this.name
+        }
+    }
+    Object.assign(Father.prototype, {
+        height: 123,
+        age: 99,
+        getSex () {
+            return this.age
+        }
+    })
+    // 定义静态属性（类属性）
+    Father.type = 'type'
+    var father = new Father('zhang', 'nan')
+    // extends继承实质上也是原型的继承，等同于 Son.prototype = new Father()
+    class Son extends Father {
+        // 一个类必须有一个constructor方法，如果没有定义，则会默认添加, 并且会自动执行传递参数
+        // constructor 默认返回实例对象this，但是也可以指定返回的值
+        // 如果定义了constructor方法，那么必须执行super方法，因为子类没有自己的this对象，super等于执行父类的constructor，继承父类的this对象
+        constructor (name, sex) {
+            // super可以被当做方法调用，也可以被当做对象
+            // 此时调用super方法实现继承
+            super(name, sex)
+            // 此时调用super以对象的形式调用，指向父类的原型对象
+            // 使用super的时候必须显示的指明是作为函数或作为对象使用
+            console.dir(super.height)
+            // 如果直接设置super的值，此时super指向this
+            super.height = 190
+        }
+        getHeight () {
+            // 使用super调用父类方法时，函数的指针this指向的是子类的实例this 而不是父类的
+            // super.getSex.call(this)
+            return super.getSex()
+        }
+    }
+    console.log(Son.type)
+    var son = new Son('zhang', 'nv')
+    console.log(son) 
+    function A (a) {
+        this.a = a
+    }
+    B.prototype = new A(3)
+    function B(a) {
+        A.call(this, a)
+    }
+    var b =new B(5)
+    console.log(b)
+</script>
+</html>
