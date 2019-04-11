@@ -19,6 +19,10 @@
     }
     .bfc {
       overflow: hidden;
+<<<<<<< HEAD
+=======
+      font-size: 0px;
+>>>>>>> 7c6feb38d4d11546ee85bd91b4639f9ca80f86f0
     }
     .box1 {
       width: 200px;
@@ -70,11 +74,20 @@
 
 <script src="https://cdn.bootcss.com/vue/2.6.8/vue.js"></script>
 <script>
-  var liD = document.querySelector("#ulD").children
-  for(var i = 0; i<liD.length; i++) {
-    liD[i].children[1].onclick = function(){
-      this.className = this.getAttribute('class') === '' ? 'bg' : ''
+  var obj = {
+    foo: 'bar',
+    show: function() {
+      var self = this;
+      console.log(this.foo);
+      console.log(self.foo);
+      (function(){
+        console.log(this.foo);
+        console.log(self.foo);
+      })()
     }
   }
+  obj.show()
+  window.localStorage.setItem('loginTag', 'zhangli')
+  window.sessionStorage.setItem('quitTag', 'haha')
 </script>
 </html>
