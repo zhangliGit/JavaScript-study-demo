@@ -6,10 +6,38 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <script>
-        console.log(document.getElementById('div1').innerHTML)
     </script>
 </head>
 <body>
     <div id="div1">haha</div>
 </body>
+<script>
+var title = 'hi'
+var obj = {
+    title: 'hello',
+    show1: function() {
+        console.log(this.title)
+    },
+    show2: function() {
+        show()
+    },
+    show3: function() {
+        return function() {
+            return this.title
+        }
+    },
+    show4: () => {
+        return this.title
+    }
+}
+function show() {
+    console.log(this.title)
+}
+obj.show1()
+obj.show2()
+var s = obj.show3()
+console.log(s())
+console.log(s.call(obj))
+console.log(obj.show4())
+</script>
 </html>

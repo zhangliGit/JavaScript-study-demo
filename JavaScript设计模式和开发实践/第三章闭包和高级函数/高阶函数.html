@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>javascript</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+    body {
+      font-size: 14px;
+      padding: 20px;
+    }
+    ul li {
+      line-height: 30px;
+    }
+  </style>
+</head>
+<body>
+  <ul>
+    <li></li>
+  </ul>
+</body>
+<script src="https://cdn.bootcss.com/vue/2.6.8/vue.js"></script>
+<script>
+    /**
+     * 封装数据类型判断
+     */
+    let type = {}
+    let typeArr = ['String', 'Number', 'Boolean', 'Ojbect', 'Array', 'Function']
+    for ( var i = 0, l = typeArr.length; i < l; i++ ) {
+        (function(t) {
+            type['is' + t] = function(obj) {
+                return Object.prototype.toString.call(obj) === `[object ${t}]`
+            }
+        })(typeArr[i])
+    }
+    console.log(type.isArray())
+    function test() {
+        var arg = Array.prototype.slice.call(arguments)
+        console.log(arg.shift())
+        console.log(arg)
+        console.log(Array.isArray(Array.prototype.slice.call(arguments)))
+    }   
+    test(1,2,3)
+</script>
+</html>

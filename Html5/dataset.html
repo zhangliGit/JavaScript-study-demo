@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            box-sizing: content-box
+        }
+    </style>
+</head>
+<body>
+    <div style="border: 5px #ccc solid; background: red; width:300px;">haha</div>
+</body>
+<script>
+    var d = document.querySelector('div')
+    d.dataset.tag = 'zhangli'
+    console.log(d.dataset.tag)
+    var dStyle = document.defaultView.getComputedStyle(d, null)
+    console.log(dStyle.border)
+    console.log(dStyle.width)
+    console.log(d.offsetWidth)
+    console.log(d.style.background)
+</script>
+</html>

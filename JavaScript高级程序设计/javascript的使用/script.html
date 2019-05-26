@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>javascript</title>
+  <script async  src="script1.js"></script>
+  <script async src="script2.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+    body {
+      font-size: 14px;
+      padding: 20px;
+    }
+    ul li {
+      line-height: 30px;
+    }
+    #box {
+      width: 100px;
+      height: 100px;
+      background: red
+    }
+  </style>
+</head>
+<body>
+  <ul>
+    <li>我是测试脚本</li>
+  </ul>
+  <div id="box"></div>
+</body>
+<script src="https://cdn.bootcss.com/vue/2.6.8/vue.js"></script>
+<script>
+    let box = document.querySelector("#box")
+    let marLeft = 5
+    function move() {
+      requestAnimationFrame(() => {
+        
+        box.style.marginLeft = marLeft + 'px'
+        marLeft +=  1
+        move()
+      })
+      
+    }
+    move()
+    window.addEventListener('DOMContentLoaded', function(){
+        console.log('domload1111')
+    }, false)
+    console.log(false&&true)
+    console.log(true == 2)
+    var a = {a: 1}
+    var b = {b: 1}
+    console.log(a == b)
+    let i = 1;
+    while(i < 10) {
+      console.log(i)
+      i++
+    }
+    var obj = {
+      name: 'zl'
+    }
+    var obj2 = {sex: 29}
+    var obj3 = Object.create(obj, { sex: {value: 45, enumerable: true}, height: {value: 176, enumerable: true}})
+    console.log(obj3)
+    for(let key in obj3) {
+      console.log(key)
+    }
+    var obj4 ={
+      name: 123
+    }
+    function test(obj) {
+      obj.name = 'test'
+    }
+    test(obj4)
+    console.log(obj4)
+</script>
+</html>

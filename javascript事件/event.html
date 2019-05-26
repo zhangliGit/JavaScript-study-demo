@@ -18,6 +18,10 @@
     ul li {
       line-height: 30px;
     }
+    #div {
+      width: 200px;
+      height: 200px;
+    }
   </style>
 </head>
 <body>
@@ -25,9 +29,31 @@
     <li class="liList">点击事件</li>
     <li onclick="handleClick(event,this)">点击事件</li>
     <li onclick="getDate1()">jsonp</li>
+    <input type="text" onkeydown="show(event)">
+    <div id="div"></div>
   </ul>
 </body>
 <script>
+  var url = 'http://pic32.nipic.com/20130823/13339320_183302468194_2.jpg'
+  document.addEventListener('DOMContentLoaded', function() {
+  }, false)
+  window.onmousewheel = function(event) {
+    document.querySelector("#div").style.marginTop = event.wheelDeltaY + 'px'
+    console.log(event.wheelDeltaX, event.wheelDeltaY)
+  }
+  window.onload = function() {
+    var img = new Image()
+    img.src = url
+    document.querySelector("#div").style.backgroundColor = 'red'
+    img.onload = function() {
+      document.querySelector("#div").style.background = 'url('+url+')'
+    }
+  }
+  function show(event) {
+    event.preventDefault()
+    event.stopPropagation()
+    console.log(event)
+  }
   document.querySelector('.liList').addEventListener('click', (e) => {
     console.log(e)
   }, false)
@@ -55,5 +81,29 @@
       }
     }
   }
+  console.log(b)
+  var b = 1
+  new Promise(function(resolve, reject){
+    console.info(2)
+    resolve()
+  }).then(function() {
+    console.log(3)
+  }) 
+  setTimeout(function() {
+    console.log(4)
+  },0)
+  function fun () {
+    setTimeout(() => {
+      console.log(this.b)
+    })
+  }
+  fun()
+  var obj = {
+    title: 'haha',
+    getTitle: function() {
+      console.log(this.title, 1)
+    }
+  }
+  obj.getTitle.call(window)
 </script>
 </html>
