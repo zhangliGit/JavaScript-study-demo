@@ -11,59 +11,88 @@
       padding: 0;
       box-sizing: border-box
     }
-    body {
-      font-size: 14px;
-      padding: 20px;
+    .box {
+        width: 300px;
+        overflow: hidden;
+        max-height: 300px;
+        background-color: #333;
     }
-    ul li {
-      line-height: 30px;
+    p {
+        padding: 10px
+    }
+    .fade-enter, .fade-leave-to {
+        max-height: 0px
+    }
+    .fade-enter-to {
+        max-height: 300px;
+    }
+    .fade-enter-active, .fade-leave-active {
+        transition: all .6s linear
     }
   </style>
 </head>
 <body>
   <div id="app">
-    <div v-if="tag1">第一</div>
-    <div v-show="tag1">第二</div>
-    <div @click="change">改变</div>
-  </div>
+    <div onclick="openH()">新窗口</div>
+      <transition name="fade">
+        <div class="box" v-if="tag">
+            <p>11</p>
+            <p>22</p>
+            <p>333</p>
+            <p>44</p>
+            <p>55</p>
+            <p>666</p>
+            <p>777</p>
+            <p>888</p>
+        </div>
+      </transition>
+      <button @click="toggle">toggle</button>
+  </div> 
 </body>
-<script src="https://cdn.bootcss.com/vue/2.6.8/vue.js"></script>
+<script src="https://cdn.bootcss.com/vue/2.6.8/vue.js"></script> 
 <script>
     var vm = new Vue({
         el: "#app",
         beforeCreate () {
-            console.log(1)
-        },
-        created () {
-            console.log(2)
-        },
-        beforeMount () {
-            console.log(3)
-        },
-        mounted () {
-            console.log(4)
-        },
-        beforeUpdate () {
-            console.log(5)
-        },
-        updated () {
-            console.log(6)
-        },
-        beforeDestroy () {
-
-        },
-        destroyed () {
-            console.log(7)
         },
         data: {
-            tag1: false
+            tag: false,
+            list: [
+                {
+                    id: 123,
+                    status: 1
+                },
+                {
+                    id: 1234,
+                    status: 2
+                },
+                {
+                    id: 12345,
+                    status: 3
+                }
+            ]
         },
         methods: {
-            change () {
-                this.tag1 = true
+            getStatus (id) {
+                return this.list.find((item, index) => {
+                    return item.id === id
+                })
+            },
+            toggle () {
+                this.tag = !this.tag
             }
+        },
+        mounted () {
+            sessionStorage.setItem('tag',22)
+            var str = {
+                id: 123,
+                status: this.getStatus(1234)
+            }
+            console.log(str)
         }
     })
-
+    function openH() {
+        window.open('../../', '_blank ')
+    }
 </script>
 </html>

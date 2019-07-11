@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        html {
+            font-size: 13.33333333vw
+        }
+        body {
+            font-size: .32rem;
+        }
+        @media (min-width: 560px) {
+            html {
+                font-size: 54px
+            }
+        }
+        .div {
+            width: 1rem;
+            height: 1rem;
+            background-color:#000
+        }
+    </style>
+</head>
+<body>
+    <div class="div">
+        我是div元素
+    </div>
+</body>
+<script>
+    var b = {
+        a: 123
+    }
+    Object.setPrototypeOf(b, null)
+    var a = Object.create(b, { b: {value: 33}})
+    console.log(a)
+</script>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 400px;
+            background: #333
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        232
+        <div class="box">
+
+        </div>
+        <button @click="toggle">toggle</button>
+    </div>
+</body>
+<script src="https://cdn.bootcss.com/vue/2.6.8/vue.js"></script>
+<script>
+    var vm = new Vue({
+        el: "#app",
+        data: {
+            title: '123'
+        },
+        beforeCreate: function() {
+
+        },
+        created: function() {
+
+        },
+        beforeMount: function() {
+
+        },
+        mounted: function() {
+            console.log(3)
+        }
+    })
+</script>
+</html>
