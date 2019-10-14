@@ -29,6 +29,27 @@
 </body>
 <script src="https://cdn.bootcss.com/vue/2.6.8/vue.js"></script>
 <script>
+    var b = 10;
+    (function b(){
+        b = 20;
+        console.log(b); 
+    })();
+    for(var i = 0; i < 5; i++) {
+        let a = i
+        setTimeout(() => {
+            console.log(a)
+        })
+    }
+    let AA = 1
+    {
+        let b = 1
+    }
+    console.log(b)
+    console.log(window.AA)
+    function Test() {
+        return 2
+    }
+    console.log(new Test())
     document.querySelector("ul").addEventListener('click', function(e){
         console.log(e.target.innerText)
     }, false)

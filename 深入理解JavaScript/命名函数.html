@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    命名函数和函数表达式
+    <div onclick="add()">发布</div>
+</body>
+<script>
+    class Parent {
+        constructor () {
+            this.name = 'zhangli'
+            this.show = function() {
+                console.log(this.name)
+            }
+        }
+        showName () {
+            console.log(this.name)
+        }
+    }
+    Parent.showA = function() {
+        console.log(33)
+    }
+    class Child extends Parent {
+
+    }
+    var c = new Child()
+    class EventBus {
+        constructor () {
+            this.watcher = {}
+        }
+        $on (id, cb) {
+            this.watcher[id] = function(msg) {
+                cb(msg)
+            }
+        }
+        $emit (id, msg) {
+            this.watcher[id](msg)
+        }
+    }
+    var eventBus = new EventBus()
+    eventBus.$on('setName', (msg) => {
+        console.log(msg)
+    })
+    function add() {
+        eventBus.$emit('setName', 'hello world')
+    }
+
+</script>
+</html>

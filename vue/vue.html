@@ -33,6 +33,9 @@
 </head>
 <body>
   <div id="app">
+      <div style="height: 200px; width: 100px; background: red;"></div>
+      <span ref="title">{{title}}</span>
+      <div @click="change">修改名字</div>
     <div onclick="openH()">新窗口</div>
       <transition name="fade">
         <div class="box" v-if="tag">
@@ -46,16 +49,66 @@
             <p>888</p>
         </div>
       </transition>
-      <button @click="toggle">toggle</button>
+      <button @click="toggle">toggle{{number}}</button>
+      <child v-model="number">
+          <template #default="item">
+            {{ item.list.title }}
+          </template>
+      </child>
   </div> 
 </body>
-<script src="https://cdn.bootcss.com/vue/2.6.8/vue.js"></script> 
+<script src="https://cdn.bootcss.com/vue/2.6.8/vue.js"></script>
 <script>
+    Number.prototype.add = function(val) {
+        return this.valueOf() + val
+    }
+    Number.prototype.jian = function(val) {
+        return this.valueOf() - val
+    }
+    var month = {1:222, 2:123, 5:888}
+    let arr = []
+    for (let i = 1; i <= 12; i++) {
+        arr.push(month[i] || null)
+    }
+    console.log(arr)
+    var child = Vue.component('child', {
+        template: '<div><slot :list="{title: 123}"></slot>{{title}}{{total}}<span @click="change">change</span></div>',
+        props: {
+            value: {
+                type: Number,
+                default: 0
+            }
+        },
+        data() {
+            console.log(this)
+            return {
+                title: this.value
+            }
+        },
+        methods: {
+            change () {
+                this.total = this.value * 6
+            }
+        },
+        computed: {
+            total: {
+                get () {
+                    return this.value * 4
+                },
+                set (val) {
+                    this.title  = val
+                    this.$emit('input',val)
+                }
+            }
+        }
+    })
     var vm = new Vue({
         el: "#app",
         beforeCreate () {
         },
         data: {
+            title: 'zhangli',
+            number: 4,
             tag: false,
             list: [
                 {
@@ -79,7 +132,18 @@
                 })
             },
             toggle () {
-                this.tag = !this.tag
+                this.tag = !this.tag你                                                                                           
+            },
+            change () {
+                this.title = 'chentian'
+                console.log(this.title)
+                Vue.nextTick(() => {
+                    console.log(this.$refs.title.innerHTML)
+                })
+                this.$nextTick(() => {
+                    console.log(this.$refs.title.innerHTML)
+                })
+                
             }
         },
         mounted () {

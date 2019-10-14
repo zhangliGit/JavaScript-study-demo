@@ -31,5 +31,11 @@
   console.log(typeof str)
   console.log(typeof str.valueOf())
   console.log(new Boolean())
+  var arr = [[1],[2],[3],[4]]
+  var a =  arr.reduceRight((prev, curr, index, arr) => {
+    console.log(prev, curr, index)
+    return prev.concat(curr)
+  }, [])
+  console.log(a)
 </script>
 </html>
