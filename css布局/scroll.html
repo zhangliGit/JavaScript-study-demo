@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      ul li {
+        list-style: none;
+        height: 50px;
+        line-height: 50px;
+      }
+      a {
+        color: #fff;
+      }
+      .scrollNews1 ul {
+          display: inline-block;
+      }
+      #p2 li {
+        display: block;
+        float: left;
+        width: 100px;
+        height: 120px;
+        background: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      class="scrollNews"
+      style="OVERFLOW: hidden; float:left; height:300px; background:blue"
+    >
+      <ul id="p1">
+        <li><a href="#">talking to the moon 放不下的理由.</a></li>
+        <li><a href="#">是不是会担心 变成一只野兽.</a></li>
+        <li><a href="#">walking on the roof 为心跳的节奏.</a></li>
+        <li><a href="#">是不是会暂停 在世界的尽头.</a></li>
+        <li><a href="#">walking on the roof 为心跳的节奏.</a></li>
+        <li><a href="#">是不是会暂停 在世界的尽头.</a></li>
+      </ul>
+    </div>
+    <div style="clear: both"></div>
+    <div
+      class="scrollNews1"
+      style="width:600px; overflow: hidden; margin-top: 20px;background:blue"
+    >
+      <ul id="p2" style="width: 2000px; overflow: auto; display: inline-block">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+      </ul>
+    </div>
+  </body>
+  <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+  <script>
+    var $this = $(".scrollNews");
+    var scrollTimer;
+    $this
+      .hover(
+        function() {
+          clearInterval(scrollTimer);
+        },
+        function() {
+          scrollTimer = setInterval(function() {
+            scrollNews($this);
+          }, 1000);
+        }
+      )
+      .trigger("mouseleave");
+
+    function scrollNews(obj) {
+      var $self = obj.find("ul");
+      var lineHeight = $self.find("li:first").height();
+      $self.css({
+          marginTop: -lineHeight
+      })
+      let num = Math.floor(Math.random() * 10000)
+      $self.prepend($("<li>我是"+ num +"元素</li>")).animate(
+        {
+          marginTop: 0 + "px"
+        },
+        300
+      );
+    }
+    var $this1 = $(".scrollNews1");
+    setInterval(() => {
+        scrollNews1($this1)
+    }, 1000)
+    function scrollNews1(obj) {
+      var $self = $this1.find("ul");
+      var lineWidth = $self.find("li:first").width();
+      console.log(lineWidth)
+      $self.css({
+          marginLeft: -lineWidth
+      })
+      let num = Math.floor(Math.random() * 10000)
+      $self.prepend($("<li>我是"+ num +"元素</li>")).animate(
+        {
+            marginLeft: 0 + "px"
+        },
+        300
+      );
+    }
+  </script>
+</html>
