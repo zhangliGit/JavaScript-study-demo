@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style> 
+    * {
+  margin: 0;
+  padding: 0;
+}
+#app {
+  width: 400px;
+  line-height: 45px;
+  padding-left: 20px;
+  height: 400px;
+  background: #444;
+  color: #fff;
+  margin: 40px;
+  overflow: hidden;
+  position:relative;
+}
+.box {
+  width: 100px;
+  height: 100px;
+  top: 0px;
+  left: 0px;
+  position: absolute;
+  background-color: #ccc;
+  margin: 40px;
+}
+</style>
+</head>
+<body>
+    <div>service worker</div>
+    <img src="http://localhost:3000/img/home.png" alt="">
+    <div id="app">
+        <p>我是前端开发工程师，不断的学习新的知识</p>
+        <p>我是前端开发工程师，不断的学习新的知识</p>
+        <p>我是前端开发工程师，不断的学习新的知识</p>
+        <p>我是前端开发工程师，不断的学习新的知识</p>
+        <p>我是前端开发工程师，不断的学习新的知识</p>
+        <p>我是前端开发工程师，不断的学习新的知识</p>
+        <p>我是前端开发工程师，不断的学习新的知识</p>
+        <p>我是前端开发工程师，不断的学习新的知识</p>
+        <p>我是前端开发工程师，不断的学习新的知识</p>
+        <p>我是前端开发工程师，不断的学习新的知识</p>
+        <div class="box"></div>
+      </div>
+</body>
+<script>
+    if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function () {
+        // 所以Service Worker只是一个挂在navigator对象上的HTML5 API而已
+        navigator.serviceWorker.register('./service-worker.js').then(function (registration) {
+            console.log('我注册成功了666');
+        }, function (err) {
+            console.log('我注册失败了');
+        });
+    });
+}
+document.querySelector('.box').addEventListener('click', function(event) {
+		this.innerHTML = `px = ${event.pageX}, py = ${event.pageY},ox = ${event.x}`
+  }, false)
+document.documentElement.addEventListener('click', function(event){
+    console.log(event)
+},false)
+</script>
+</html>

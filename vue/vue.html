@@ -59,6 +59,39 @@
 </body>
 <script src="https://cdn.bootcss.com/vue/2.6.8/vue.js"></script>
 <script>
+    class Child {
+        constructor () {
+            this.hello1 = function() {
+                console.log('heolo')
+            }
+        }
+        static show () {
+            console.log('static')
+        }
+        // 原型方法
+        hello () {
+            console.log('hello')
+        }
+    }
+    const child1 = new Child()
+    console.dir(child1)
+    var a = 4
+    if (a > 3) {
+        var b = a
+        var c = b + a
+    }
+    function test() {
+        var a = 1
+        var b = a + 3
+        console.log(b)
+        test2()
+    }
+    function test2() {
+        var a = 2
+        var b = 3-1
+    }
+    test()
+    var b = 4
     Number.prototype.add = function(val) {
         return this.valueOf() + val
     }

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input id="num" type="text">
+    <button onclick="add()">新增</button>
+</body>
+<script>
+    // let str = 'console.log("hello world!");'
+    // let workerBlob = new Blob([str], { type: "text/java" });
+    // let url = URL.createObjectURL(workerBlob);
+    // let worker = new Worker(url);
+    var worker = new Worker('worker.js')
+    var dom = document.getElementById('num')
+    let i = 0
+    let id = setInterval(() => {
+        i++
+        dom.value = i
+    }, 1000)
+    
+    function add() {
+        alert(3)
+    }
+    
+    worker.onmessage = function(msg) {
+        dom.value = msg.data
+    }
+</script>
+</html>

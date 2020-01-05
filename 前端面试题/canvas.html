@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input type="file" id="file">
+    <img src="" id="img" alt="">
+    <canvas id="cvs" width="400" height="400" style="background: #000"></canvas>
+    <button onclick="getImg()" id="btn">获取图片</button>
+</body>
+<script>
+    let canvas = document.querySelector('#cvs')
+    function getImg () {
+        const ctx = canvas.getContext('2d')
+        const base64 = canvas.toDataURL('image/png')
+        document.getElementById('img').src = base64
+        
+    }
+    window.onload = function() {
+        // file.onchange = function(e){
+        //     const file = e.target.files[0]
+        //     const url = URL.createObjectURL(file)
+        //     document.querySelector('#img').src = url
+        //     img.onload = function() {
+		// 	    URL.revokeObjectURL(url)
+        //     }
+        // }
+        file.onchange = function(e) {
+            const file = e.target.files[0]
+            const fr = new FileReader(file)
+            fr.readAsDataURL(file)
+            fr.onload = function() {
+                document.querySelector('#img').src = this.result
+            }
+        }
+    }
+</script>
+</html>
