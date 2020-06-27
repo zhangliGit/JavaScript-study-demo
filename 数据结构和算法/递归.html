@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>递归</title>
+  </head>
+
+  <body>
+    <ul id="box">
+      <li title="haha">递归</li>
+      <li>深拷贝</li>
+    </ul>
+    <ul id="ul"></ul>
+    <div id="deepD">
+      <div>
+        <ul>
+          <li>我是第一个元素</li>
+          <li>我是第二个元素</li>
+          <li>我是第三个元素</li>
+        </ul>
+      </div>
+      <div>
+        <span>我是行内元素一</span>
+        <span>我是行内元素二</span>
+      </div>
+    </div>
+  </body>
+  <script>
+    const _box = document
+      .querySelector("#box")
+      .children[0].getAttributeNode("title");
+    console.dir(_box.value);
+    // 拷贝数组和对象 每一次调用都会形成一个函数作用域
+    function cloneDeep(data) {
+      let obj = Array.isArray(data) ? [] : {};
+      for (let keys in data) {
+        if (typeof data[keys] === "object") {
+          obj[keys] = cloneDeep(data[keys]);
+        } else {
+          obj[keys] = data[keys];
+        }
+      }
+      return obj;
+    }
+    const autoObj = {
+      name: "zhangli",
+      children: {
+        name: "zhangzhiyue",
+      },
+    };
+    const newObj = cloneDeep(autoObj);
+    newObj.children.name = "jiaojiao";
+    console.dir(autoObj);
+    console.dir(newObj);
+    // 数学计算阶乘
+    function getN(num) {
+      if (num == 0) {
+        return 1;
+      } else {
+        return num * getN(num - 1);
+      }
+    }
+    console.log(getN(4));
+    // 斐波那契数列实现，1,1,2,3,5,8 当前元素的值等于前一个和前两个的值的和
+    function feibo(n) {
+      if (n == 1 || n == 2) {
+        return 1;
+      } else {
+        return feibo(n - 2) + feibo(n - 1);
+      }
+    }
+    console.log(feibo(6));
+    // 深度遍历组织机构树
+    const obj = [
+      {
+        name: "河北全品",
+        children: [
+          {
+            name: "我是假的",
+          },
+        ],
+      },
+      {
+        name: "武汉全品",
+        children: [
+          {
+            name: "ai教育",
+            children: [
+              {
+                name: "研发部",
+              },
+              {
+                name: "产品部",
+              },
+            ],
+          },
+          {
+            name: "中考中心",
+          },
+        ],
+      },
+      {
+        name: "河北全品",
+        children: [
+          {
+            name: "河北仓库",
+          },
+        ],
+      },
+    ];
+    let level = 0;
+    const ele = document.querySelector("#ul");
+    ele.addEventListener(
+      "click",
+      function (e) {
+        console.log(e.target.nodeType);
+        if (e.target.childNodes.length !== 1) {
+          e.target.children[0].style.display =
+            e.target.children[0].style.display === "none" ? "block" : "none";
+        }
+      },
+      false
+    );
+    function orgTree(data, ele) {
+      for (let i = 0; i < data.length; i++) {
+        const _li = document.createElement("li");
+        _li.innerHTML = data[i].name;
+        ele.appendChild(_li);
+        if (data[i].children) {
+          const _ul = document.createElement("ul");
+          _ul.style.display = "none";
+          _li.appendChild(_ul);
+          orgTree(data[i].children, _ul);
+        }
+      }
+    }
+    orgTree(obj, ele);
+    // 深层遍历获取属性
+    const arr = [];
+    function getAttr(data) {
+      data.forEach((item, index) => {
+        arr.push(item.name + "-" + (!item.children ? --level : level));
+        if (item.children) {
+          level++;
+          getAttr(item.children);
+        } else {
+        }
+      });
+      return arr;
+    }
+    console.log(getAttr(obj));
+    // 深度递归查找属性
+    function getChild(data, name, arr) {
+      for (let i = 0; i < data.length; i++) {
+        if (data[i].name === name) {
+          arr.push(data[i].children);
+        } else {
+          getChild(data[i].children || [], name);
+        }
+      }
+      return arr;
+    }
+    console.log(getChild(obj, "河北全品", []));
+
+    // 递归函数执行顺序
+    function a(n) {
+      console.log("a", n);
+      return n;
+    }
+    function b(n) {
+      console.log("b", n);
+      return n;
+    }
+    function exeFun(n) {
+      if (n == 0) {
+        return;
+      } else {
+        exeFun(n - 1);
+        return a(n - 1) + b(n - 1);
+      }
+    }
+    exeFun(8);
+    function getJc(n) {
+      if (n === 1) {
+        return 1;
+      } else {
+        return n * getJc(n - 1);
+      }
+    }
+    // 排列组合
+    function AC(n, m) {
+      return getJc(n) / (getJc(n - m) * getJc(m));
+    }
+    console.log(AC(6, 4));
+    // 深度优先遍历
+    var myData = [
+      {
+        name: "a",
+        children: [
+          {
+            name: "b",
+            children: [
+              {
+                name: "e",
+              },
+            ],
+          },
+          {
+            name: "c",
+            children: [
+              {
+                name: "f",
+              },
+            ],
+          },
+          {
+            name: "d",
+            children: [
+              {
+                name: "g",
+              },
+            ],
+          },
+        ],
+      },
+      {
+        name: "a2",
+        children: [
+          {
+            name: "b2",
+            children: [
+              {
+                name: "e2",
+              },
+            ],
+          },
+          {
+            name: "c2",
+            children: [
+              {
+                name: "f2",
+              },
+            ],
+          },
+          {
+            name: "d2",
+            children: [
+              {
+                name: "g2",
+              },
+            ],
+          },
+        ],
+      },
+    ];
+    function deepMap(data, arr) {
+      data.forEach((item) => {
+        arr.push(item.name);
+        if (item.children) {
+          deepMap(item.children, arr);
+        }
+      });
+      return arr;
+    }
+    console.log(deepMap(myData, []));
+    // 先对对应进行遍历，如果有子元素就把子元素加到队列末尾 同时把当前元素删除
+    function bfsMap(data) {
+      let result = [];
+      let queue = data;
+      while (queue.length > 0) {
+        [...queue].forEach((item) => {
+          result.push(item.name);
+          queue.shift();
+          item.children && queue.push(...item.children);
+        });
+      }
+
+      return result;
+    }
+    console.log(bfsMap(myData));
+    // 递归遍历div元素
+    const deepD = document.querySelector("#deepD").children;
+    function deepDiv(ele, arr) {
+      [...ele].forEach((item) => {
+        arr.push(item.nodeName);
+        if (item.children.length > 0) {
+          deepDiv(item.children, arr);
+        }
+      });
+      return arr;
+    }
+    console.log(deepDiv(deepD, []));
+  </script>
+</html>
