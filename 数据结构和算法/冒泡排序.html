@@ -1,32 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
 </head>
+
 <body>
-    冒泡排序
-    对数组进行嵌套for循环，比较数组中当前元素和下一个元素的大小，然后交互位置，依次类推的进行比较
+  冒泡排序
+  对数组进行嵌套for循环，比较数组中当前元素和下一个元素的大小，然后交互位置，依次类推的进行比较
 </body>
 <script>
-    var autoArr = [1,6,2,8,3,8,5,7,12,11]
-    function bubbleSort(arr) {
-        let arrLen = arr.length
-        for (var i = 0; i < arrLen; i++) {
-            for (var j = 0; j < arrLen - 1 - i; j++) {
-                // 相邻元素两两比较
-                if (arr[j] > arr[j+1]) {
-                    // 元素替换位置
-                    const temp = arr[j+1]
-                    arr[j+1] = arr[j]
-                    arr[j] = temp
-                }
-            }
+  var autoArr = [1, 6, 2, 8, 3, 8, 5, 7, 12, 11]
+
+  function bubbleSort(arr) {
+    let arrLen = arr.length
+    for (var i = 0; i < arrLen; i++) {
+      for (var j = 0; j < arrLen - 1 - i; j++) {
+        // 相邻元素两两比较
+        if (arr[j] > arr[j + 1]) {
+          // 元素替换位置
+          const temp = arr[j + 1]
+          arr[j + 1] = arr[j]
+          arr[j] = temp
         }
-        return arr
+      }
     }
-    console.log(bubbleSort(autoArr))
+    return arr
+  }
+  console.log(bubbleSort(autoArr))
 </script>
+
 </html>
