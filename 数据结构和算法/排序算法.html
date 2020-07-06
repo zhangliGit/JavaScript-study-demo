@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Document</title>
+</head>
+
+<body>
+  冒泡排序
+  对数组进行嵌套for循环，比较数组中当前元素和下一个元素的大小，然后交互位置，依次类推的进行比较
+</body>
+<script>
+  var autoArr = [1, 6, 2, 8, 3, 8, 5, 7, 12, 11];
+
+  function bubbleSort(arr) {
+    let arrLen = arr.length;
+    for (var i = 0; i < arrLen; i++) {
+      for (var j = 0; j < arrLen - 1 - i; j++) {
+        // 相邻元素两两比较
+        if (arr[j] > arr[j + 1]) {
+          // 元素替换位置
+          const temp = arr[j + 1];
+          arr[j + 1] = arr[j];
+          arr[j] = temp;
+        }
+      }
+    }
+    return arr;
+  }
+  console.log(bubbleSort(autoArr));
+  // 冒泡排序
+  const mp = [1, 4, 7, 2, 6, 7, 9, 3, 5];
+  let ac = 0;
+  let total = 0;
+
+  function maopao() {
+    // 冒泡排序，每循环一次 就会把最大的一个值放到最后，循环的次数等于n为数字累加，n越大，循环的次数越多，时间复杂度越大
+    let length = mp.length;
+    for (let i = 0; i < length; i++) {
+      total++;
+      for (let j = i; j < length; j++) {
+        console.log(i, j);
+        ac++;
+        // 如果当前元素大于后面的元素，就互换位置
+        if (mp[j + 1] < mp[j]) {
+          let tmp = mp[j];
+          mp[j] = mp[j + 1];
+          mp[j + 1] = tmp;
+        }
+      }
+    }
+    return {
+      mp,
+      ac,
+      total,
+    };
+  }
+  console.log(maopao());
+  // 选择排序
+  function xuanze(arr) {
+    console.time("选择排序");
+    let length = mp.length;
+    for (let i = 0; i < length; i++) {
+      let minIndex = i;
+      for (let j = i + 1; j < length; j++) {
+        if (mp[j] < mp[minIndex]) {
+          minIndex = j;
+        }
+      }
+      let tmp = arr[minIndex];
+      arr[minIndex] = arr[i];
+      arr[i] = tmp;
+    }
+    console.timeEnd("选择排序");
+    return arr;
+  }
+  console.log(xuanze(mp));
+  // 插入排序
+  const aa = [2, 4, 5, 1, 2, 5, 9, 10, 13, 8];
+
+  function insertSort(aa) {
+    const length = aa.length;
+    for (var i = 0; i < length; i++) {
+      for (let j = i; j > 0; j--) {
+        if (aa[j] < aa[j - 1]) {
+          let tmp = aa[j];
+          aa[j] = aa[j - 1];
+          aa[j - 1] = tmp;
+        }
+      }
+    }
+    return aa;
+  }
+  console.log(1, insertSort(aa));
+  // 快速排序
+  const aaa = [2, 4, 5, 1, 2, 5, 9, 7, 10, 13, 8];
+  console.time("快速排序");
+
+  function quickSort(arr) {
+    if (arr.length <= 1) return arr;
+
+    var pointIndex = arr.splice(Math.floor(arr.length / 2), 1)[0];
+    console.log(pointIndex);
+    var left = [];
+    var right = [];
+    for (let i = 0; i < arr.length; i++) {
+      if (arr[i] < pointIndex) {
+        left.push(arr[i]);
+      } else {
+        right.push(arr[i]);
+      }
+    }
+    return quickSort(left).concat([pointIndex]).concat(quickSort(right));
+  }
+  console.log("quick", quickSort(aaa));
+  console.timeEnd("快速排序");
+  // 希尔排序
+  function sheelSort(arr) {
+    var len = arr.length;
+    var tmp;
+    var gap = 1;
+    console.time("希尔排序耗时");
+    while (gap < len / 5) {
+      gap = gap * 5 + 1;
+      console.log("gap---", gap);
+    }
+    for (gap; gap > 0; gap = Math.floor(gap / 5)) {
+      console.log("gap===", gap);
+      for (var i = 0; i < len; i++) {
+        tmp = arr[i];
+        for (var j = i - gap; i >= 0 && tmp < arr[j]; j -= gap) {
+          arr[j + gap] = arr[j];
+        }
+        arr[j + gap] = tmp;
+      }
+    }
+    console.timeEnd("希尔排序耗时");
+    return arr;
+  }
+  console.log(sheelSort(aaa));
+  // 归并排序 分而治之，采用至上而下的递归
+  var gb = [15, 1, 5, 9, 6, 9, 8, 5, 4, 13];
+
+  function mergeSort(arr) {
+    let len = arr.length;
+    if (len < 2) {
+      return arr;
+    }
+    const middle = Math.floor(len / 2);
+    const left = arr.slice(0, middle);
+    const right = arr.slice(middle);
+    console.log(left, right);
+    return merge(mergeSort(left), mergeSort(right));
+  }
+
+  function merge(left, right) {
+    const result = [];
+    while (left.length && right.length) {
+      console.log(3);
+      if (left[0] < right[0]) {
+        console.log(5);
+        result.push(left.shift());
+        console.log(result);
+      } else {
+        result.push(right.shift());
+      }
+    }
+    while (left.length) {
+      result.push(left.shift());
+    }
+    while (right.length) {
+      result.push(right.shift());
+    }
+    return result;
+  }
+  console.log('guibing', mergeSort(gb));
+</script>
+
+</html>

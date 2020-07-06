@@ -280,74 +280,65 @@
 
   function putNumber(n) {
     if (n <= 0) {
-      return 0
+      return 0;
     } else {
-      return putNumber(--n)
+      return putNumber(--n);
     }
   }
-  console.log('123', putNumber(10))
+  console.log("123", putNumber(10));
   // 使用动态规划实现斐波那契数列
   function feibonaqie(n) {
-    let arr = []
+    let arr = [];
     for (let i = 0; i < n; i++) {
-      arr[i] = 0
+      arr[i] = 0;
     }
-    console.log(arr)
+    console.log(arr);
     if (n === 1 || n === 2) {
-      return 1
+      return 1;
     } else {
-      arr[0] = 1
-      arr[1] = 1
+      arr[0] = 1;
+      arr[1] = 1;
       for (let j = 2; j <= n; j++) {
-        arr[j] = arr[j - 2] + arr[j - 1]
+        arr[j] = arr[j - 2] + arr[j - 1];
       }
     }
-    console.log(arr)
-    return arr[n - 1]
+    console.log(arr);
+    return arr[n - 1];
   }
-  console.log('1', feibonaqie(6))
-  // 冒泡排序
-  const mp = [1, 4, 7, 2, 6, 7, 9, 3, 5]
-  let ac = 0
+  console.log("1", feibonaqie(6));
+  // 使用递归实现深拷贝
+  var obj1 = {
+    height: 100,
+    person: {
+      name: '张立',
+      aeg: '23'
+    },
+    birthday: [1, 2, 3, 4]
+  }
 
-  function maopao() {
-    // 冒泡排序，每循环一次 就会把最大的一个值放到最后，循环的次数等于n为数字累加，n越大，循环的次数越多，时间复杂度越大
-    let length = mp.length
-    for (let i = 0; i < length; i++) {
-      for (let j = i; j < length; j++) {
-        console.log(i, j)
-        ac++
-        // 如果当前元素大于后面的元素，就互换位置
-        if (mp[j + 1] < mp[j]) {
-          let tmp = mp[j]
-          mp[j] = mp[j + 1]
-          mp[j + 1] = tmp
-        }
-      }
+  function deepClone(obj) {
+    let newObj = Object.prototype.toString.call(obj) === "[object Array]" ? [] : {}
+    for (let key in obj) {
+      newObj[key] = typeof obj[key] === 'object' ? deepClone(obj[key]) : obj[key]
     }
-    return {
-      mp,
-      ac
-    }
+    return newObj
   }
-  console.log(maopao())
-
-  function xuanze(arr) {
-    let length = mp.length
-    for (let i = 0; i < length; i++) {
-      let minIndex = i
-      for (let j = i + 1; j < length; j++) {
-        if (mp[j] < mp[minIndex]) {
-          minIndex = j
-        }
-      }
-      let tmp = arr[minIndex]
-      arr[minIndex] = arr[i]
-      arr[i] = tmp
+  const obj2 = deepClone(obj1)
+  console.log(obj1)
+  console.log(obj2)
+  // 不使用递归实现斐波那契队列
+  function fbnq(num) {
+    var n1 = 1,
+      n2 = 1,
+      n = 1
+    for (var i = 3; i <= num; i++) {
+      n = n1 + n2
+      n1 = n2
+      n2 = n
     }
-    return arr
+    return n
   }
-  console.log(xuanze(mp))
+  console.log(fbnq(9))
 </script>
 
 </html>
