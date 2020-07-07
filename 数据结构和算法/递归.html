@@ -339,6 +339,57 @@
     return n
   }
   console.log(fbnq(9))
+  // 顺序查找
+  var arrIndex = [9, 8, 6, 4, 5, 1, 12, 7]
+
+  function shunxu(arr, flag) {
+    arr.forEach((item, index) => {
+      if (item === flag) {
+        _index = index
+      }
+    })
+    return _index
+  }
+  console.log('顺序查找', shunxu(arrIndex, 6))
+  // 二分查找
+  function erfen(arr, flag) {
+    console.log(arr)
+    if (arr.length === 1) return arr
+    let middle = Math.floor(arr.length / 2)
+    let left = arr.slice(0, middle)
+    let right = arr.slice(middle + 1)
+    let middleVal = arr.splice(middle, 1)[0]
+    if (middleVal === flag) {
+      return middle
+    } else if (middleVal > flag) {
+      return erfen(left, flag)
+    } else {
+      return erfen(right, flag)
+    }
+  }
+  console.log('二分查找', erfen(shellSort(arrIndex), 6))
+  // 希尔排序
+  function shellSort(arr) {
+    // 最开始以数组长度的等分值作为间隔点gap，把数组分为若干的组，对每组进行类似插入排序，然后在对数组进行gap/2的间距分组，再次对分隔的数组进行插入排序，直到gap/2 等于1时
+    for (
+      let gap = Math.floor(arr.length / 2); gap > 0; gap = Math.floor(gap / 2)
+    ) {
+      // 从i的位置开始，变量与之前的gap数作比较，如果比前面的数小就交换位置
+      for (let i = gap; i < arr.length; i++) {
+        let j = i;
+        // 存储一个值，存储的值
+        let tmp = arr[j];
+        for (; j > 0; j -= gap) {
+          if (tmp >= arr[j - gap] || j - gap < 0) {
+            break;
+          }
+          arr[j] = arr[j - gap];
+        }
+        arr[j] = tmp;
+      }
+    }
+    return arr;
+  }
 </script>
 
 </html>
