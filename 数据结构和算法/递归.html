@@ -355,41 +355,145 @@
   function erfen(arr, flag) {
     console.log(arr)
     if (arr.length === 1) return arr
+    // 获取中间索引
     let middle = Math.floor(arr.length / 2)
+    // 截取左边
     let left = arr.slice(0, middle)
+    // 截取右边
     let right = arr.slice(middle + 1)
+    // 获取中间的值
     let middleVal = arr.splice(middle, 1)[0]
+    // 进行判断，如果需要查找的值等于中间值，则返回，
     if (middleVal === flag) {
       return middle
-    } else if (middleVal > flag) {
+    } else if (middleVal > flag) { // 如果中间值比目标值大 则继续比较左边的
       return erfen(left, flag)
     } else {
       return erfen(right, flag)
     }
   }
-  console.log('二分查找', erfen(shellSort(arrIndex), 6))
-  // 希尔排序
-  function shellSort(arr) {
-    // 最开始以数组长度的等分值作为间隔点gap，把数组分为若干的组，对每组进行类似插入排序，然后在对数组进行gap/2的间距分组，再次对分隔的数组进行插入排序，直到gap/2 等于1时
-    for (
-      let gap = Math.floor(arr.length / 2); gap > 0; gap = Math.floor(gap / 2)
-    ) {
-      // 从i的位置开始，变量与之前的gap数作比较，如果比前面的数小就交换位置
-      for (let i = gap; i < arr.length; i++) {
-        let j = i;
-        // 存储一个值，存储的值
-        let tmp = arr[j];
-        for (; j > 0; j -= gap) {
-          if (tmp >= arr[j - gap] || j - gap < 0) {
-            break;
-          }
-          arr[j] = arr[j - gap];
+  // 插值查找
+  // 二叉树生产
+  function BinaryTree() {
+    // 定义节点
+    var Node = function (key) {
+      this.key = key // 节点值
+      this.left = null // 左孩子
+      this.right = null // 右孩子
+    }
+    let root = null
+    // 定义插入规则
+    function insertNode(node, newNode) {
+      // 如果节点的值大于出入的值，则插入到左边
+      if (node.key > newNode.key) {
+        // 如果有左侧孩子，则插入到左侧孩子的左边
+        if (node.left === null) {
+          node.left = newNode
+        } else {
+          insertNode(node.left, newNode)
         }
-        arr[j] = tmp;
+      } else { // 如果小于插入的值就把值放到右边
+        if (node.right === null) {
+          node.right = newNode
+        } else {
+          insertNode(node.right, newNode)
+        }
       }
     }
-    return arr;
+    this.insert = function (key) {
+      var node = new Node(key)
+      if (root === null) {
+        root = node
+      } else {
+        insertNode(root, node)
+      }
+    }
+    this.getRoot = function () {
+      return root
+    }
   }
+  var arr1 = [18, 7, 9, 6, 10, 5, 13, 14]
+  var binaryTree = new BinaryTree()
+  arr1.forEach(item => {
+    binaryTree.insert(item)
+  })
+  console.log('tree', binaryTree.getRoot())
+  // 二叉树最大值和最小值查找
+  function binaryMax(node) {
+    if (node) {
+      while (node.right !== null) {
+        node = node.right
+      }
+      return node
+    }
+  }
+
+  function binaryMin(node) {
+    if (node) {
+      while (node.left !== null) {
+        node = node.left
+      }
+      return node
+    }
+    return null
+  }
+  // 排序二叉树的查找
+  function binarySearch(node, key) {
+    if (node === null) return null
+    if (node.key > key) {
+      return binarySearch(node.left, key)
+    } else if (node.key < key) {
+      return binarySearch(node.right, key)
+    } else {
+      return node
+    }
+  }
+  // 二叉树每层节点遍历,广度优先遍历
+  let levelArr = []
+
+  function binaryLevel(node, tag) {
+    if (tag && node) {
+      levelArr.push(node.key)
+    }
+    if (node.left) {
+      levelArr.push(node.left.key)
+      binaryLevel(node.left)
+    }
+
+    if (node.right) {
+      levelArr.push(node.right.key)
+      binaryLevel(node.right)
+    }
+    return levelArr
+  }
+  // 二叉树深度优先遍历
+  let deepArr = []
+
+  function binaryDeep(node, tag) {
+    if (node && tag) {
+      deepArr.push(node.key)
+    }
+    let leftTree = node.left
+    let rightTree = node.right
+    while (leftTree) {
+      deepArr.push(leftTree.key)
+      if (leftTree.right) {
+        binaryDeep(leftTree.right)
+      }
+      leftTree = leftTree.left
+
+    }
+    while (rightTree) {
+      deepArr.push(rightTree.key)
+      rightTree = rightTree.key
+    }
+    return deepArr
+  }
+  console.log('最大值', binaryMax(binaryTree.getRoot()).key)
+  console.log('最小值', binaryMin(binaryTree.getRoot()).key)
+  console.log('二叉树查找4节点', binarySearch(binaryTree.getRoot(), 4))
+  console.log('二叉树广度优先取值', binaryLevel(binaryTree.getRoot(), true))
+  console.log('二叉树深度优先取值', binaryDeep(binaryTree.getRoot(), true))
 </script>
 
 </html>
