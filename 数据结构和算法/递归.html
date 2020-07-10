@@ -1,499 +1,523 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>递归</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>递归</title>
-</head>
-
-<body>
-  <ul id="box">
-    <li title="haha">递归</li>
-    <li>深拷贝</li>
-  </ul>
-  <ul id="ul"></ul>
-  <div id="deepD">
-    <div>
-      <ul>
-        <li>我是第一个元素</li>
-        <li>我是第二个元素</li>
-        <li>我是第三个元素</li>
-      </ul>
+  <body>
+    <ul id="box">
+      <li title="haha">递归</li>
+      <li>深拷贝</li>
+    </ul>
+    <ul id="ul"></ul>
+    <div id="deepD">
+      <div>
+        <ul>
+          <li>我是第一个元素</li>
+          <li>我是第二个元素</li>
+          <li>我是第三个元素</li>
+        </ul>
+      </div>
+      <div>
+        <span>我是行内元素一</span>
+        <span>我是行内元素二</span>
+      </div>
     </div>
-    <div>
-      <span>我是行内元素一</span>
-      <span>我是行内元素二</span>
-    </div>
-  </div>
-</body>
-<script>
-  const _box = document
-    .querySelector("#box")
-    .children[0].getAttributeNode("title");
-  console.dir(_box.value);
-  // 拷贝数组和对象 每一次调用都会形成一个函数作用域
-  function cloneDeep(data) {
-    let obj = Array.isArray(data) ? [] : {};
-    for (let keys in data) {
-      if (typeof data[keys] === "object") {
-        obj[keys] = cloneDeep(data[keys]);
+  </body>
+  <script>
+    const _box = document
+      .querySelector("#box")
+      .children[0].getAttributeNode("title");
+    console.dir(_box.value);
+    // 拷贝数组和对象 每一次调用都会形成一个函数作用域
+    function cloneDeep(data) {
+      let obj = Array.isArray(data) ? [] : {};
+      for (let keys in data) {
+        if (typeof data[keys] === "object") {
+          obj[keys] = cloneDeep(data[keys]);
+        } else {
+          obj[keys] = data[keys];
+        }
+      }
+      return obj;
+    }
+    const autoObj = {
+      name: "zhangli",
+      children: {
+        name: "zhangzhiyue",
+      },
+    };
+    const newObj = cloneDeep(autoObj);
+    newObj.children.name = "jiaojiao";
+    console.dir(autoObj);
+    console.dir(newObj);
+    // 数学计算阶乘
+    function getN(num) {
+      if (num == 0) {
+        return 1;
       } else {
-        obj[keys] = data[keys];
+        return num * getN(num - 1);
       }
     }
-    return obj;
-  }
-  const autoObj = {
-    name: "zhangli",
-    children: {
-      name: "zhangzhiyue",
-    },
-  };
-  const newObj = cloneDeep(autoObj);
-  newObj.children.name = "jiaojiao";
-  console.dir(autoObj);
-  console.dir(newObj);
-  // 数学计算阶乘
-  function getN(num) {
-    if (num == 0) {
-      return 1;
-    } else {
-      return num * getN(num - 1);
-    }
-  }
-  console.log(getN(4));
-  // 斐波那契数列实现，1,1,2,3,5,8 当前元素的值等于前一个和前两个的值的和
-  function feibo(n) {
-    if (n == 1 || n == 2) {
-      return 1;
-    } else {
-      return feibo(n - 2) + feibo(n - 1);
-    }
-  }
-  console.log(feibo(6));
-  // 深度遍历组织机构树
-  const obj = [{
-      name: "河北全品",
-      children: [{
-        name: "我是假的",
-      }, ],
-    },
-    {
-      name: "武汉全品",
-      children: [{
-          name: "ai教育",
-          children: [{
-              name: "研发部",
-            },
-            {
-              name: "产品部",
-            },
-          ],
-        },
-        {
-          name: "中考中心",
-        },
-      ],
-    },
-    {
-      name: "河北全品",
-      children: [{
-        name: "河北仓库",
-      }, ],
-    },
-  ];
-  let level = 0;
-  const ele = document.querySelector("#ul");
-  ele.addEventListener(
-    "click",
-    function (e) {
-      console.log(e.target.nodeType);
-      if (e.target.childNodes.length !== 1) {
-        e.target.children[0].style.display =
-          e.target.children[0].style.display === "none" ? "block" : "none";
-      }
-    },
-    false
-  );
-
-  function orgTree(data, ele) {
-    for (let i = 0; i < data.length; i++) {
-      const _li = document.createElement("li");
-      _li.innerHTML = data[i].name;
-      ele.appendChild(_li);
-      if (data[i].children) {
-        const _ul = document.createElement("ul");
-        _ul.style.display = "none";
-        _li.appendChild(_ul);
-        orgTree(data[i].children, _ul);
-      }
-    }
-  }
-  orgTree(obj, ele);
-  // 深层遍历获取属性
-  const arr = [];
-
-  function getAttr(data) {
-    data.forEach((item, index) => {
-      arr.push(item.name + "-" + (!item.children ? --level : level));
-      if (item.children) {
-        level++;
-        getAttr(item.children);
-      } else {}
-    });
-    return arr;
-  }
-  console.log(getAttr(obj));
-  // 深度递归查找属性
-  function getChild(data, name, arr) {
-    for (let i = 0; i < data.length; i++) {
-      if (data[i].name === name) {
-        arr.push(data[i].children);
+    console.log(getN(4));
+    // 斐波那契数列实现，1,1,2,3,5,8 当前元素的值等于前一个和前两个的值的和
+    function feibo(n) {
+      if (n == 1 || n == 2) {
+        return 1;
       } else {
-        getChild(data[i].children || [], name);
+        return feibo(n - 2) + feibo(n - 1);
       }
     }
-    return arr;
-  }
-  console.log(getChild(obj, "河北全品", []));
+    console.log(feibo(6));
+    // 深度遍历组织机构树
+    const obj = [
+      {
+        name: "河北全品",
+        children: [
+          {
+            name: "我是假的",
+          },
+        ],
+      },
+      {
+        name: "武汉全品",
+        children: [
+          {
+            name: "ai教育",
+            children: [
+              {
+                name: "研发部",
+              },
+              {
+                name: "产品部",
+              },
+            ],
+          },
+          {
+            name: "中考中心",
+          },
+        ],
+      },
+      {
+        name: "河北全品",
+        children: [
+          {
+            name: "河北仓库",
+          },
+        ],
+      },
+    ];
+    let level = 0;
+    const ele = document.querySelector("#ul");
+    ele.addEventListener(
+      "click",
+      function (e) {
+        console.log(e.target.nodeType);
+        if (e.target.childNodes.length !== 1) {
+          e.target.children[0].style.display =
+            e.target.children[0].style.display === "none" ? "block" : "none";
+        }
+      },
+      false
+    );
 
-  // 递归函数执行顺序
-  function a(n) {
-    console.log("a", n);
-    return n;
-  }
-
-  function b(n) {
-    console.log("b", n);
-    return n;
-  }
-
-  function exeFun(n) {
-    if (n == 0) {
-      return;
-    } else {
-      exeFun(n - 1);
-      return a(n - 1) + b(n - 1);
-    }
-  }
-  exeFun(8);
-
-  function getJc(n) {
-    if (n === 1) {
-      return 1;
-    } else {
-      return n * getJc(n - 1);
-    }
-  }
-  // 排列组合
-  function AC(n, m) {
-    return getJc(n) / (getJc(n - m) * getJc(m));
-  }
-  console.log(AC(6, 4));
-  // 深度优先遍历
-  var myData = [{
-      name: "a",
-      children: [{
-          name: "b",
-          children: [{
-            name: "e",
-          }, ],
-        },
-        {
-          name: "c",
-          children: [{
-            name: "f",
-          }, ],
-        },
-        {
-          name: "d",
-          children: [{
-            name: "g",
-          }, ],
-        },
-      ],
-    },
-    {
-      name: "a2",
-      children: [{
-          name: "b2",
-          children: [{
-            name: "e2",
-          }, ],
-        },
-        {
-          name: "c2",
-          children: [{
-            name: "f2",
-          }, ],
-        },
-        {
-          name: "d2",
-          children: [{
-            name: "g2",
-          }, ],
-        },
-      ],
-    },
-  ];
-
-  function deepMap(data, arr) {
-    data.forEach((item) => {
-      arr.push(item.name);
-      if (item.children) {
-        deepMap(item.children, arr);
+    function orgTree(data, ele) {
+      for (let i = 0; i < data.length; i++) {
+        const _li = document.createElement("li");
+        _li.innerHTML = data[i].name;
+        ele.appendChild(_li);
+        if (data[i].children) {
+          const _ul = document.createElement("ul");
+          _ul.style.display = "none";
+          _li.appendChild(_ul);
+          orgTree(data[i].children, _ul);
+        }
       }
-    });
-    return arr;
-  }
-  console.log(deepMap(myData, []));
-  // 先对对应进行遍历，如果有子元素就把子元素加到队列末尾 同时把当前元素删除
-  function bfsMap(data) {
-    let result = [];
-    let queue = data;
-    while (queue.length > 0) {
-      [...queue].forEach((item) => {
-        result.push(item.name);
-        queue.shift();
-        item.children && queue.push(...item.children);
+    }
+    orgTree(obj, ele);
+    // 深层遍历获取属性
+    const arr = [];
+
+    function getAttr(data) {
+      data.forEach((item, index) => {
+        arr.push(item.name + "-" + (!item.children ? --level : level));
+        if (item.children) {
+          level++;
+          getAttr(item.children);
+        } else {
+        }
       });
+      return arr;
     }
-
-    return result;
-  }
-  console.log(bfsMap(myData));
-  // 递归遍历div元素
-  const deepD = document.querySelector("#deepD").children;
-
-  function deepDiv(ele, arr) {
-    [...ele].forEach((item) => {
-      arr.push(item.nodeName);
-      if (item.children.length > 0) {
-        deepDiv(item.children, arr);
-      }
-    });
-    return arr;
-  }
-  console.log(deepDiv(deepD, []));
-  // 递归输出
-
-  function putNumber(n) {
-    if (n <= 0) {
-      return 0;
-    } else {
-      return putNumber(--n);
-    }
-  }
-  console.log("123", putNumber(10));
-  // 使用动态规划实现斐波那契数列
-  function feibonaqie(n) {
-    let arr = [];
-    for (let i = 0; i < n; i++) {
-      arr[i] = 0;
-    }
-    console.log(arr);
-    if (n === 1 || n === 2) {
-      return 1;
-    } else {
-      arr[0] = 1;
-      arr[1] = 1;
-      for (let j = 2; j <= n; j++) {
-        arr[j] = arr[j - 2] + arr[j - 1];
-      }
-    }
-    console.log(arr);
-    return arr[n - 1];
-  }
-  console.log("1", feibonaqie(6));
-  // 使用递归实现深拷贝
-  var obj1 = {
-    height: 100,
-    person: {
-      name: '张立',
-      aeg: '23'
-    },
-    birthday: [1, 2, 3, 4]
-  }
-
-  function deepClone(obj) {
-    let newObj = Object.prototype.toString.call(obj) === "[object Array]" ? [] : {}
-    for (let key in obj) {
-      newObj[key] = typeof obj[key] === 'object' ? deepClone(obj[key]) : obj[key]
-    }
-    return newObj
-  }
-  const obj2 = deepClone(obj1)
-  console.log(obj1)
-  console.log(obj2)
-  // 不使用递归实现斐波那契队列
-  function fbnq(num) {
-    var n1 = 1,
-      n2 = 1,
-      n = 1
-    for (var i = 3; i <= num; i++) {
-      n = n1 + n2
-      n1 = n2
-      n2 = n
-    }
-    return n
-  }
-  console.log(fbnq(9))
-  // 顺序查找
-  var arrIndex = [9, 8, 6, 4, 5, 1, 12, 7]
-
-  function shunxu(arr, flag) {
-    arr.forEach((item, index) => {
-      if (item === flag) {
-        _index = index
-      }
-    })
-    return _index
-  }
-  console.log('顺序查找', shunxu(arrIndex, 6))
-  // 二分查找
-  function erfen(arr, flag) {
-    console.log(arr)
-    if (arr.length === 1) return arr
-    // 获取中间索引
-    let middle = Math.floor(arr.length / 2)
-    // 截取左边
-    let left = arr.slice(0, middle)
-    // 截取右边
-    let right = arr.slice(middle + 1)
-    // 获取中间的值
-    let middleVal = arr.splice(middle, 1)[0]
-    // 进行判断，如果需要查找的值等于中间值，则返回，
-    if (middleVal === flag) {
-      return middle
-    } else if (middleVal > flag) { // 如果中间值比目标值大 则继续比较左边的
-      return erfen(left, flag)
-    } else {
-      return erfen(right, flag)
-    }
-  }
-  // 插值查找
-  // 二叉树生产
-  function BinaryTree() {
-    // 定义节点
-    var Node = function (key) {
-      this.key = key // 节点值
-      this.left = null // 左孩子
-      this.right = null // 右孩子
-    }
-    let root = null
-    // 定义插入规则
-    function insertNode(node, newNode) {
-      // 如果节点的值大于出入的值，则插入到左边
-      if (node.key > newNode.key) {
-        // 如果有左侧孩子，则插入到左侧孩子的左边
-        if (node.left === null) {
-          node.left = newNode
+    console.log(getAttr(obj));
+    // 深度递归查找属性
+    function getChild(data, name, arr) {
+      for (let i = 0; i < data.length; i++) {
+        if (data[i].name === name) {
+          arr.push(data[i].children);
         } else {
-          insertNode(node.left, newNode)
-        }
-      } else { // 如果小于插入的值就把值放到右边
-        if (node.right === null) {
-          node.right = newNode
-        } else {
-          insertNode(node.right, newNode)
+          getChild(data[i].children || [], name);
         }
       }
+      return arr;
     }
-    this.insert = function (key) {
-      var node = new Node(key)
-      if (root === null) {
-        root = node
+    console.log(getChild(obj, "河北全品", []));
+
+    // 递归函数执行顺序
+    function a(n) {
+      console.log("a", n);
+      return n;
+    }
+
+    function b(n) {
+      console.log("b", n);
+      return n;
+    }
+
+    function exeFun(n) {
+      if (n == 0) {
+        return;
       } else {
-        insertNode(root, node)
+        exeFun(n - 1);
+        return a(n - 1) + b(n - 1);
       }
     }
-    this.getRoot = function () {
-      return root
-    }
-  }
-  var arr1 = [18, 7, 9, 6, 10, 5, 13, 14]
-  var binaryTree = new BinaryTree()
-  arr1.forEach(item => {
-    binaryTree.insert(item)
-  })
-  console.log('tree', binaryTree.getRoot())
-  // 二叉树最大值和最小值查找
-  function binaryMax(node) {
-    if (node) {
-      while (node.right !== null) {
-        node = node.right
+    exeFun(8);
+
+    function getJc(n) {
+      if (n === 1) {
+        return 1;
+      } else {
+        return n * getJc(n - 1);
       }
-      return node
     }
-  }
+    // 排列组合
+    function AC(n, m) {
+      return getJc(n) / (getJc(n - m) * getJc(m));
+    }
+    console.log(AC(6, 4));
+    // 深度优先遍历
+    var myData = [
+      {
+        name: "a",
+        children: [
+          {
+            name: "b",
+            children: [
+              {
+                name: "e",
+              },
+            ],
+          },
+          {
+            name: "c",
+            children: [
+              {
+                name: "f",
+              },
+            ],
+          },
+          {
+            name: "d",
+            children: [
+              {
+                name: "g",
+              },
+            ],
+          },
+        ],
+      },
+      {
+        name: "a2",
+        children: [
+          {
+            name: "b2",
+            children: [
+              {
+                name: "e2",
+              },
+            ],
+          },
+          {
+            name: "c2",
+            children: [
+              {
+                name: "f2",
+              },
+            ],
+          },
+          {
+            name: "d2",
+            children: [
+              {
+                name: "g2",
+              },
+            ],
+          },
+        ],
+      },
+    ];
 
-  function binaryMin(node) {
-    if (node) {
-      while (node.left !== null) {
-        node = node.left
+    function deepMap(data, arr) {
+      data.forEach((item) => {
+        arr.push(item.name);
+        if (item.children) {
+          deepMap(item.children, arr);
+        }
+      });
+      return arr;
+    }
+    console.log(deepMap(myData, []));
+    // 先对对应进行遍历，如果有子元素就把子元素加到队列末尾 同时把当前元素删除
+    function bfsMap(data) {
+      let result = [];
+      let queue = data;
+      while (queue.length > 0) {
+        [...queue].forEach((item) => {
+          result.push(item.name);
+          queue.shift();
+          item.children && queue.push(...item.children);
+        });
       }
-      return node
-    }
-    return null
-  }
-  // 排序二叉树的查找
-  function binarySearch(node, key) {
-    if (node === null) return null
-    if (node.key > key) {
-      return binarySearch(node.left, key)
-    } else if (node.key < key) {
-      return binarySearch(node.right, key)
-    } else {
-      return node
-    }
-  }
-  // 二叉树每层节点遍历,广度优先遍历
-  let levelArr = []
 
-  function binaryLevel(node, tag) {
-    if (tag && node) {
-      levelArr.push(node.key)
+      return result;
     }
-    if (node.left) {
-      levelArr.push(node.left.key)
-      binaryLevel(node.left)
-    }
+    console.log(bfsMap(myData));
+    // 递归遍历div元素
+    const deepD = document.querySelector("#deepD").children;
 
-    if (node.right) {
-      levelArr.push(node.right.key)
-      binaryLevel(node.right)
+    function deepDiv(ele, arr) {
+      [...ele].forEach((item) => {
+        arr.push(item.nodeName);
+        if (item.children.length > 0) {
+          deepDiv(item.children, arr);
+        }
+      });
+      return arr;
     }
-    return levelArr
-  }
-  // 二叉树深度优先遍历
-  let deepArr = []
+    console.log(deepDiv(deepD, []));
+    // 递归输出
 
-  function binaryDeep(node, tag) {
-    if (node && tag) {
-      deepArr.push(node.key)
-    }
-    let leftTree = node.left
-    let rightTree = node.right
-    while (leftTree) {
-      deepArr.push(leftTree.key)
-      if (leftTree.right) {
-        binaryDeep(leftTree.right)
+    function putNumber(n) {
+      if (n <= 0) {
+        return 0;
+      } else {
+        return putNumber(--n);
       }
-      leftTree = leftTree.left
-
     }
-    while (rightTree) {
-      deepArr.push(rightTree.key)
-      rightTree = rightTree.key
+    console.log("123", putNumber(10));
+    // 使用动态规划实现斐波那契数列
+    function feibonaqie(n) {
+      let arr = [];
+      for (let i = 0; i < n; i++) {
+        arr[i] = 0;
+      }
+      console.log(arr);
+      if (n === 1 || n === 2) {
+        return 1;
+      } else {
+        arr[0] = 1;
+        arr[1] = 1;
+        for (let j = 2; j <= n; j++) {
+          arr[j] = arr[j - 2] + arr[j - 1];
+        }
+      }
+      console.log(arr);
+      return arr[n - 1];
     }
-    return deepArr
-  }
-  console.log('最大值', binaryMax(binaryTree.getRoot()).key)
-  console.log('最小值', binaryMin(binaryTree.getRoot()).key)
-  console.log('二叉树查找4节点', binarySearch(binaryTree.getRoot(), 4))
-  console.log('二叉树广度优先取值', binaryLevel(binaryTree.getRoot(), true))
-  console.log('二叉树深度优先取值', binaryDeep(binaryTree.getRoot(), true))
-</script>
+    console.log("1", feibonaqie(6));
+    // 使用递归实现深拷贝
+    var obj1 = {
+      height: 100,
+      person: {
+        name: "张立",
+        aeg: "23",
+      },
+      birthday: [1, 2, 3, 4],
+    };
 
+    function deepClone(obj) {
+      let newObj =
+        Object.prototype.toString.call(obj) === "[object Array]" ? [] : {};
+      for (let key in obj) {
+        newObj[key] =
+          typeof obj[key] === "object" ? deepClone(obj[key]) : obj[key];
+      }
+      return newObj;
+    }
+    const obj2 = deepClone(obj1);
+    console.log(obj1);
+    console.log(obj2);
+    // 不使用递归实现斐波那契队列
+    function fbnq(num) {
+      var n1 = 1,
+        n2 = 1,
+        n = 1;
+      for (var i = 3; i <= num; i++) {
+        n = n1 + n2;
+        n1 = n2;
+        n2 = n;
+      }
+      return n;
+    }
+    console.log(fbnq(9));
+    // 顺序查找
+    var arrIndex = [9, 8, 6, 4, 5, 1, 12, 7];
+
+    function shunxu(arr, flag) {
+      arr.forEach((item, index) => {
+        if (item === flag) {
+          _index = index;
+        }
+      });
+      return _index;
+    }
+    console.log("顺序查找", shunxu(arrIndex, 6));
+    // 二分查找
+    function erfen(arr, flag) {
+      console.log(arr);
+      if (arr.length === 1) return arr;
+      // 获取中间索引
+      let middle = Math.floor(arr.length / 2);
+      // 截取左边
+      let left = arr.slice(0, middle);
+      // 截取右边
+      let right = arr.slice(middle + 1);
+      // 获取中间的值
+      let middleVal = arr.splice(middle, 1)[0];
+      // 进行判断，如果需要查找的值等于中间值，则返回，
+      if (middleVal === flag) {
+        return middle;
+      } else if (middleVal > flag) {
+        // 如果中间值比目标值大 则继续比较左边的
+        return erfen(left, flag);
+      } else {
+        return erfen(right, flag);
+      }
+    }
+    // 插值查找
+    // 二叉树生产
+    function BinaryTree() {
+      // 定义节点
+      var Node = function (key) {
+        this.key = key; // 节点值
+        this.left = null; // 左孩子
+        this.right = null; // 右孩子
+      };
+      let root = null;
+      // 定义插入规则
+      function insertNode(node, newNode) {
+        // 如果节点的值大于出入的值，则插入到左边
+        if (node.key > newNode.key) {
+          // 如果有左侧孩子，则插入到左侧孩子的左边
+          if (node.left === null) {
+            node.left = newNode;
+          } else {
+            insertNode(node.left, newNode);
+          }
+        } else {
+          // 如果小于插入的值就把值放到右边
+          if (node.right === null) {
+            node.right = newNode;
+          } else {
+            insertNode(node.right, newNode);
+          }
+        }
+      }
+      this.insert = function (key) {
+        var node = new Node(key);
+        if (root === null) {
+          root = node;
+        } else {
+          insertNode(root, node);
+        }
+      };
+      this.getRoot = function () {
+        return root;
+      };
+    }
+    var arr1 = [18, 7, 9, 6, 10, 5, 13, 14];
+    var binaryTree = new BinaryTree();
+    arr1.forEach((item) => {
+      binaryTree.insert(item);
+    });
+    console.log("tree", binaryTree.getRoot());
+    // 二叉树最大值和最小值查找
+    function binaryMax(node) {
+      if (node) {
+        while (node.right !== null) {
+          node = node.right;
+        }
+        return node;
+      }
+    }
+
+    function binaryMin(node) {
+      if (node) {
+        while (node.left !== null) {
+          node = node.left;
+        }
+        return node;
+      }
+      return null;
+    }
+    // 排序二叉树的查找
+    function binarySearch(node, key) {
+      if (node === null) return null;
+      if (node.key > key) {
+        return binarySearch(node.left, key);
+      } else if (node.key < key) {
+        return binarySearch(node.right, key);
+      } else {
+        return node;
+      }
+    }
+    // 二叉树每层节点遍历,广度优先遍历
+    let levelArr = [];
+
+    function binaryLevel(node, tag) {
+      if (tag && node) {
+        levelArr.push(node.key);
+      }
+      if (node.left) {
+        levelArr.push(node.left.key);
+        binaryLevel(node.left);
+      }
+
+      if (node.right) {
+        levelArr.push(node.right.key);
+        binaryLevel(node.right);
+      }
+      return levelArr;
+    }
+    // 二叉树深度优先遍历
+    let deepArr = [];
+
+    function binaryDeep(node, tag) {
+      if (node && tag) {
+        deepArr.push(node.key);
+      }
+      let leftTree = node.left;
+      let rightTree = node.right;
+      while (leftTree) {
+        deepArr.push(leftTree.key);
+        if (leftTree.right) {
+          binaryDeep(leftTree.right);
+        }
+        leftTree = leftTree.left;
+      }
+      while (rightTree) {
+        deepArr.push(rightTree.key);
+        rightTree = rightTree.key;
+      }
+      return deepArr;
+    }
+    console.log("最大值", binaryMax(binaryTree.getRoot()).key);
+    console.log("最小值", binaryMin(binaryTree.getRoot()).key);
+    console.log("二叉树查找4节点", binarySearch(binaryTree.getRoot(), 4));
+    console.log("二叉树广度优先取值", binaryLevel(binaryTree.getRoot(), true));
+    console.log("二叉树深度优先取值", binaryDeep(binaryTree.getRoot(), true));
+  </script>
 </html>

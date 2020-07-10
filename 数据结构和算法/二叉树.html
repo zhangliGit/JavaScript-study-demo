@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>二叉树</title>
+  </head>
+  <body>
+    二叉树
+  </body>
+  <script>
+    function createNode(key) {
+      this.key = key;
+      this.left = null;
+      this.right = null;
+    }
+    class BinaryTree {
+      constructor() {
+        // 实例属性0
+        this.result = [];
+        this.root = null;
+      }
+      // 插入节点
+      insert = (key) => {
+        let newNode = new createNode(key);
+        // 如果没有根节点
+        if (this.root === null) {
+          this.root = newNode;
+        } else {
+          // 如果有根节点就按要求插入新节点
+          this.insertNode(this.root, newNode);
+        }
+      };
+      insertNode = (node, newNode) => {
+        // 如果插入的key比父节点小，则插入到左边
+        if (node.key > newNode.key) {
+          if (!node.left) {
+            node.left = newNode;
+          } else {
+            this.insertNode(node.left, newNode);
+          }
+        } else {
+          if (!node.right) {
+            node.right = newNode;
+          } else {
+            this.insertNode(node.right, newNode);
+          }
+        }
+      };
+      // 中序遍历
+      _middle = (node) => {
+        if (!node) return node;
+        this._middle(node.left);
+        this.result.push(node.key);
+        this._middle(node.right);
+        return this.result;
+      };
+      // 前序遍历
+      // 后续遍历
+    }
+    var arr = [18, 7, 20, 6, 10, 5, 13, 14];
+    const binaryTree = new BinaryTree();
+    arr.forEach((item) => {
+      binaryTree.insert(item);
+    });
+    console.log(binaryTree);
+    console.log("中序遍历", binaryTree._middle(binaryTree.root));
+    // 递归执行顺序
+    function showData(num) {
+      debugger;
+      if (num === 0) return 0;
+      console.log(num);
+      showData(--num);
+      show(num);
+    }
+    function show(num) {
+      console.log(num);
+    }
+    console.log(showData(4));
+  </script>
+</html>
